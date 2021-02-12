@@ -51,7 +51,7 @@ public class SC_Fire : MonoBehaviour
         RaycastHit2D[] hit2D;
         hit2D = Physics2D.RaycastAll(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized, 1000f);
 
-        if (hit2D[1].transform.CompareTag("Enemy"))
+        if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
         {
             hit2D[1].transform.GetComponent<SC_Health>().Damage(inventory.equippedWeapon.damage);
         }

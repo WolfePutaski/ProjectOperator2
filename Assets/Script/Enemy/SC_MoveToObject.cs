@@ -12,6 +12,7 @@ public class SC_MoveToObject : MonoBehaviour
     void Update()
     {
         float step = speed * Time.deltaTime;
+        if (target != null)
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
     }
 }
