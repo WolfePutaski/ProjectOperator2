@@ -24,7 +24,7 @@ public class SC_Weapon_Master : ScriptableObject
     public bool isClosedBolt; //Has extra ammo in chamber.
 
     //Recoil & Handling
-    public float swaySpeed; //How fast gun aim move around
+    public float swayPeriod; //For every seconds in swayPeriod, the crosshair will move to new position. Guns with higher number will feel more shaky.
     public float swayRadius; //How far gun aim move around
     public float recoilKick; //Amount of Kick
     public float recoilRecoverySpeed; //How fast to recover from recoil
