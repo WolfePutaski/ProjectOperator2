@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 591844994}
   - component: {fileID: 591844993}
   - component: {fileID: 591844995}
+  - component: {fileID: 591844996}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -462,6 +463,20 @@ MonoBehaviour:
   crosshairSway: {fileID: 0}
   crosshairAim: {fileID: 0}
   crosshairDot: {fileID: -2413806693520163455, guid: 65a0fd7dff0775643a69462ff30c3c08, type: 3}
+--- !u!114 &591844996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591844992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ddb2cf73360d243a13f23779d7b5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimDir: {x: 0, y: 0, z: 0}
+  target: {fileID: 1978028606}
 --- !u!1 &836895804
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,11 +732,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8657389b1a0616f40b46a6feabf9ac0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equippedWeapon: {fileID: 11400000, guid: 9069e6702192f4143bd986051e802e96, type: 2}
+  equippedWeapon: {fileID: 11400000, guid: 509e29d5e99ff8c4c966079b9dd40c19, type: 2}
   equippedWeaponProperty:
     ammoInMag: 0
     currentHeat: 0
-    isLoaded: 0
+    isLoaded: 1
+    CurrentFiremode: 1
 --- !u!114 &1978028610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,7 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25fa5e093d46f84798bff63136e63e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpPara: 0
 --- !u!82 &1978028611
 AudioSource:
   m_ObjectHideFlags: 0

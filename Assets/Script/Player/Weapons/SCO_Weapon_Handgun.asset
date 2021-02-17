@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SC_Weapon_Handgun
+  m_Name: SCO_Weapon_Handgun
   m_EditorClassIdentifier: 
   weaponName: Handgun
   fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
   fireMode: 0
+  FiremodeToggle: 0
   rateOfFire: 0
   damage: 25
   velocity: 0
   magCapacity: 0
   isClosedBolt: 0
+  TriggerDelay: 0
   swayPeriod: 0.2
   swayRadius: 5
   recoilKick: 0.5

@@ -18,7 +18,7 @@ public class SC_Fire : MonoBehaviour
 
     //Sway
     Vector3 nextSwayPos;
-    public float lerpPara = 0;
+    float lerpPara = 0;
 
     Vector3 defaultAimPos;
 
@@ -34,17 +34,21 @@ public class SC_Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
+            if (inventory.equippedWeaponProperty.isLoaded)
             Shoot();
         }
+
+        //RELOAD
+
+        //
 
         CrosshairUpdate();
     }
 
     void Shoot()
     {
-        Debug.Log("FIRE!");
         GetComponent<AudioSource>().PlayOneShot(inventory.equippedWeapon.fireSound);
         Debug.DrawRay(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized * 1000f, Color.green, 1f);
 
@@ -56,8 +60,11 @@ public class SC_Fire : MonoBehaviour
             hit2D[1].transform.GetComponent<SC_Health>().Damage(inventory.equippedWeapon.damage);
         }
 
+        inventory.equippedWeaponProperty.isLoaded = false;
+
 
         Invoke("aimKick", 0.04f);
+        Invoke("CycleGun", inventory.equippedWeapon.rateOfFire);
     }
 
     void CrosshairUpdate()
@@ -98,5 +105,10 @@ public class SC_Fire : MonoBehaviour
 
         //The gunCrosshair positon is added by a random recoil kick value on Y axis and a random angle to give a look that the gun spread everywhere while still ensuring that the gun will always kicks up and not "kicking down".
         // Kick up + Kick Angles
+    }
+
+    void CycleGun()
+    {
+        inventory.equippedWeaponProperty.isLoaded = true;
     }
 }

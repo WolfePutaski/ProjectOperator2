@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum FireMode { SEMI, AUTO, BURST, MANUAL }
+
 [System.Serializable]
 public struct WeaponFunctionProperties
 {
     public int ammoInMag;
     public int currentHeat;
-    public int isLoaded;
+    public bool isLoaded;
+    public FireMode CurrentFiremode;
 }
 
 [CreateAssetMenu(fileName = "SCO_Weapon_", menuName = "ScriptableObject_Weapon")]
@@ -15,17 +19,18 @@ public class SC_Weapon_Master : ScriptableObject
     //Put Default Value Here
     public string weaponName;
     public AudioClip fireSound;
-    public enum FireMode {SEMI,AUTO,MANUAL}
     public FireMode fireMode;
+    public bool FiremodeToggle;
     public float rateOfFire;
     public float damage;
     public float velocity;
     public int magCapacity;
     public bool isClosedBolt; //Has extra ammo in chamber.
+    public bool TriggerDelay; //Time it takes before start firing after pressing trigger
 
     //Recoil & Handling
     public float swayPeriod; //For every seconds in swayPeriod, the crosshair will move to new position. Guns with higher number will feel more shaky.
-    public float swayRadius; //How far gun aim move around
+    public float swayRadius; //How far crosshair move around
     public float recoilKick; //Amount of Kick
     public float recoilRecoverySpeed; //How fast to recover from recoil
 
