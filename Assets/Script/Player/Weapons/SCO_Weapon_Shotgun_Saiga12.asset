@@ -9,33 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_Handgun
+  m_Script: {fileID: 11500000, guid: 849a61b73fbc92d48a4aaeb5d50bc98e, type: 3}
+  m_Name: SCO_Weapon_Shotgun_Saiga12
   m_EditorClassIdentifier: 
-  weaponName: Handgun
-  fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
+  weaponName: Saiga-12
+  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 0
-  secondFireMode: 0
-  FiremodeToggle: 0
-  cycleTime: 0
-  reloadTime: 1.8
-  reloadPerfectStart: 1.2
+  secondFireMode: 1
+  FiremodeToggle: 1
+  cycleTime: 0.1
+  reloadTime: 2.7
+  reloadPerfectStart: 1.8
   reloadPerfectWindow: 0.3
-  damage: 25
+  damage: 50
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0
   velocity: 0
-  magCapacity: 15
+  magCapacity: 12
   isClosedBolt: 1
   TriggerDelay: 0
   swayPeriod: 0.2
-  swayRadius: 5
-  recoilKick: 0.5
-  recoilRecoverySpeed: 2
-  recoilKickShake: 0
+  swayRadius: 4
+  recoilKick: 0.8
+  recoilRecoverySpeed: 1.5
+  recoilKickShake: 1
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0
   maxJamChance: 0
   totalShots: 0
+  PelletCount: 8
+  Spread: 0.05

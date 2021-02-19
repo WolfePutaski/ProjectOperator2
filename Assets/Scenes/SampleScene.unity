@@ -2197,7 +2197,7 @@ MonoBehaviour:
   currentSlot: 0
   startWeaponList:
   - {fileID: 11400000, guid: 9069e6702192f4143bd986051e802e96, type: 2}
-  - {fileID: 11400000, guid: 509e29d5e99ff8c4c966079b9dd40c19, type: 2}
+  - {fileID: 11400000, guid: 7e1f5d9933fec8544a2a73e12db3c48e, type: 2}
   - {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
 --- !u!114 &1978028610
 MonoBehaviour:
@@ -2320,6 +2320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 132852196}
+  animator: {fileID: 0}
 --- !u!1 &2094220816
 GameObject:
   m_ObjectHideFlags: 0
