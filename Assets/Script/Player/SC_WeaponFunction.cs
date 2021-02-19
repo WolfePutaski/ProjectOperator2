@@ -15,6 +15,8 @@ public class SC_WeaponFunction : MonoBehaviour
     SC_ReloadCircle reloadCircle;
     float ReloadTimeCount;
 
+    SC_WeaponUI weaponUI;
+
     Vector3 nextSwayPos;
     float lerpPara = 0;
 
@@ -29,17 +31,27 @@ public class SC_WeaponFunction : MonoBehaviour
         crosshair = FindObjectOfType<SC_Crosshair>();
         audioSource = GetComponent<AudioSource>();
         reloadCircle = FindObjectOfType<SC_ReloadCircle>();
+        weaponUI = FindObjectOfType<SC_WeaponUI>();
 
     }
     void Update()
     {
-        currentWeapon = inventory.weaponItems[inventory.currentSlot];
+        if (inventory.weaponItems[inventory.currentSlot] != null)
+        {
+            currentWeapon = inventory.weaponItems[inventory.currentSlot];
 
-        Input_Fire();
-        Input_ChangeFireMode();
-        Input_Reload();
+            Input_Fire();
+            Input_ChangeFireMode();
+            Input_Reload();
 
-        CrosshairUpdate();
+            CrosshairUpdate();
+
+
+            //weaponUI.SetWeaponUIText(currentWeapon.equippedWeaponStats.weaponName, currentWeapon.equippedWeaponProperties.ammoInMag, currentWeapon.equippedWeaponStats.magCapacity);
+
+            weaponUI.SetWeaponUIText(currentWeapon);
+        }
+
     }
 
     void Input_EjectMag()

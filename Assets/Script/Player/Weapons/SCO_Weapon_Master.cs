@@ -11,10 +11,20 @@ public class WeaponFunctionProperties
     public int currentHeat;
     public bool isLoaded = true;
     public FireMode CurrentFiremode;
+
+    public WeaponFunctionProperties(SCO_Weapon_Master weaponClass)
+    {
+        ammoInMag = weaponClass.magCapacity;
+        isLoaded = true;
+        CurrentFiremode = weaponClass.fireMode;
+
+       if (!weaponClass.isClosedBolt)
+            ammoInMag--;
+    }
 }
 
 [CreateAssetMenu(fileName = "SCO_Weapon_", menuName = "ScriptableObject_Weapon")]
-public class SC_Weapon_Master : ScriptableObject
+public class SCO_Weapon_Master : ScriptableObject
 {
     //Put Default Value Here
     public string weaponName;
@@ -30,6 +40,7 @@ public class SC_Weapon_Master : ScriptableObject
 
     [Header("=== Ammo ===")]
     public float damage;
+    public float critChance;
     public float velocity;
     public int magCapacity;
     public bool isClosedBolt; //Has extra ammo in chamber.

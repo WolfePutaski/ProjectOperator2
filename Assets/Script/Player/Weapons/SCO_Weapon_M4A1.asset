@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_Handgun
+  m_Name: SCO_Weapon_M4A1
   m_EditorClassIdentifier: 
-  weaponName: Handgun
-  fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
-  fireMode: 0
+  weaponName: M4A1
+  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+  fireMode: 1
   FiremodeToggle: 0
-  cycleTime: 0
-  reloadTime: 1.8
-  reloadPerfectStart: 1.2
+  cycleTime: 0.067
+  reloadTime: 2.4
+  reloadPerfectStart: 1.5
   reloadPerfectWindow: 0.3
   damage: 25
+  critChance: 0
   velocity: 0
-  magCapacity: 15
+  magCapacity: 30
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.2
-  swayRadius: 5
-  recoilKick: 0.5
-  recoilRecoverySpeed: 2
+  swayPeriod: 0.3
+  swayRadius: 3
+  recoilKick: 0.4
+  recoilRecoverySpeed: 1
   heatPerShot: 0
   heatCoolRate: 0
