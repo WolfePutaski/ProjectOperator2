@@ -43,6 +43,8 @@ public class SC_WeaponFunction : MonoBehaviour
             Input_Fire();
             Input_ChangeFireMode();
             Input_Reload();
+            Input_RackSlide();
+
 
             CrosshairUpdate();
 
@@ -59,6 +61,14 @@ public class SC_WeaponFunction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentWeapon.equippedWeaponProperties.ammoInMag = 0;
+        }
+    }
+
+    void Input_RackSlide()
+    {
+        if (Input.GetMouseButton(2))
+        {
+            print("HEY!");
         }
     }
 
@@ -102,8 +112,10 @@ public class SC_WeaponFunction : MonoBehaviour
             else
             {
                 StopReload();
-                currentWeapon.equippedWeaponProperties.ammoInMag = currentWeapon.equippedWeaponStats.magCapacity;
+                currentWeapon.equippedWeaponProperties.ammoInMag = currentWeapon.equippedWeaponStats.isClosedBolt? currentWeapon.equippedWeaponStats.magCapacity : currentWeapon.equippedWeaponStats.magCapacity -1;
                 currentWeapon.equippedWeaponProperties.isLoaded = true;
+
+
             }
         }
         else
@@ -118,10 +130,10 @@ public class SC_WeaponFunction : MonoBehaviour
             weaponToReload = null;
         }
 
-        ReloadBarFunction();
+        ReloadUIUpdate();
     }
 
-    void ReloadBarFunction()
+    void ReloadUIUpdate()
     {
         reloadCircle.gameObject.SetActive(weaponToReload != null);
 
@@ -244,7 +256,9 @@ public class SC_WeaponFunction : MonoBehaviour
         crosshair.crosshairAim.transform.position += -GetComponent<SC_LookDir>().aimDir * currentWeapon.equippedWeaponStats.recoilKick
             + (Random.insideUnitSphere * currentWeapon.equippedWeaponStats.recoilKick);
 
-        GetComponent<SC_CameraShake>().ShakeCamera();
+        GetComponent<SC_CameraShake>().ShakeCamera(currentWeapon.equippedWeaponStats.recoilKickShake);
+
+        
     }
 
     void CycleGun()

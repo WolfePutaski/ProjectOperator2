@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum FireMode { SEMI, AUTO, BURST, MANUAL }
+public enum RecoilKickShake { LIGHT, MEDIUM, HEAVY }
 
 [System.Serializable]
 public class WeaponFunctionProperties
@@ -51,6 +52,7 @@ public class SCO_Weapon_Master : ScriptableObject
     public float swayRadius; //How far crosshair move around
     public float recoilKick; //Amount of Kick
     public float recoilRecoverySpeed; //How fast to recover from recoil
+    public RecoilKickShake recoilKickShake;
 
     [Header("=== Heat ===")]
     public float heatPerShot;

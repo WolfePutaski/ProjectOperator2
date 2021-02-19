@@ -21,6 +21,7 @@ MonoBehaviour:
   reloadPerfectStart: 0
   reloadPerfectWindow: 0
   damage: 20
+  critChance: 0
   velocity: 0
   magCapacity: 100
   isClosedBolt: 0
@@ -29,5 +30,6 @@ MonoBehaviour:
   swayRadius: 5
   recoilKick: 0.5
   recoilRecoverySpeed: 2
+  recoilKickShake: 1
   heatPerShot: 0
   heatCoolRate: 0
