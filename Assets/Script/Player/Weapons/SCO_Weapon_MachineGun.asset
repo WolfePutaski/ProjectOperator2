@@ -15,15 +15,18 @@ MonoBehaviour:
   weaponName: Machine Gun
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
-  FiremodeToggle: 0
-  rateOfFire: 0.05
+  FiremodeToggle: 1
+  cycleTime: 0.07
+  reloadTime: 5
+  reloadPerfectStart: 0
+  reloadPerfectWindow: 0
   damage: 20
   velocity: 0
-  magCapacity: 0
+  magCapacity: 100
   isClosedBolt: 0
   TriggerDelay: 0
   swayPeriod: 0.2
-  swayRadius: 0
+  swayRadius: 5
   recoilKick: 0.5
   recoilRecoverySpeed: 2
   heatPerShot: 0

@@ -16,10 +16,13 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
   fireMode: 0
   FiremodeToggle: 0
-  rateOfFire: 0
+  cycleTime: 0
+  reloadTime: 1.8
+  reloadPerfectStart: 1.2
+  reloadPerfectWindow: 0.3
   damage: 25
   velocity: 0
-  magCapacity: 0
+  magCapacity: 15
   isClosedBolt: 0
   TriggerDelay: 0
   swayPeriod: 0.2
