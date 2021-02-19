@@ -33,6 +33,7 @@ public class SCO_Weapon_Master : ScriptableObject
 
     [Header("=== Loading Mechanism ===")]
     public FireMode fireMode;
+    public FireMode secondFireMode;
     public bool FiremodeToggle;
     public float cycleTime;
     public float reloadTime;
@@ -41,13 +42,16 @@ public class SCO_Weapon_Master : ScriptableObject
 
     [Header("=== Ammo ===")]
     public float damage;
+    public float headShotMultiplier;
     public float critChance;
+    public float critMultiplier;
     public float velocity;
     public int magCapacity;
     public bool isClosedBolt; //Has extra ammo in chamber.
     public float TriggerDelay; //Delay before start firing after pressing trigger
 
     [Header("=== Recoil & Handling ===")]
+    [Range(0,1)]
     public float swayPeriod; //For every seconds in swayPeriod, the crosshair will move to new position. Guns with higher number will feel more shaky.
     public float swayRadius; //How far crosshair move around
     public float recoilKick; //Amount of Kick
@@ -57,4 +61,10 @@ public class SCO_Weapon_Master : ScriptableObject
     [Header("=== Heat ===")]
     public float heatPerShot;
     public float heatCoolRate;
+
+    [Header("=== Jamming ===")]
+    public float minJamChance;
+    public float maxJamChance;
+    public float totalShots;
+
 }

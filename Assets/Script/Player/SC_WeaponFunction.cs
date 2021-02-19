@@ -27,9 +27,9 @@ public class SC_WeaponFunction : MonoBehaviour
 
     void Awake()
     {
-        inventory = GetComponent<SC_Inventory>();
+        TryGetComponent(out inventory);
+        TryGetComponent(out audioSource);
         crosshair = FindObjectOfType<SC_Crosshair>();
-        audioSource = GetComponent<AudioSource>();
         reloadCircle = FindObjectOfType<SC_ReloadCircle>();
         weaponUI = FindObjectOfType<SC_WeaponUI>();
 
@@ -47,10 +47,6 @@ public class SC_WeaponFunction : MonoBehaviour
 
 
             CrosshairUpdate();
-
-
-            //weaponUI.SetWeaponUIText(currentWeapon.equippedWeaponStats.weaponName, currentWeapon.equippedWeaponProperties.ammoInMag, currentWeapon.equippedWeaponStats.magCapacity);
-
             weaponUI.SetWeaponUIText(currentWeapon);
         }
 
@@ -112,8 +108,12 @@ public class SC_WeaponFunction : MonoBehaviour
             else
             {
                 StopReload();
-                currentWeapon.equippedWeaponProperties.ammoInMag = currentWeapon.equippedWeaponStats.isClosedBolt? currentWeapon.equippedWeaponStats.magCapacity : currentWeapon.equippedWeaponStats.magCapacity -1;
-                currentWeapon.equippedWeaponProperties.isLoaded = true;
+                currentWeapon.equippedWeaponProperties.ammoInMag = currentWeapon.equippedWeaponStats.magCapacity;
+                if (!currentWeapon.equippedWeaponProperties.isLoaded)
+                {
+                    currentWeapon.equippedWeaponProperties.ammoInMag--;
+                    currentWeapon.equippedWeaponProperties.isLoaded = true;
+                }
 
 
             }
@@ -168,21 +168,19 @@ public class SC_WeaponFunction : MonoBehaviour
 
     void Input_ChangeFireMode()
     {
-        if (currentWeapon.equippedWeaponStats.FiremodeToggle)
+        if (Input.GetButtonDown("ChangeFireMode"))
         {
-            if (Input.GetButtonDown("ChangeFireMode"))
+            if (currentWeapon.equippedWeaponStats.FiremodeToggle)
+
             {
                 var _currentFireMode = currentWeapon.equippedWeaponProperties.CurrentFiremode;
 
-                if (_currentFireMode == FireMode.AUTO)
-                    _currentFireMode = FireMode.SEMI;
-                else
-                    _currentFireMode = FireMode.AUTO;
+            if (_currentFireMode == currentWeapon.equippedWeaponStats.fireMode)
+                _currentFireMode = currentWeapon.equippedWeaponStats.secondFireMode;
+            else
+                _currentFireMode = currentWeapon.equippedWeaponStats.fireMode;
 
-                currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
-
-                print("Hello1");
-
+            currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
             }
         }
     }
@@ -191,21 +189,45 @@ public class SC_WeaponFunction : MonoBehaviour
     void Shoot()
     {
         GetComponent<AudioSource>().PlayOneShot(currentWeapon.equippedWeaponStats.fireSound);
-        Debug.DrawRay(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized * 1000f, Color.green, 1f);
+        //Debug.DrawRay(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized * 1000f, Color.green, 1f);
 
-        RaycastHit2D[] hit2D;
-        hit2D = Physics2D.RaycastAll(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized, 1000f);
-
-        if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
+        if (currentWeapon.equippedWeaponStats.GetType() == typeof(SCO_Weapon_Class_Shotgun))
         {
-            hit2D[1].transform.GetComponent<SC_Health>().Damage(currentWeapon.equippedWeaponStats.damage);
+            SCO_Weapon_Class_Shotgun sgClass = (SCO_Weapon_Class_Shotgun)currentWeapon.equippedWeaponStats;
+            for (int i = 0; i < sgClass.PelletCount; i++)
+            {
+                ShootRay(sgClass.damage / sgClass.PelletCount, crosshair.crosshairAim.transform.position, sgClass.Spread);
+                print("Hi");
+
+            }
         }
+        else
+            ShootRay(currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position, 0);
+
+        //RaycastHit2D[] hit2D;
+        //hit2D = Physics2D.RaycastAll(transform.position,(crosshair.crosshairAim.transform.position - transform.position).normalized , 1000f);
+
+        //if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
+        //{
+        //    hit2D[1].transform.GetComponent<SC_Health>().Damage(currentWeapon.equippedWeaponStats.damage);
+        //    print("HIT!");
+        //}
 
         currentWeapon.equippedWeaponProperties.isLoaded = false;
-
-
-        Invoke("aimKick", 0.04f);
+        aimKick();
         Invoke("CycleGun", currentWeapon.equippedWeaponStats.cycleTime);
+
+        void ShootRay(float Damage, Vector3 AimPoint, float spread)
+        {
+            RaycastHit2D[] hit2D;
+            hit2D = Physics2D.RaycastAll(transform.position, (AimPoint - transform.position).normalized + (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0)), 1000f);
+            Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread),Mathf.Cos(spread),0))) * 1000f, Color.red, 1f);
+
+            if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
+            {
+                hit2D[1].transform.GetComponent<SC_Health>().Damage(Damage);
+            }
+        }
     }
 
     void CrosshairUpdate()
