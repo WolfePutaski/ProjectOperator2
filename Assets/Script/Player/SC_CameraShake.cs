@@ -13,17 +13,19 @@ public class SC_CameraShake : MonoBehaviour
         animator = cameraHolder.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ShakeCamera(RecoilKickShake recoilKickShake)
     {
-        if (recoilKickShake == RecoilKickShake.LIGHT)
+        switch (recoilKickShake)
+        {
+            case RecoilKickShake.LIGHT:
             animator.Play("Camera_RecoilLow", 0, 0f);
-        if(recoilKickShake == RecoilKickShake.MEDIUM)
-            animator.Play("Camera_RecoilMedium", 0, 0f);
+                break;
+            case RecoilKickShake.MEDIUM:
+                animator.Play("Camera_RecoilMedium", 0, 0f);
+                break;
+            case RecoilKickShake.HEAVY:
+                break;
+
+        }
     }
 }

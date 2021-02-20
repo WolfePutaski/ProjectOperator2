@@ -30,9 +30,9 @@ MonoBehaviour:
   isClosedBolt: 1
   TriggerDelay: 0
   swayPeriod: 0.2
-  swayRadius: 5
+  swayOffset: 2
+  recoilRecoverySpeed: 3
   recoilKick: 0.5
-  recoilRecoverySpeed: 2
   recoilKickShake: 0
   heatPerShot: 0
   heatCoolRate: 0

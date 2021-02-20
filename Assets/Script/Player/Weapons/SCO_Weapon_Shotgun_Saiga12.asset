@@ -29,10 +29,10 @@ MonoBehaviour:
   magCapacity: 12
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.2
-  swayRadius: 4
+  swayPeriod: 1
+  swayOffset: 8
+  recoilRecoverySpeed: 1
   recoilKick: 0.8
-  recoilRecoverySpeed: 1.5
   recoilKickShake: 1
   heatPerShot: 0
   heatCoolRate: 0

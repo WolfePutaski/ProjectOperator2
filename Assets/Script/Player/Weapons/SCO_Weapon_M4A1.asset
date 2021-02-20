@@ -15,20 +15,27 @@ MonoBehaviour:
   weaponName: M4A1
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
-  FiremodeToggle: 0
+  secondFireMode: 0
+  FiremodeToggle: 1
   cycleTime: 0.067
   reloadTime: 2.4
   reloadPerfectStart: 1.5
   reloadPerfectWindow: 0.3
   damage: 25
+  headShotMultiplier: 0
   critChance: 0
+  critMultiplier: 0
   velocity: 0
   magCapacity: 30
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.3
-  swayRadius: 3
-  recoilKick: 0.4
+  swayPeriod: 0.2
+  swayOffset: 1
   recoilRecoverySpeed: 1
+  recoilKick: 0.4
+  recoilKickShake: 0
   heatPerShot: 0
   heatCoolRate: 0
+  minJamChance: 0
+  maxJamChance: 0
+  totalShots: 0

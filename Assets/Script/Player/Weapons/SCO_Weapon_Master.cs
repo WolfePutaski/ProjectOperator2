@@ -51,11 +51,14 @@ public class SCO_Weapon_Master : ScriptableObject
     public float TriggerDelay; //Delay before start firing after pressing trigger
 
     [Header("=== Recoil & Handling ===")]
+    [Tooltip("For every seconds in swayPeriod, the crosshair will move to new position. Guns with higher number will feel more shaky.")]
     [Range(0,1)]
-    public float swayPeriod; //For every seconds in swayPeriod, the crosshair will move to new position. Guns with higher number will feel more shaky.
-    public float swayRadius; //How far crosshair move around
-    public float recoilKick; //Amount of Kick
+    public float swayPeriod;
+    [Tooltip("How far crosshair sway in degree")]
+    public float swayOffset; //How far crosshair move around
+    [Range(.1f, 10)]
     public float recoilRecoverySpeed; //How fast to recover from recoil
+    public float recoilKick; //Amount of Kick
     public RecoilKickShake recoilKickShake;
 
     [Header("=== Heat ===")]

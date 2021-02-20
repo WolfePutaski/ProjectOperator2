@@ -22,7 +22,8 @@ public class SC_WeaponUI : MonoBehaviour
     {
         TextName.text = weaponItem.equippedWeaponStats.weaponName;
 
-        string ammoToShow = weaponItem.equippedWeaponProperties.isLoaded ? (weaponItem.equippedWeaponProperties.ammoInMag + 1).ToString() : weaponItem.equippedWeaponProperties.ammoInMag.ToString();
+        string ammoToShow = weaponItem.equippedWeaponProperties.isLoaded ? 
+            (weaponItem.equippedWeaponProperties.ammoInMag + 1).ToString() : weaponItem.equippedWeaponProperties.ammoInMag.ToString();
 
 
 

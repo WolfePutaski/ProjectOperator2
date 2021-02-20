@@ -18,7 +18,7 @@ public class SC_WeaponFunction : MonoBehaviour
     SC_WeaponUI weaponUI;
 
     Vector3 nextSwayPos;
-    float lerpPara = 0;
+    float lerpPeriodCount = 0;
 
     Vector3 defaultAimPos;
 
@@ -64,7 +64,6 @@ public class SC_WeaponFunction : MonoBehaviour
     {
         if (Input.GetMouseButton(2))
         {
-            print("HEY!");
         }
     }
 
@@ -96,11 +95,6 @@ public class SC_WeaponFunction : MonoBehaviour
                         deltaTime - currentWeapon.equippedWeaponStats.reloadPerfectStart <= currentWeapon.equippedWeaponStats.reloadPerfectWindow)
                     {
                         ReloadTimeCount = 0;
-                        print("Success");
-                    }
-                    else
-                    {
-                        print("Fail");
                     }
                     PerfectReloadCanTry = false;
                 }
@@ -185,11 +179,9 @@ public class SC_WeaponFunction : MonoBehaviour
         }
     }
 
-
     void Shoot()
     {
         GetComponent<AudioSource>().PlayOneShot(currentWeapon.equippedWeaponStats.fireSound);
-        //Debug.DrawRay(transform.position, (crosshair.crosshairAim.transform.position - transform.position).normalized * 1000f, Color.green, 1f);
 
         if (currentWeapon.equippedWeaponStats.GetType() == typeof(SCO_Weapon_Class_Shotgun))
         {
@@ -197,21 +189,10 @@ public class SC_WeaponFunction : MonoBehaviour
             for (int i = 0; i < sgClass.PelletCount; i++)
             {
                 ShootRay(sgClass.damage / sgClass.PelletCount, crosshair.crosshairAim.transform.position, sgClass.Spread);
-                print("Hi");
-
             }
         }
         else
             ShootRay(currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position, 0);
-
-        //RaycastHit2D[] hit2D;
-        //hit2D = Physics2D.RaycastAll(transform.position,(crosshair.crosshairAim.transform.position - transform.position).normalized , 1000f);
-
-        //if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
-        //{
-        //    hit2D[1].transform.GetComponent<SC_Health>().Damage(currentWeapon.equippedWeaponStats.damage);
-        //    print("HIT!");
-        //}
 
         currentWeapon.equippedWeaponProperties.isLoaded = false;
         aimKick();
@@ -220,8 +201,11 @@ public class SC_WeaponFunction : MonoBehaviour
         void ShootRay(float Damage, Vector3 AimPoint, float spread)
         {
             RaycastHit2D[] hit2D;
-            hit2D = Physics2D.RaycastAll(transform.position, (AimPoint - transform.position).normalized + (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0)), 1000f);
-            Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread),Mathf.Cos(spread),0))) * 1000f, Color.red, 1f);
+            hit2D = Physics2D.RaycastAll(transform.position, 
+                (AimPoint - transform.position).normalized + 
+                (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0)), 1000f);
+            Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + 
+                (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread),Mathf.Cos(spread),0))) * 1000f, Color.red,1f);
 
             if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
             {
@@ -242,42 +226,45 @@ public class SC_WeaponFunction : MonoBehaviour
             ReturnCrosshair();
         }
 
-        if (lerpPara < currentWeapon.equippedWeaponStats.swayPeriod)
+        void ReturnCrosshair()
+        {
+            AimPoint.position = Vector3.Lerp(AimPoint.position, defaultAimPos,
+                Mathf.Pow(Time.deltaTime,.7f)* currentWeapon.equippedWeaponStats.recoilRecoverySpeed);
+        }
+
+        float swayRadius = Vector2.Distance(transform.position, crosshair.transform.position) * Mathf.Tan(Mathf.Deg2Rad* currentWeapon.equippedWeaponStats.swayOffset / 2f);
+        if (lerpPeriodCount < currentWeapon.equippedWeaponStats.swayPeriod)
         {
             MoveToSwayPosition();
         }
         else
         {
             AssignNewSway();
-
-        }
-
-        void ReturnCrosshair()
-        {
-            AimPoint.position = Vector3.Lerp(AimPoint.position, defaultAimPos, currentWeapon.equippedWeaponStats.recoilRecoverySpeed * Mathf.Sin(Time.deltaTime));
         }
 
         void AssignNewSway()
         {
-            nextSwayPos = Random.insideUnitSphere;
-            lerpPara = 0;
+            nextSwayPos = new Vector2(Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f)) * swayRadius;
+            lerpPeriodCount = 0;
         }
 
         void MoveToSwayPosition()
         {
-
-            lerpPara += Time.deltaTime;
-            SwayPoint.localPosition = Vector2.Lerp(SwayPoint.localPosition, nextSwayPos * currentWeapon.equippedWeaponStats.swayRadius, Mathf.Sin(Time.deltaTime) / 12);
+            lerpPeriodCount += Time.deltaTime;
+            SwayPoint.localPosition = Vector2.Lerp(SwayPoint.localPosition, nextSwayPos , Time.deltaTime/currentWeapon.equippedWeaponStats.swayPeriod);
         }
 
-
+        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z + currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
+        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z -currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
+        
     }
 
     void aimKick()
     {
-        crosshair.crosshairAim.transform.position += -GetComponent<SC_LookDir>().aimDir * currentWeapon.equippedWeaponStats.recoilKick
-            + (Random.insideUnitSphere * currentWeapon.equippedWeaponStats.recoilKick);
-
+        crosshair.crosshairAim.transform.position += (SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z) * -currentWeapon.equippedWeaponStats.recoilKick) 
+            + Random.insideUnitSphere * currentWeapon.equippedWeaponStats.recoilKick;
+        
         GetComponent<SC_CameraShake>().ShakeCamera(currentWeapon.equippedWeaponStats.recoilKickShake);
 
         

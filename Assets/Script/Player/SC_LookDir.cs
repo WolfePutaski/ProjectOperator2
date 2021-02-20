@@ -23,4 +23,12 @@ public class SC_LookDir : MonoBehaviour
             aimDir = (targetPs - transform.position).normalized;
         return Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
     }
+
+    public static Vector3 GetVectorFromAngle(float angle)
+    {
+        float angleRad = angle * (Mathf.PI / 180f);
+        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+    }
 }
+
+
