@@ -31,7 +31,7 @@ MonoBehaviour:
   TriggerDelay: 0
   swayPeriod: 0.2
   swayOffset: 2
-  recoilRecoverySpeed: 3
+  recoilRecoverySpeed: 2
   recoilKick: 0.5
   recoilKickShake: 0
   heatPerShot: 0

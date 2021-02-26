@@ -6,12 +6,12 @@ using UnityEngine;
 public class WeaponItem
 {
     public SCO_Weapon_Master equippedWeaponStats;
-    [SerializeField]
     public WeaponFunctionProperties equippedWeaponProperties;
+
 
     public WeaponItem(SCO_Weapon_Master weaponClass)
     {
-        equippedWeaponStats = weaponClass;
+        equippedWeaponStats = Object.Instantiate(weaponClass);
         equippedWeaponProperties = new WeaponFunctionProperties(weaponClass);
     }
 }
@@ -40,6 +40,9 @@ public class SC_Inventory : MonoBehaviour
             ChangeWeaponTo(1);
         if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangeWeaponTo(2);
+
+        if (Input.GetKeyDown(KeyCode.P))
+            weaponItems[currentSlot].equippedWeaponStats.magCapacity += 10;
     }
 
     void ChangeWeaponTo(int i)

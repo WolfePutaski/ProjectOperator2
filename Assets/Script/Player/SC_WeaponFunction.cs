@@ -207,12 +207,44 @@ public class SC_WeaponFunction : MonoBehaviour
             Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + 
                 (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread),Mathf.Cos(spread),0))) * 1000f, Color.red,1f);
 
-            if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
+            int hitCount = 0;
+
+            for (int i = 0; i < hit2D.Length; i++)
             {
-                hit2D[1].transform.GetComponent<SC_Health>().Damage(Damage);
+                CheckHit(hit2D[i].transform.gameObject);
+                if (hitCount == 1)
+                    break;
             }
+
+            void CheckHit(GameObject hitObject)
+            {
+                bool isSelf()
+                {
+                    if (hitObject == gameObject) return true;
+                    else return false;
+                }
+
+                if (!isSelf())
+                {
+                    SC_Health healthReciever;
+                    hitObject.TryGetComponent(out healthReciever);
+                    if (healthReciever != null)
+                        healthReciever.Damage(Damage);
+                    
+                    hitCount++;
+                }
+
+                Debug.Log(hitObject);
+            }
+
+            //if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
+            //{
+            //    hit2D[1].transform.GetComponent<SC_Health>().Damage(Damage);
+            //}
         }
     }
+
+
 
     void CrosshairUpdate()
     {

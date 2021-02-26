@@ -32,7 +32,7 @@ MonoBehaviour:
   swayPeriod: 0.2
   swayOffset: 1
   recoilRecoverySpeed: 1
-  recoilKick: 0.4
+  recoilKick: 0.35
   recoilKickShake: 0
   heatPerShot: 0
   heatCoolRate: 0

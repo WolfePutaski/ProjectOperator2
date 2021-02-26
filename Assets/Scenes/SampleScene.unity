@@ -1141,7 +1141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &836895805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,7 +2182,7 @@ GameObject:
   - component: {fileID: 1978028610}
   - component: {fileID: 1978028612}
   - component: {fileID: 1978028611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2234,6 +2234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimDir: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+  enableLookWithMouse: 1
 --- !u!114 &1978028608
 MonoBehaviour:
   m_ObjectHideFlags: 0
