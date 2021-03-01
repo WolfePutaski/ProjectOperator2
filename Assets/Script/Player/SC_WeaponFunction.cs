@@ -196,7 +196,7 @@ public class SC_WeaponFunction : MonoBehaviour
 
         currentWeapon.equippedWeaponProperties.isLoaded = false;
         aimKick();
-        Invoke("CycleGun", currentWeapon.equippedWeaponStats.cycleTime);
+        Invoke("CycleAmmo", currentWeapon.equippedWeaponStats.cycleTime);
 
         void ShootRay(float Damage, Vector3 AimPoint, float spread)
         {
@@ -302,7 +302,7 @@ public class SC_WeaponFunction : MonoBehaviour
         
     }
 
-    void CycleGun()
+    void CycleAmmo()
     {
         if (currentWeapon.equippedWeaponProperties.ammoInMag > 0)
         {

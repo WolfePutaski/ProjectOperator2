@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IState
 {
-    void Tick(float dt);
+    void Tick();
     void OnEnter();
     void OnExit();
 

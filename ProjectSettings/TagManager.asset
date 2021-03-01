@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - WeakPoint
+  - CameraHolder
   layers:
   - Default
   - TransparentFX

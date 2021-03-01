@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SC_CameraShake : MonoBehaviour
 {
-    public GameObject cameraHolder;
-    public Animator animator;
+    private GameObject cameraHolder;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Awake()
     {
+        cameraHolder = GameObject.FindGameObjectWithTag("CameraHolder");
         animator = cameraHolder.GetComponent<Animator>();
     }
 

@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 132852198}
   m_Layer: 0
   m_Name: CameraHolder
-  m_TagString: Untagged
+  m_TagString: CameraHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRadius: 15
   spawnCooldown: 2
-  maxEnemyCount: 10
+  maxEnemyCount: 1
   squads:
   - squadSpread: 1
     enemies:
@@ -2403,8 +2403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0556e8b7a192af49a3ca92436fb57e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraHolder: {fileID: 132852196}
-  animator: {fileID: 0}
 --- !u!1 &2094220816
 GameObject:
   m_ObjectHideFlags: 0
