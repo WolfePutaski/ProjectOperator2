@@ -27,6 +27,8 @@ public class SC_EnemySpawner : MonoBehaviour
 
     public List<Squad> squads;
 
+    public int SquadRank;
+
     public bool CoolDownFinished => spawnCooldownCount <= 0;
     public bool EnemyCountIsMax => GameObject.FindGameObjectsWithTag("Enemy").Length >= maxEnemyCount;
 
