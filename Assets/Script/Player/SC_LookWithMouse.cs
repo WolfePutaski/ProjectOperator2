@@ -18,6 +18,6 @@ public class SC_LookWithMouse : SC_LookDir
     void Update()
     {
         if (enableLookWithMouse)
-            transform.eulerAngles = new Vector3(0, 0, LookAngle(mousePosition.GetMousePos()));
+            transform.eulerAngles = new Vector3(0, 0, LookAngle(SC_GetMousePosition.GetMousePos()));
     }
 }

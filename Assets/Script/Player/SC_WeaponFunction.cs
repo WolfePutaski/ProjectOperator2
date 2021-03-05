@@ -192,29 +192,30 @@ public class SC_WeaponFunction : MonoBehaviour
             }
         }
         else
-            ShootRay(currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position, 0);
+            ShootRay(currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position);
 
         currentWeapon.equippedWeaponProperties.isLoaded = false;
         aimKick();
         Invoke("CycleAmmo", currentWeapon.equippedWeaponStats.cycleTime);
 
-        void ShootRay(float Damage, Vector3 AimPoint, float spread)
+        void ShootRay(float Damage, Vector3 AimPoint, float spread = 0)
         {
             RaycastHit2D[] hit2D;
+            var _spread = (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0));
+
             hit2D = Physics2D.RaycastAll(transform.position, 
-                (AimPoint - transform.position).normalized + 
-                (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0)), 1000f);
-            Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + 
-                (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread),Mathf.Cos(spread),0))) * 1000f, Color.red,1f);
+                (AimPoint - transform.position).normalized + _spread, 1000f);
+            Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + _spread) * 1000f, Color.red,1f);
 
             int hitCount = 0;
 
             for (int i = 0; i < hit2D.Length; i++)
             {
                 CheckHit(hit2D[i].transform.gameObject);
-                if (hitCount == 1)
+                if (hitCount == 1) //PENETRATION
                     break;
             }
+
 
             void CheckHit(GameObject hitObject)
             {
@@ -234,13 +235,15 @@ public class SC_WeaponFunction : MonoBehaviour
                     hitCount++;
                 }
 
-                Debug.Log(hitObject);
-            }
+                //Debug.Log(hitObject);
 
-            //if (hit2D.Length > 1 && hit2D[1].transform.CompareTag("Enemy"))
-            //{
-            //    hit2D[1].transform.GetComponent<SC_Health>().Damage(Damage);
-            //}
+                Vector3 lastHitpoint = hit2D.Length > 1 ? (Vector3)hit2D[1].point : ((crosshair.crosshairAim.transform.position - transform.position).normalized + _spread) * 20;
+
+                var bulletTracer = SC_ObjectPooler.SharedInstance.GetPooledObject("BulletTracer");
+                bulletTracer.SetActive(true);                        
+                bulletTracer.GetComponent<LineRenderer>().SetPosition(1, lastHitpoint);
+                SC_ObjectPooler.SharedInstance.DeactivePooledObject(bulletTracer, 0.04f);
+            }
         }
     }
 

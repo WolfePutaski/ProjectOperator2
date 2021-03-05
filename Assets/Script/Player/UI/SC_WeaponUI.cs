@@ -10,6 +10,9 @@ public class SC_WeaponUI : MonoBehaviour
     public TextMeshProUGUI TextAmmo;
     public Image Heat;
     public Image Condition;
+    public Text TextFiremode;
+
+    public List<Text> InvSlot;
 
     public void SetWeaponUIText(string wpnName, int Ammo, int MaxAmmo )
     {
@@ -28,5 +31,35 @@ public class SC_WeaponUI : MonoBehaviour
 
 
         TextAmmo.text = ammoToShow + "/" + weaponItem.equippedWeaponStats.magCapacity.ToString();
+
+        string _textFiremode()
+        {
+            switch (weaponItem.equippedWeaponProperties.CurrentFiremode)
+            {
+                case FireMode.SEMI:
+                    return "SEMI-AUTO";
+                case FireMode.AUTO:
+                    return "FULL-AUTO";
+                case FireMode.BURST:
+                    return "BURST";
+                case FireMode.MANUAL:
+                    return "Manual";
+                default:
+                    return "???";
+            }
+        }
+        
+
+        TextFiremode.text = _textFiremode();
+    }
+
+    public void SetInventoryUI(SC_Inventory playerInventory)
+    {
+        for (int i = 0; i < InvSlot.Count; i++)
+        {
+
+            if (playerInventory.currentSlot = i)
+                InvSlot[i].color;
+        }
     }
 }

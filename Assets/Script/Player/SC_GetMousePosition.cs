@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SC_GetMousePosition : MonoBehaviour
 {
-    public Vector3 GetMousePos()
+    public static Vector3 GetMousePos()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition); ;
     }

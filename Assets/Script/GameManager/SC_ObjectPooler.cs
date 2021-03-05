@@ -62,4 +62,15 @@ public class SC_ObjectPooler : MonoBehaviour
         return null;
     }
 
+    public void DeactivePooledObject(GameObject gameObject, float delay = 0)
+    {
+        StartCoroutine(_DeactivePooledObject(gameObject, delay));
+    }
+
+    IEnumerator _DeactivePooledObject(GameObject gameObject, float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        gameObject.SetActive(false);
+    }
+
 }
