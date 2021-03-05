@@ -47,7 +47,6 @@ public class SC_WeaponFunction : MonoBehaviour
 
 
             CrosshairUpdate();
-            weaponUI.SetWeaponUIText(currentWeapon);
         }
 
     }

@@ -10,6 +10,11 @@ public class SC_EnemySystem : MonoBehaviour
     private GameObject PlayerTarget;
     private SC_Health healthSystem;
 
+    [Header("===Speed===")]
+    public float DefaultSpeed;
+    public float minSpeed;
+    public float Acceleration;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +26,7 @@ public class SC_EnemySystem : MonoBehaviour
         lookDir.target = PlayerTarget.transform;
 
         _stateMachine = new StateMachine();
-        var move = new EnemyState.Move(GetComponent<SC_MoveToObject>(),PlayerTarget.transform);
+        var move = new EnemyState.Move(this,GetComponent<SC_MoveToObject>(),PlayerTarget.transform);
         var attack = new EnemyState.Attack();
         var die = new EnemyState.Die(this);
 
@@ -32,6 +37,7 @@ public class SC_EnemySystem : MonoBehaviour
 
         void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
         void AAt(IState to, Func<bool> condition) => _stateMachine.AddAnyTransition(to, condition);
+
         Func<bool> closeToTarget() => () => Vector2.Distance(PlayerTarget.transform.position, gameObject.transform.position) <= 1f;
         Func<bool> noHP() => () => healthSystem.HealthCurrent <= 0f;
     }

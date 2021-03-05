@@ -6,9 +6,12 @@ namespace EnemyState
 {
     public class Move : IState
     {
+        SC_EnemySystem _enemySystem;
         SC_MoveToObject _moveToObject;
-        public Move (SC_MoveToObject moveToSystem, Transform moveTarget)
+
+        public Move (SC_EnemySystem enemySystem, SC_MoveToObject moveToSystem, Transform moveTarget)
         {
+            _enemySystem = enemySystem;
             _moveToObject = moveToSystem;
             _moveToObject.target = moveTarget;
 
@@ -16,12 +19,16 @@ namespace EnemyState
 
         public void Tick()
         {
+            if (_moveToObject.speed < _enemySystem.DefaultSpeed)
+            {
+                _moveToObject.speed += _enemySystem.Acceleration * Time.deltaTime;
+            }
 
         }
 
         public void OnEnter()
         {
-            _moveToObject.speed = 1f;
+            _moveToObject.speed = 0 ;
         }
 
         public void OnExit()
