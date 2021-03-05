@@ -251,6 +251,7 @@ MonoBehaviour:
   DefaultSpeed: 1
   minSpeed: 0
   Acceleration: 1
+  timeToAttack: 0
 --- !u!50 &5920497722758795373
 Rigidbody2D:
   serializedVersion: 4

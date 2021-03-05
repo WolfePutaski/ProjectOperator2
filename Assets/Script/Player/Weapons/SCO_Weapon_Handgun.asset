@@ -21,7 +21,7 @@ MonoBehaviour:
   reloadTime: 1.8
   reloadPerfectStart: 1.2
   reloadPerfectWindow: 0.3
-  damage: 25
+  damage: 20
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0

@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: DefaultSpeed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2962727107886977819, guid: faca6636696092444be09795d616d598, type: 3}
+      propertyPath: timeToAttack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4376035539166764969, guid: faca6636696092444be09795d616d598, type: 3}
       propertyPath: m_Name
       value: Enemy_Heavy

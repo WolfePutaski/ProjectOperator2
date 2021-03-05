@@ -15,6 +15,9 @@ public class SC_EnemySystem : MonoBehaviour
     public float minSpeed;
     public float Acceleration;
 
+    [Header("===Attack===")]
+    public float timeToAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,7 @@ public class SC_EnemySystem : MonoBehaviour
 
         _stateMachine = new StateMachine();
         var move = new EnemyState.Move(this,GetComponent<SC_MoveToObject>(),PlayerTarget.transform);
-        var attack = new EnemyState.Attack();
+        var attack = new EnemyState.Attack(this);
         var die = new EnemyState.Die(this);
 
         At(move, attack, closeToTarget());

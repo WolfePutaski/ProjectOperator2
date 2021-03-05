@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SCO_Weapon_Shotgun_Saiga12
   m_EditorClassIdentifier: 
   weaponName: Saiga-12
-  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+  fireSound: {fileID: 8300000, guid: 6c539999a9c296f4ba44b3e1047652df, type: 3}
   fireMode: 0
   secondFireMode: 1
   FiremodeToggle: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
   reloadTime: 2.7
   reloadPerfectStart: 1.8
   reloadPerfectWindow: 0.3
-  damage: 50
+  damage: 60
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0

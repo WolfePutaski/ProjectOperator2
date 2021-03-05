@@ -21,7 +21,5 @@ public class SC_Health : MonoBehaviour, IKillable, IDamagable<float>
     public void Damage(float damage)
     {
         HealthCurrent -= damage;
-        //if (HealthCurrent <= 0)
-        //    Kill();
     }
 }
