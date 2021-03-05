@@ -43,8 +43,9 @@ public class SC_Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangeWeaponTo(2);
 
-        if (Input.GetKeyDown(KeyCode.P))
-            weaponItems[currentSlot].equippedWeaponStats.magCapacity += 10;
+        //if (Input.GetKeyDown(KeyCode.P))
+        //    weaponItems[currentSlot].equippedWeaponStats.magCapacity += 10;
+        // For Debugging. Weapon Mod system will be implemented later;
     }
 
     void ChangeWeaponTo(int i)

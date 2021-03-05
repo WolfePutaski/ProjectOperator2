@@ -19,7 +19,7 @@ namespace EnemyState
         public void OnEnter()
         {
             _enemySystem.GetComponent<SC_Health>().Kill();
-            SC_RecordScore.scoreRecorder.addKillCount();
+            SC_RecordScore.SharedInstance.addKillCount();
         }
 
         public void OnExit()

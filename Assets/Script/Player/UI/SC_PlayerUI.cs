@@ -28,7 +28,7 @@ public class SC_PlayerUI : MonoBehaviour
         weaponUI.SetInventoryUI(inventory);
         weaponUI.SetWeaponUIText(currentWeapon);
 
-        killCount.text = SC_RecordScore.scoreRecorder.killCount.ToString();
+        killCount.text = SC_RecordScore.SharedInstance.killCount.ToString();
         SetHealthUI();
 
     }

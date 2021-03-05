@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SC_RecordScore : MonoBehaviour
 {
-    public static SC_RecordScore scoreRecorder;
+    public static SC_RecordScore SharedInstance;
     public int killCount;
 
     public void Start()
     {
-        scoreRecorder = this;
+        SharedInstance = this;
     }
     void Update()
     {
