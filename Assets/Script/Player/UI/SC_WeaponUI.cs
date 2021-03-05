@@ -58,8 +58,10 @@ public class SC_WeaponUI : MonoBehaviour
         for (int i = 0; i < InvSlot.Count; i++)
         {
 
-            if (playerInventory.currentSlot = i)
-                InvSlot[i].color;
+            if (playerInventory.currentSlot == i)
+                InvSlot[i].color = Color.white;
+            else
+                InvSlot[i].color = Color.black;
         }
     }
 }

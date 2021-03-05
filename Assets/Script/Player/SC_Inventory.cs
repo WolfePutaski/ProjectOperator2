@@ -7,8 +7,7 @@ public class WeaponItem
 {
     public SCO_Weapon_Master equippedWeaponStats;
     public WeaponFunctionProperties equippedWeaponProperties;
-
-
+    
     public WeaponItem(SCO_Weapon_Master weaponClass)
     {
         equippedWeaponStats = Object.Instantiate(weaponClass);

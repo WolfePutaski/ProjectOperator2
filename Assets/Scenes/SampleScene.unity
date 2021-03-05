@@ -1815,7 +1815,10 @@ MonoBehaviour:
   Heat: {fileID: 0}
   Condition: {fileID: 0}
   TextFiremode: {fileID: 1022666068}
-  InvSlot: []
+  InvSlot:
+  - {fileID: 617478504}
+  - {fileID: 1183882484}
+  - {fileID: 1872764033}
 --- !u!222 &1034096622
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2878,6 +2881,7 @@ GameObject:
   - component: {fileID: 1978028610}
   - component: {fileID: 1978028612}
   - component: {fileID: 1978028611}
+  - component: {fileID: 1978028608}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2934,6 +2938,18 @@ MonoBehaviour:
   aimDir: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   enableLookWithMouse: 1
+--- !u!114 &1978028608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978028604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2062195d0e7b03f489443b1455cc6d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1978028609
 MonoBehaviour:
   m_ObjectHideFlags: 0
