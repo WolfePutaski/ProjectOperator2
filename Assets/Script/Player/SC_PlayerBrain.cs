@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class SC_PlayerBrain : MonoBehaviour
 {
-    GameObject pauseMenu;
+    [SerializeField] GameObject pauseMenu;
     SC_PlayerHealth playerHealth;
 
     void Start()
     {
-        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         TryGetComponent(out playerHealth);
-        ForceOffPause();
+        ForceUnPause();
     }
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class SC_PlayerBrain : MonoBehaviour
         }
     }
 
-    void ForceOffPause()
+    void ForceUnPause()
     {
         pauseMenu.SetActive(true);
         TogglePauseMenu();
@@ -34,12 +33,12 @@ public class SC_PlayerBrain : MonoBehaviour
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
 
-        bool isPaused = pauseMenu.activeSelf;
+        bool isPausedMenuActive = pauseMenu.activeSelf;
 
-        Time.timeScale = isPaused ? 0 : 1;
+        Time.timeScale = isPausedMenuActive ? 0 : 1;
 
 
-        if (isPaused)
+        if (isPausedMenuActive)
         {
             playerHealth.disablePlayerInput();
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849a61b73fbc92d48a4aaeb5d50bc98e, type: 3}
   m_Name: SCO_Weapon_Shotgun_Saiga12
   m_EditorClassIdentifier: 
-  weaponName: Saiga-12
+  weaponName: Tacitcal SHOTGUN
   fireSound: {fileID: 8300000, guid: 6c539999a9c296f4ba44b3e1047652df, type: 3}
   fireMode: 0
   secondFireMode: 1

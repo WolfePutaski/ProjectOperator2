@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SC_Health : MonoBehaviour, IKillable, IDamagable<float>
+public class SC_Health : MonoBehaviour/*, IKillable, IDamagable<float>*/
 {
     public float HealthStart;
     public float HealthCurrent;
