@@ -52,7 +52,7 @@ public class SC_PlayerHealth : SC_Health
     public void SetHighScore()
     {
         var currentHighScore = PlayerPrefs.GetInt("HighScore", 0);
-        var newScore = SC_RecordScore.SharedInstance.killCount;
+        var newScore = FindObjectOfType<SC_RecordScore>().killCount;
         if (newScore > currentHighScore)
             PlayerPrefs.SetInt("HighScore", newScore);
     }

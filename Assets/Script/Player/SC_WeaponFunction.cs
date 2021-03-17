@@ -26,6 +26,8 @@ public class SC_WeaponFunction : MonoBehaviour
     WeaponItem _currentWeapon;
     public WeaponItem currentWeapon { get { return _currentWeapon; } }
 
+    SC_ObjectPooler objectPooler;
+
     void Awake()
     {
         TryGetComponent(out inventory);
@@ -33,6 +35,7 @@ public class SC_WeaponFunction : MonoBehaviour
         crosshair = FindObjectOfType<SC_Crosshair>();
         reloadCircle = FindObjectOfType<SC_ReloadCircle>();
         weaponUI = FindObjectOfType<SC_WeaponUI>();
+        objectPooler = FindObjectOfType<SC_ObjectPooler>();
 
     }
     void Update()
@@ -113,10 +116,10 @@ public class SC_WeaponFunction : MonoBehaviour
 
                 Vector3 lastHitpoint = hit2D.Length > 1 ? (Vector3)hit2D[1].point : ((crosshair.crosshairAim.transform.position - transform.position).normalized + _spread) * 20;
 
-                var bulletTracer = SC_ObjectPooler.SharedInstance.GetPooledObject("BulletTracer");
+                var bulletTracer = objectPooler.GetPooledObject("BulletTracer");
                 bulletTracer.SetActive(true);                        
                 bulletTracer.GetComponent<LineRenderer>().SetPosition(1, lastHitpoint);
-                SC_ObjectPooler.SharedInstance.DeactivePooledObject(bulletTracer, 0.04f);
+                objectPooler.DeactivePooledObject(bulletTracer, 0.04f);
             }
         }
     }

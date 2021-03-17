@@ -12,14 +12,11 @@ public class ObjectPoolItem
 
 public class SC_ObjectPooler : MonoBehaviour
 {
-
-    public static SC_ObjectPooler SharedInstance;
     public List<ObjectPoolItem> itemsToPool;
     public List<GameObject> pooledObjects;
 
     void Awake()
     {
-        SharedInstance = this;
     }
 
     // Use this for initialization
@@ -60,6 +57,11 @@ public class SC_ObjectPooler : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void DeactivePooledObject(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
     }
 
     public void DeactivePooledObject(GameObject gameObject, float delay = 0)
