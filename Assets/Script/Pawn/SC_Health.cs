@@ -8,17 +8,17 @@ public class SC_Health : MonoBehaviour/*, IKillable, IDamagable<float>*/
     public float HealthCurrent;
 
     // Start is called before the first frame update
-    void Start()
+    virtual protected void Start()
     {
         HealthCurrent = HealthStart;
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         Destroy(gameObject);
     }
 
-    public void Damage(float damage)
+    public virtual void Damage(float damage)
     {
         HealthCurrent -= damage;
     }

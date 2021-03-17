@@ -34,23 +34,8 @@ public class SC_Inventory : MonoBehaviour
         }
     }
 
-    void Update()
+    public void ChangeWeaponTo(int i)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            ChangeWeaponTo(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            ChangeWeaponTo(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            ChangeWeaponTo(2);
-
-        //if (Input.GetKeyDown(KeyCode.P))
-        //    weaponItems[currentSlot].equippedWeaponStats.magCapacity += 10;
-        // For Debugging. Weapon Mod system will be implemented later;
-    }
-
-    void ChangeWeaponTo(int i)
-    {
-        if (!NotReceiveInput)
         currentSlot = weaponItems[i].equippedWeaponStats? i : currentSlot ;
     }
 }

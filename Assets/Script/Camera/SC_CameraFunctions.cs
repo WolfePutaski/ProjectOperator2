@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SC_CameraFunctions : MonoBehaviour
 {
-    public static SC_CameraFunctions sharedInstance;
     AudioSource audioSource;
     Animator animator;
 
@@ -12,7 +11,6 @@ public class SC_CameraFunctions : MonoBehaviour
 
     void Start()
     {
-        sharedInstance = this;
         TryGetComponent(out audioSource);
         TryGetComponent(out animator);
     }

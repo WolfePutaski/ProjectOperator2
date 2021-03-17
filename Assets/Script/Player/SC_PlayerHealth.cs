@@ -6,6 +6,13 @@ public class SC_PlayerHealth : SC_Health
 {
     public bool isDead => HealthCurrent <= 0;
     [SerializeField] private GameObject GameOverScreen;
+    private SC_PlayerBrain playerBrain;
+
+    new void Start()
+    {
+        base.Start();
+        TryGetComponent(out playerBrain);
+    }
 
     public void Update()
     {    
@@ -14,7 +21,7 @@ public class SC_PlayerHealth : SC_Health
             Kill();
         }
     }
-    public new void Kill()
+    public override void Kill()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.gray;
 
@@ -26,18 +33,20 @@ public class SC_PlayerHealth : SC_Health
         Debug.Log("PlayerDied");
     }
 
+    public override void Damage(float damage)
+    {
+        base.Damage(damage);
+        playerBrain.cameraFunctions.ShakeDamage();
+    }
+
     public void disablePlayerInput()
     {
-        gameObject.GetComponentInChildren<SC_WeaponFunction>().enabled = false;
-        gameObject.GetComponentInChildren<SC_LookDir>().enabled = false;
-        gameObject.GetComponentInChildren<SC_Inventory>().NotReceiveInput = true;
+        playerBrain.SetDisableInput(true);
     }
 
     public void enablePlayerInput()
     {
-        gameObject.GetComponentInChildren<SC_WeaponFunction>().enabled = true;
-        gameObject.GetComponentInChildren<SC_LookDir>().enabled = true;
-        gameObject.GetComponentInChildren<SC_Inventory>().NotReceiveInput = false;
+        playerBrain.SetDisableInput(false);
     }
 
     public void SetHighScore()

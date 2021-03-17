@@ -5,11 +5,24 @@ using UnityEngine;
 public class SC_PlayerBrain : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-    SC_PlayerHealth playerHealth;
+    SC_PlayerHealth _Health;
+    SC_Inventory _Inventory;
+    SC_WeaponFunction _WeaponFunction;
+    Animator _animator;
+    private SC_LookWithMouse _lookWithMouse;
+    private SC_CameraFunctions _cameraFunctions;
+    public SC_CameraFunctions cameraFunctions { get { return _cameraFunctions; } }
+
+    private bool NotRecieveInput;
 
     void Start()
     {
-        TryGetComponent(out playerHealth);
+        TryGetComponent(out _Health);
+        TryGetComponent(out _Inventory);
+        TryGetComponent(out _lookWithMouse);
+        TryGetComponent(out _WeaponFunction);
+        TryGetComponent(out _animator);
+        _cameraFunctions = FindObjectOfType<SC_CameraFunctions>();
         ForceUnPause();
     }
 
@@ -19,9 +32,55 @@ public class SC_PlayerBrain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             TogglePauseMenu();
-
         }
+
+        if (!NotRecieveInput)
+        {
+            InputChangeWeapon();
+            InputWeapon();
+            _lookWithMouse.enabled = true;
+            _WeaponFunction.enabled = true;
+        }
+
+        else
+        {
+            _lookWithMouse.enabled = false;
+            _WeaponFunction.enabled = false;
+        }
+        
+        
+
+
     }
+
+    //void UpdateAnimation()
+    //{
+    //    _WeaponFunction.currentWeapon;
+    //}
+
+    void InputChangeWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            _Inventory.ChangeWeaponTo(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            _Inventory.ChangeWeaponTo(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            _Inventory.ChangeWeaponTo(2);
+    }
+
+    void InputWeapon()
+    {
+        if (_Inventory.weaponItems[_Inventory.currentSlot] != null)
+        {
+            _WeaponFunction.Input_Fire();
+            _WeaponFunction.Input_ChangeFireMode();
+            _WeaponFunction.Input_Reload();
+            _WeaponFunction.Input_RackSlide();
+        }
+
+    }
+
+
 
     void ForceUnPause()
     {
@@ -40,12 +99,17 @@ public class SC_PlayerBrain : MonoBehaviour
 
         if (isPausedMenuActive)
         {
-            playerHealth.disablePlayerInput();
+            _Health.disablePlayerInput();
         }
         else
         {
-            if (!playerHealth.isDead)
-                playerHealth.enablePlayerInput();
+            if (!_Health.isDead)
+                _Health.enablePlayerInput();
         }
+    }
+
+    public void SetDisableInput(bool boolean)
+    {
+        NotRecieveInput = boolean;
     }
 }

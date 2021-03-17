@@ -31,7 +31,6 @@ namespace EnemyState
             {
                 _target.Damage(10);
                 _enemySystem.GetComponent<SC_Health>().Kill();
-                SC_CameraFunctions.sharedInstance.ShakeDamage();
 
             }
         }

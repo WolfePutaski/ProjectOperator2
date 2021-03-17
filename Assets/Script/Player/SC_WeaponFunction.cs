@@ -23,7 +23,8 @@ public class SC_WeaponFunction : MonoBehaviour
     Vector3 defaultAimPos;
 
     string FireKey => "Fire1";
-    WeaponItem currentWeapon;
+    WeaponItem _currentWeapon;
+    public WeaponItem currentWeapon { get { return _currentWeapon; } }
 
     void Awake()
     {
@@ -38,164 +39,38 @@ public class SC_WeaponFunction : MonoBehaviour
     {
         if (inventory.weaponItems[inventory.currentSlot] != null)
         {
-            currentWeapon = inventory.weaponItems[inventory.currentSlot];
-
-            Input_Fire();
-            Input_ChangeFireMode();
-            Input_Reload();
-            Input_RackSlide();
-
-
+            _currentWeapon = inventory.weaponItems[inventory.currentSlot];
             CrosshairUpdate();
         }
 
-    }
-
-    void Input_EjectMag()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            currentWeapon.equippedWeaponProperties.ammoInMag = 0;
-        }
-    }
-
-    void Input_RackSlide()
-    {
-        if (Input.GetMouseButton(2))
-        {
-        }
-    }
-
-    WeaponItem weaponToReload;
-    bool PerfectReloadCanTry;
-    void Input_Reload()
-    {
-        if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null)
-        {
-            weaponToReload = currentWeapon;
-            PerfectReloadCanTry = true;
-
-            currentWeapon.equippedWeaponProperties.ammoInMag = 0;
-            ReloadTimeCount = currentWeapon.equippedWeaponStats.reloadTime;
-            if (!weaponToReload.equippedWeaponStats.isClosedBolt)
-                currentWeapon.equippedWeaponProperties.isLoaded = false;
-        }
-
-        if (weaponToReload == currentWeapon)
-        {
-            if (ReloadTimeCount > 0)
-            {
-                float deltaTime = weaponToReload.equippedWeaponStats.reloadTime - ReloadTimeCount;
-                ReloadTimeCount -= Time.deltaTime;
-
-                if (Input.GetKeyDown(KeyCode.R) && deltaTime > .5f && PerfectReloadCanTry)
-                {
-                    if (deltaTime - currentWeapon.equippedWeaponStats.reloadPerfectStart >= 0 &&
-                        deltaTime - currentWeapon.equippedWeaponStats.reloadPerfectStart <= currentWeapon.equippedWeaponStats.reloadPerfectWindow)
-                    {
-                        ReloadTimeCount = 0;
-                    }
-                    PerfectReloadCanTry = false;
-                }
-            }
-            else
-            {
-                StopReload();
-                currentWeapon.equippedWeaponProperties.ammoInMag = currentWeapon.equippedWeaponStats.magCapacity;
-                if (!currentWeapon.equippedWeaponProperties.isLoaded)
-                {
-                    currentWeapon.equippedWeaponProperties.ammoInMag--;
-                    currentWeapon.equippedWeaponProperties.isLoaded = true;
-                }
-
-
-            }
-        }
-        else
-        {
-            ReloadTimeCount = 0;
-            weaponToReload = null;
-        }
-
-        void StopReload()
-        {
-            PerfectReloadCanTry = false;
-            weaponToReload = null;
-        }
-
-        ReloadUIUpdate();
     }
 
     void ReloadUIUpdate()
     {
         reloadCircle.gameObject.SetActive(weaponToReload != null);
 
-        reloadCircle.ReloadBar.fillAmount = 1- (ReloadTimeCount / currentWeapon.equippedWeaponStats.reloadTime);
-        reloadCircle.PerfectReloadBar.fillAmount = currentWeapon.equippedWeaponStats.reloadPerfectWindow / currentWeapon.equippedWeaponStats.reloadTime;
-        reloadCircle.PerfectReloadBar.rectTransform.eulerAngles = new Vector3(0,0,360 - ( 360f* currentWeapon.equippedWeaponStats.reloadPerfectStart / currentWeapon.equippedWeaponStats.reloadTime));
+        reloadCircle.ReloadBar.fillAmount = 1- (ReloadTimeCount / _currentWeapon.equippedWeaponStats.reloadTime);
+        reloadCircle.PerfectReloadBar.fillAmount = _currentWeapon.equippedWeaponStats.reloadPerfectWindow / _currentWeapon.equippedWeaponStats.reloadTime;
+        reloadCircle.PerfectReloadBar.rectTransform.eulerAngles = new Vector3(0,0,360 - ( 360f* _currentWeapon.equippedWeaponStats.reloadPerfectStart / _currentWeapon.equippedWeaponStats.reloadTime));
     }
-
-    void Input_Fire()
-    {
-
-        if (currentWeapon.equippedWeaponProperties.isLoaded)
-        {
-            if (currentWeapon.equippedWeaponProperties.CurrentFiremode == FireMode.AUTO)
-            {
-                if (Input.GetButton(FireKey))
-                {
-                    Shoot();
-                }
-
-            }
-            else
-            {
-                if (Input.GetButtonDown(FireKey))
-                {
-                    Shoot();
-                }
-            }
-        }
-
-    }
-
-    void Input_ChangeFireMode()
-    {
-        if (Input.GetButtonDown("ChangeFireMode"))
-        {
-            if (currentWeapon.equippedWeaponStats.FiremodeToggle)
-
-            {
-                var _currentFireMode = currentWeapon.equippedWeaponProperties.CurrentFiremode;
-
-            if (_currentFireMode == currentWeapon.equippedWeaponStats.fireMode)
-                _currentFireMode = currentWeapon.equippedWeaponStats.secondFireMode;
-            else
-                _currentFireMode = currentWeapon.equippedWeaponStats.fireMode;
-
-            currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
-            }
-        }
-    }
-
     void Shoot()
     {
-        GetComponent<AudioSource>().PlayOneShot(currentWeapon.equippedWeaponStats.fireSound);
+        GetComponent<AudioSource>().PlayOneShot(_currentWeapon.equippedWeaponStats.fireSound);
 
-        if (currentWeapon.equippedWeaponStats.GetType() == typeof(SCO_Weapon_Class_Shotgun))
+        if (_currentWeapon.equippedWeaponStats.GetType() == typeof(SCO_Weapon_Class_Shotgun))
         {
-            SCO_Weapon_Class_Shotgun sgClass = (SCO_Weapon_Class_Shotgun)currentWeapon.equippedWeaponStats;
+            SCO_Weapon_Class_Shotgun sgClass = (SCO_Weapon_Class_Shotgun)_currentWeapon.equippedWeaponStats;
             for (int i = 0; i < sgClass.PelletCount; i++)
             {
                 ShootRay(sgClass.damage / sgClass.PelletCount, crosshair.crosshairAim.transform.position, sgClass.Spread);
             }
         }
         else
-            ShootRay(currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position);
+            ShootRay(_currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position);
 
-        currentWeapon.equippedWeaponProperties.isLoaded = false;
+        _currentWeapon.equippedWeaponProperties.isLoaded = false;
         aimKick();
-        Invoke("CycleAmmo", currentWeapon.equippedWeaponStats.cycleTime);
+        Invoke("CycleAmmo", _currentWeapon.equippedWeaponStats.cycleTime);
 
         void ShootRay(float Damage, Vector3 AimPoint, float spread = 0)
         {
@@ -245,9 +120,21 @@ public class SC_WeaponFunction : MonoBehaviour
             }
         }
     }
-
-
-
+    void CycleAmmo()
+    {
+        if (_currentWeapon.equippedWeaponProperties.ammoInMag > 0)
+        {
+            _currentWeapon.equippedWeaponProperties.ammoInMag--;
+            _currentWeapon.equippedWeaponProperties.isLoaded = true;
+        }
+    }
+    void aimKick()
+    {
+        crosshair.crosshairAim.transform.position += (SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z) * -_currentWeapon.equippedWeaponStats.recoilKick) 
+            + Random.insideUnitSphere * _currentWeapon.equippedWeaponStats.recoilKick;
+        
+        GetComponent<SC_CameraShake>().ShakeCamera(_currentWeapon.equippedWeaponStats.recoilKickShake);
+    }
     void CrosshairUpdate()
     {
         defaultAimPos = crosshair.transform.position;
@@ -263,11 +150,11 @@ public class SC_WeaponFunction : MonoBehaviour
         void ReturnCrosshair()
         {
             AimPoint.position = Vector3.Lerp(AimPoint.position, defaultAimPos,
-                Mathf.Pow(Time.deltaTime,.7f)* currentWeapon.equippedWeaponStats.recoilRecoverySpeed);
+                Mathf.Pow(Time.deltaTime,.7f)* _currentWeapon.equippedWeaponStats.recoilRecoverySpeed);
         }
 
-        float swayRadius = Vector2.Distance(transform.position, crosshair.transform.position) * Mathf.Tan(Mathf.Deg2Rad* currentWeapon.equippedWeaponStats.swayOffset / 2f);
-        if (lerpPeriodCount < currentWeapon.equippedWeaponStats.swayPeriod)
+        float swayRadius = Vector2.Distance(transform.position, crosshair.transform.position) * Mathf.Tan(Mathf.Deg2Rad* _currentWeapon.equippedWeaponStats.swayOffset / 2f);
+        if (lerpPeriodCount < _currentWeapon.equippedWeaponStats.swayPeriod)
         {
             MoveToSwayPosition();
         }
@@ -286,32 +173,127 @@ public class SC_WeaponFunction : MonoBehaviour
         void MoveToSwayPosition()
         {
             lerpPeriodCount += Time.deltaTime;
-            SwayPoint.localPosition = Vector2.Lerp(SwayPoint.localPosition, nextSwayPos , Time.deltaTime/currentWeapon.equippedWeaponStats.swayPeriod);
+            SwayPoint.localPosition = Vector2.Lerp(SwayPoint.localPosition, nextSwayPos , Time.deltaTime/_currentWeapon.equippedWeaponStats.swayPeriod);
         }
 
-        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z + currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
-        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z -currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
+        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z + _currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
+        Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z -_currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
         
     }
 
-    void aimKick()
-    {
-        crosshair.crosshairAim.transform.position += (SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z) * -currentWeapon.equippedWeaponStats.recoilKick) 
-            + Random.insideUnitSphere * currentWeapon.equippedWeaponStats.recoilKick;
-        
-        GetComponent<SC_CameraShake>().ShakeCamera(currentWeapon.equippedWeaponStats.recoilKickShake);
 
-        
-    }
-
-    void CycleAmmo()
+    public void Input_EjectMag()
     {
-        if (currentWeapon.equippedWeaponProperties.ammoInMag > 0)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            currentWeapon.equippedWeaponProperties.ammoInMag--;
-            currentWeapon.equippedWeaponProperties.isLoaded = true;
+            _currentWeapon.equippedWeaponProperties.ammoInMag = 0;
+        }
+    }
+    public void Input_RackSlide()
+    {
+        if (Input.GetMouseButton(2))
+        {
         }
     }
 
+    WeaponItem weaponToReload;
+    bool PerfectReloadCanTry;
+    public void Input_Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null)
+        {
+            weaponToReload = _currentWeapon;
+            PerfectReloadCanTry = true;
 
+            _currentWeapon.equippedWeaponProperties.ammoInMag = 0;
+            ReloadTimeCount = _currentWeapon.equippedWeaponStats.reloadTime;
+            if (!weaponToReload.equippedWeaponStats.isClosedBolt)
+                _currentWeapon.equippedWeaponProperties.isLoaded = false;
+        }
+
+        if (weaponToReload == _currentWeapon)
+        {
+            if (ReloadTimeCount > 0)
+            {
+                float deltaTime = weaponToReload.equippedWeaponStats.reloadTime - ReloadTimeCount;
+                ReloadTimeCount -= Time.deltaTime;
+
+                if (Input.GetKeyDown(KeyCode.R) && deltaTime > .5f && PerfectReloadCanTry)
+                {
+                    if (deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart >= 0 &&
+                        deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart <= _currentWeapon.equippedWeaponStats.reloadPerfectWindow)
+                    {
+                        ReloadTimeCount = 0;
+                    }
+                    PerfectReloadCanTry = false;
+                }
+            }
+            else
+            {
+                StopReload();
+                _currentWeapon.equippedWeaponProperties.ammoInMag = _currentWeapon.equippedWeaponStats.magCapacity;
+                if (!_currentWeapon.equippedWeaponProperties.isLoaded)
+                {
+                    _currentWeapon.equippedWeaponProperties.ammoInMag--;
+                    _currentWeapon.equippedWeaponProperties.isLoaded = true;
+                }
+
+
+            }
+        }
+        else
+        {
+            ReloadTimeCount = 0;
+            weaponToReload = null;
+        }
+
+        void StopReload()
+        {
+            PerfectReloadCanTry = false;
+            weaponToReload = null;
+        }
+
+        ReloadUIUpdate();
+    }
+    public void Input_Fire()
+    {
+
+        if (_currentWeapon.equippedWeaponProperties.isLoaded)
+        {
+            if (_currentWeapon.equippedWeaponProperties.CurrentFiremode == FireMode.AUTO)
+            {
+                if (Input.GetButton(FireKey))
+                {
+                    Shoot();
+                }
+
+            }
+            else
+            {
+                if (Input.GetButtonDown(FireKey))
+                {
+                    Shoot();
+                }
+            }
+        }
+
+    }
+    public void Input_ChangeFireMode()
+    {
+        if (Input.GetButtonDown("ChangeFireMode"))
+        {
+            if (_currentWeapon.equippedWeaponStats.FiremodeToggle)
+
+            {
+                var _currentFireMode = _currentWeapon.equippedWeaponProperties.CurrentFiremode;
+
+            if (_currentFireMode == _currentWeapon.equippedWeaponStats.fireMode)
+                _currentFireMode = _currentWeapon.equippedWeaponStats.secondFireMode;
+            else
+                _currentFireMode = _currentWeapon.equippedWeaponStats.fireMode;
+
+            _currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
+            }
+        }
+    }
 }
