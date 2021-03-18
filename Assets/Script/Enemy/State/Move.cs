@@ -21,7 +21,7 @@ namespace EnemyState
         {
             if (_moveToObject.speed < _enemySystem.DefaultSpeed)
             {
-                _moveToObject.speed += _enemySystem.Acceleration * Time.deltaTime;
+                _moveToObject.speed = Mathf.Min(_moveToObject.speed + (_enemySystem.Acceleration * Time.deltaTime), _enemySystem.DefaultSpeed);
             }
 
         }

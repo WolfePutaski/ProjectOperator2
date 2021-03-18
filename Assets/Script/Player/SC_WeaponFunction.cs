@@ -25,8 +25,10 @@ public class SC_WeaponFunction : MonoBehaviour
     string FireKey => "Fire1";
     WeaponItem _currentWeapon;
     public WeaponItem currentWeapon { get { return _currentWeapon; } }
+    [SerializeField] Transform _muzzle;
 
     SC_ObjectPooler objectPooler;
+
 
     void Awake()
     {
@@ -117,7 +119,8 @@ public class SC_WeaponFunction : MonoBehaviour
                 Vector3 lastHitpoint = hit2D.Length > 1 ? (Vector3)hit2D[1].point : ((crosshair.crosshairAim.transform.position - transform.position).normalized + _spread) * 20;
 
                 var bulletTracer = objectPooler.GetPooledObject("BulletTracer");
-                bulletTracer.SetActive(true);                        
+                bulletTracer.SetActive(true);
+                bulletTracer.GetComponent<LineRenderer>().SetPosition(0, _muzzle.position);
                 bulletTracer.GetComponent<LineRenderer>().SetPosition(1, lastHitpoint);
                 objectPooler.DeactivePooledObject(bulletTracer, 0.04f);
             }

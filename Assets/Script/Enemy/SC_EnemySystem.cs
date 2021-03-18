@@ -7,8 +7,9 @@ public class SC_EnemySystem : MonoBehaviour
 {
     public StateMachine _stateMachine;
 
-    private GameObject PlayerTarget;
-    private SC_Health healthSystem;
+    private GameObject _PlayerTarget;
+    private SC_MoveToObject _MoveToObject;
+    private SC_Health _healthSystem;
 
     [Header("===Speed===")]
     public float DefaultSpeed;
@@ -21,15 +22,17 @@ public class SC_EnemySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerTarget = GameObject.FindGameObjectWithTag("Player");
+        _PlayerTarget = GameObject.FindGameObjectWithTag("Player");
+        _MoveToObject = gameObject.AddComponent<SC_MoveToObject>();
 
-        TryGetComponent(out healthSystem);
+
+        TryGetComponent(out _healthSystem);
 
         var lookDir = GetComponentInChildren<SC_LookDir>();
-        lookDir.target = PlayerTarget.transform;
+        lookDir.target = _PlayerTarget.transform;
 
         _stateMachine = new StateMachine();
-        var move = new EnemyState.Move(this,GetComponent<SC_MoveToObject>(),PlayerTarget.transform);
+        var move = new EnemyState.Move(this, _MoveToObject,_PlayerTarget.transform);
         var attack = new EnemyState.Attack(this);
         var die = new EnemyState.Die(this);
 
@@ -41,8 +44,8 @@ public class SC_EnemySystem : MonoBehaviour
         void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
         void AAt(IState to, Func<bool> condition) => _stateMachine.AddAnyTransition(to, condition);
 
-        Func<bool> closeToTarget() => () => Vector2.Distance(PlayerTarget.transform.position, gameObject.transform.position) <= 1f;
-        Func<bool> noHP() => () => healthSystem.HealthCurrent <= 0f;
+        Func<bool> closeToTarget() => () => Vector2.Distance(_PlayerTarget.transform.position, gameObject.transform.position) <= 1f;
+        Func<bool> noHP() => () => _healthSystem.HealthCurrent <= 0f;
     }
 
     // Update is called once per frame

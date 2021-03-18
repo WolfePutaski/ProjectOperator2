@@ -21,7 +21,10 @@ namespace EnemyState
             _enemySystem.GetComponent<SC_Health>().Kill();
 
             var recordScore = Object.FindObjectOfType<SC_RecordScore>();
+            var enemySpawner = Object.FindObjectOfType<SC_EnemySpawner>();
+
             recordScore.addKillCount();
+            enemySpawner.AddRankScore(100f);
         }
 
         public void OnExit()
