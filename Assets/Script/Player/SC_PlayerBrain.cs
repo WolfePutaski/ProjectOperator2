@@ -48,9 +48,6 @@ public class SC_PlayerBrain : MonoBehaviour
             _WeaponFunction.enabled = false;
         }
         
-        
-
-
     }
 
     //void UpdateAnimation()
@@ -67,7 +64,6 @@ public class SC_PlayerBrain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3))
             _Inventory.ChangeWeaponTo(2);
     }
-
     void InputWeapon()
     {
         if (_Inventory.weaponItems[_Inventory.currentSlot] != null)
@@ -79,15 +75,11 @@ public class SC_PlayerBrain : MonoBehaviour
         }
 
     }
-
-
-
     void ForceUnPause()
     {
         pauseMenu.SetActive(true);
         TogglePauseMenu();
     }
-
     void TogglePauseMenu()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
@@ -107,7 +99,6 @@ public class SC_PlayerBrain : MonoBehaviour
                 _Health.enablePlayerInput();
         }
     }
-
     public void SetDisableInput(bool boolean)
     {
         NotRecieveInput = boolean;

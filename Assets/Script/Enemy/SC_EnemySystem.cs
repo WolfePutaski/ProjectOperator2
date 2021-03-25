@@ -19,6 +19,8 @@ public class SC_EnemySystem : MonoBehaviour
     [Header("===Attack===")]
     public float timeToAttack;
 
+    //[SerializeField] SCO_Enemy enemyProfile;
+
     // Start is called before the first frame update
     void Start()
     {
