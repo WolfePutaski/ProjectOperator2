@@ -54,6 +54,5 @@ public class SC_EnemySystem : MonoBehaviour
     void Update()
     {
         _stateMachine.Tick();
-        //Debug.Log(_stateMachine.getCurrentState() != null ? _stateMachine.getCurrentState().GetType().ToString() : "no statemachine") ;
     }
 }

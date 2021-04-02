@@ -105,6 +105,17 @@ public class SC_Inventory : MonoBehaviour
     }
     public void ReplaceWeapon(WeaponItem newWeapon)
     {
-        weaponItemList[currentSlot] = newWeapon;
+        //Check Null
+        int slotToReplace = currentSlot;
+        for (int i = 0; i < 3; i++)
+        {
+            if (weaponItemList[i].equippedWeaponStats == null)
+            {
+                slotToReplace = i;
+                break;
+            }
+        }
+
+        weaponItemList[slotToReplace] = newWeapon;
     }
 }

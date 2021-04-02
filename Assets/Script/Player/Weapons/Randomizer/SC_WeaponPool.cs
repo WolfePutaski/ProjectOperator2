@@ -8,12 +8,26 @@ public class ItemScore<T>
     public T itemClass;
     public float Score;
 }
+
+[System.Serializable]
+class RankClass
+{
+    [SerializeField] private float _rankingScore;
+    [SerializeField] private float _awardedScore;
+    public float rankingScore => _rankingScore;
+    public float awardedScore => _awardedScore;
+
+}
+
 public class SC_WeaponPool : MonoBehaviour
 {
-    public float currentScore;
+    [SerializeField] private float currentScore;
+    [SerializeField] private float currentComboScore;
+    [SerializeField] private int currentComboRank;
+    [SerializeField] List<RankClass> rankingList;
+    [SerializeField] float degradeRate = 1f;
 
     public SCO_WeaponPoolProfile _weaponPoolProfile;
-
     private List<ItemScore<SCO_Weapon_Master>> _weaponList => _weaponPoolProfile.weaponList;
     private List<ItemScore<SCO_WeaponMods>> _weaponModList => _weaponPoolProfile.weaponModList;
 
@@ -58,6 +72,29 @@ public class SC_WeaponPool : MonoBehaviour
         }
 
         return new WeaponItem(newWeaponClass,newEquippedModList);
+    }
+
+    void Update()
+    {
+        var updatedCurrentComboScore = currentComboScore - (degradeRate * Time.deltaTime);
+        currentComboScore = Mathf.Max(0, updatedCurrentComboScore);
+
+        for (int i = 0; i< rankingList.Count;i++)
+        {
+            float scoreToCompare = 0;
+            for (int j = 0; j < i; j++)
+                scoreToCompare += rankingList[j].rankingScore;
+
+            if (currentComboScore > scoreToCompare)
+                currentComboRank = i;
+        }
+
+        //currentScore = 
+    }
+
+    public void AddComboScore(float addNum)
+    {
+        currentComboScore += addNum;
     }
 }
 

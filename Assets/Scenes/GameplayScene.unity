@@ -5938,17 +5938,8 @@ MonoBehaviour:
   currentSlot: 0
   NotReceiveInput: 0
   startWeaponList:
-  - weaponClass: {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
+  - weaponClass: {fileID: 11400000, guid: 9069e6702192f4143bd986051e802e96, type: 2}
     equippedMods: []
-  - weaponClass: {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
-    equippedMods:
-    - {fileID: 11400000, guid: 9f4441ee931f65b40858090ad5132601, type: 2}
-  - weaponClass: {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
-    equippedMods:
-    - {fileID: 11400000, guid: c1e86b2c1eba7f14197955948507d126, type: 2}
-    - {fileID: 11400000, guid: f174d68e03456bc46904631d7bbabd8e, type: 2}
-    - {fileID: 11400000, guid: 736ce0233a16ac847b95e8da63ff6d3e, type: 2}
-    - {fileID: 11400000, guid: 164299b7e6368a04fbe08675d68edbe6, type: 2}
 --- !u!114 &1978028610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6152,6 +6143,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScore: 0
+  currentComboScore: 0
+  currentComboRank: 0
+  rankingList:
+  - _rankingScore: 13
+    _awardedScore: 80
+  - _rankingScore: 15
+    _awardedScore: 120
+  - _rankingScore: 21
+    _awardedScore: 200
+  - _rankingScore: 23
+    _awardedScore: 240
+  - _rankingScore: 28
+    _awardedScore: 300
+  degradeRate: 1
   _weaponPoolProfile: {fileID: 11400000, guid: e51950225fbd72647be27b7e55537478, type: 2}
 --- !u!1 &2010509219
 GameObject:
