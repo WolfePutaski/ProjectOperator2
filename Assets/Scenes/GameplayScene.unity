@@ -5948,6 +5948,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c1e86b2c1eba7f14197955948507d126, type: 2}
     - {fileID: 11400000, guid: f174d68e03456bc46904631d7bbabd8e, type: 2}
     - {fileID: 11400000, guid: 736ce0233a16ac847b95e8da63ff6d3e, type: 2}
+    - {fileID: 11400000, guid: 164299b7e6368a04fbe08675d68edbe6, type: 2}
 --- !u!114 &1978028610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6150,14 +6151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c5c38db4173a347b0f86fc26964116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponList:
-  - {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
-  - {fileID: 11400000, guid: 509e29d5e99ff8c4c966079b9dd40c19, type: 2}
-  - {fileID: 11400000, guid: 7e1f5d9933fec8544a2a73e12db3c48e, type: 2}
-  weaponModList:
-  - {fileID: 11400000, guid: 9f4441ee931f65b40858090ad5132601, type: 2}
-  - {fileID: 11400000, guid: c1e86b2c1eba7f14197955948507d126, type: 2}
-  - {fileID: 11400000, guid: f174d68e03456bc46904631d7bbabd8e, type: 2}
+  currentScore: 0
+  _weaponPoolProfile: {fileID: 11400000, guid: e51950225fbd72647be27b7e55537478, type: 2}
 --- !u!1 &2010509219
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class WeaponItem
                         if (_WeaponMods != null)
                         {
                             bool sameType = _WeaponMods.modType == currentMod.modType;
-                            if (equippedMods.Contains(_WeaponMods) && sameType)
+                            if (equippedMods.Contains(_WeaponMods) || sameType)
                             {
                                 return true;
                             }
@@ -42,12 +42,11 @@ public class WeaponItem
 
                     }
 
+                    equippedMods.Add(_WeaponMods);
                     return false;
                 }
 
-                if (!incompatibleMod())
-                    equippedMods.Add(_WeaponMods);
-                else
+                if (incompatibleMod())
                     break;
 
                 float modByPercent(float a)

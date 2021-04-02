@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_MachineGun
   m_EditorClassIdentifier: 
-  weaponName: Machine Gun
+  weaponName: M249 SAW
+  weaponDesc: A standard military light machine gun.
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
   secondFireMode: 0

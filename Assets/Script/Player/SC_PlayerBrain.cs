@@ -68,7 +68,15 @@ public class SC_PlayerBrain : MonoBehaviour
     void DebugInputSpawnWeapon()
     {
         if(Input.GetKeyDown(KeyCode.Y))
-        _Inventory.ReplaceWeapon(_WeaponPool.createWeapon());
+        {
+            Debug.Log("SpawnWeapon");
+            var newWeapon = _WeaponPool.generateWeapon();
+            if (newWeapon != null)
+            {
+                _Inventory.ReplaceWeapon(newWeapon);
+            }
+
+        }
     }
 
     void InputChangeWeapon()

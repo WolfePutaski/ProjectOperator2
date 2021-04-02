@@ -29,6 +29,8 @@ public class SCO_Weapon_Master : ScriptableObject
 {
     //Put Default Value Here
     public string weaponName;
+    [Multiline]
+    public string weaponDesc;
     public AudioClip fireSound;
 
     [Header("=== Loading Mechanism ===")]

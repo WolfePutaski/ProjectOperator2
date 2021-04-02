@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SCO_Weapon_M4A1
   m_EditorClassIdentifier: 
   weaponName: M4A1
+  weaponDesc: A standard military assault rifle.
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
   secondFireMode: 0

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3038f3340b4e746a1284e52bed644c, type: 3}
+  m_Name: SCO_WeaponMods_SmallMag
+  m_EditorClassIdentifier: 
+  modName: 
+  modType: 0
+  ModMag: -0.33
+  ModReloadTime: -0.25
+  ModForceOffPerfectLoad: 0
+  ModFirerate: 0
+  ModCritChance: 0
+  ModKick: 0
+  ModSway: 0
+  ModDurability: 0
+  ModDegradeRate: 0
+  ModHeatRate: 0
+  ModHeatCooldownRate: 0
