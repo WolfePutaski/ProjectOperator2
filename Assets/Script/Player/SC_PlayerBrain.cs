@@ -5,9 +5,11 @@ using UnityEngine;
 public class SC_PlayerBrain : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] bool enableDebug;
     SC_PlayerHealth _Health;
     SC_Inventory _Inventory;
     SC_WeaponFunction _WeaponFunction;
+    SC_WeaponPool _WeaponPool;
     Animator _animator;
     private SC_LookWithMouse _lookWithMouse;
     private SC_CameraFunctions _cameraFunctions;
@@ -22,6 +24,7 @@ public class SC_PlayerBrain : MonoBehaviour
         TryGetComponent(out _lookWithMouse);
         TryGetComponent(out _WeaponFunction);
         TryGetComponent(out _animator);
+        TryGetComponent(out _WeaponPool);
         _cameraFunctions = FindObjectOfType<SC_CameraFunctions>();
         ForceUnPause();
     }
@@ -40,6 +43,13 @@ public class SC_PlayerBrain : MonoBehaviour
             InputWeapon();
             _lookWithMouse.enabled = true;
             _WeaponFunction.enabled = true;
+
+            if(enableDebug)
+            {
+                DebugInputSpawnWeapon();
+            }
+
+            //Accept & Decline when Prompt = True
         }
 
         else
@@ -55,6 +65,12 @@ public class SC_PlayerBrain : MonoBehaviour
     //    _WeaponFunction.currentWeapon;
     //}
 
+    void DebugInputSpawnWeapon()
+    {
+        if(Input.GetKeyDown(KeyCode.Y))
+        _Inventory.ReplaceWeapon(_WeaponPool.createWeapon());
+    }
+
     void InputChangeWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -66,7 +82,7 @@ public class SC_PlayerBrain : MonoBehaviour
     }
     void InputWeapon()
     {
-        if (_Inventory.weaponItems[_Inventory.currentSlot] != null)
+        if (_Inventory.weaponItemList[_Inventory.currentSlot] != null)
         {
             _WeaponFunction.Input_Fire();
             _WeaponFunction.Input_ChangeFireMode();

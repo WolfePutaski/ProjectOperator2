@@ -42,9 +42,9 @@ public class SC_WeaponFunction : MonoBehaviour
     }
     void Update()
     {
-        if (inventory.weaponItems[inventory.currentSlot] != null)
+        if (inventory.weaponItemList[inventory.currentSlot] != null)
         {
-            _currentWeapon = inventory.weaponItems[inventory.currentSlot];
+            _currentWeapon = inventory.weaponItemList[inventory.currentSlot];
             CrosshairUpdate();
         }
 

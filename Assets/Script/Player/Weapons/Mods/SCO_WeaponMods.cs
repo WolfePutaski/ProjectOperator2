@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ModType { Magazine, Action, Muzzle, Stock }
+public enum ModType { Magazine, Action, Muzzle, Stock, Ammo }
 
 [CreateAssetMenu(fileName = "SCO_WeaponMods_", menuName = "ScriptableObject_WeaponMods")]
 public class SCO_WeaponMods : ScriptableObject
 {
     public string modName;
+    public ModType modType;
 
     [SerializeField] public float ModMag;
     [SerializeField] public float ModReloadTime;
@@ -23,8 +24,4 @@ public class SCO_WeaponMods : ScriptableObject
     [SerializeField] public float ModDegradeRate;
     [SerializeField] public float ModHeatRate;
     [SerializeField] public float ModHeatCooldownRate;
-
-
-
-
 }

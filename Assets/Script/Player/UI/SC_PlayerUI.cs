@@ -23,7 +23,7 @@ public class SC_PlayerUI : MonoBehaviour
     }
     void Update()
     {
-       var  currentWeapon = inventory.weaponItems[inventory.currentSlot];
+       var  currentWeapon = inventory.weaponItemList[inventory.currentSlot];
 
         weaponUI.SetInventoryUI(inventory);
         weaponUI.SetWeaponUIText(currentWeapon);
