@@ -15,7 +15,7 @@ public class SC_WeaponFunction : MonoBehaviour
     SC_ReloadCircle reloadCircle;
     float ReloadTimeCount;
 
-    SC_WeaponUI weaponUI;
+    float cycleDelay;
 
     Vector3 nextSwayPos;
     float lerpPeriodCount = 0;
@@ -24,7 +24,7 @@ public class SC_WeaponFunction : MonoBehaviour
 
     string FireKey => "Fire1";
     WeaponItem _currentWeapon;
-    public WeaponItem currentWeapon { get { return _currentWeapon; } }
+    public WeaponItem currentWeapon => _currentWeapon;
     [SerializeField] Transform _muzzle;
 
     SC_ObjectPooler objectPooler;
@@ -36,7 +36,6 @@ public class SC_WeaponFunction : MonoBehaviour
         TryGetComponent(out audioSource);
         crosshair = FindObjectOfType<SC_Crosshair>();
         reloadCircle = FindObjectOfType<SC_ReloadCircle>();
-        weaponUI = FindObjectOfType<SC_WeaponUI>();
         objectPooler = FindObjectOfType<SC_ObjectPooler>();
 
     }
@@ -50,6 +49,19 @@ public class SC_WeaponFunction : MonoBehaviour
 
     }
 
+    void FixedUpdate()
+    {
+        if (_currentWeapon != null)
+        {
+            if (cycleDelay >= 0 && !_currentWeapon.equippedWeaponProperties.isLoaded)
+                cycleDelay -= Time.fixedDeltaTime;
+            else if (!_currentWeapon.equippedWeaponProperties.isLoaded)
+                CycleAmmo();
+        }
+
+
+    }
+
     void ReloadUIUpdate()
     {
         reloadCircle.gameObject.SetActive(weaponToReload != null);
@@ -60,7 +72,7 @@ public class SC_WeaponFunction : MonoBehaviour
     }
     void Shoot()
     {
-        GetComponent<AudioSource>().PlayOneShot(_currentWeapon.equippedWeaponStats.fireSound);
+        audioSource.PlayOneShot(_currentWeapon.equippedWeaponStats.fireSound);
 
         if (_currentWeapon.equippedWeaponStats.GetType() == typeof(SCO_Weapon_Class_Shotgun))
         {
@@ -75,7 +87,8 @@ public class SC_WeaponFunction : MonoBehaviour
 
         _currentWeapon.equippedWeaponProperties.isLoaded = false;
         aimKick();
-        Invoke("CycleAmmo", _currentWeapon.equippedWeaponStats.cycleTime);
+        //Invoke("CycleAmmo", _currentWeapon.equippedWeaponStats.cycleTime);
+        cycleDelay = _currentWeapon.equippedWeaponStats.cycleTime;
 
         void ShootRay(float Damage, Vector3 AimPoint, float spread = 0)
         {
