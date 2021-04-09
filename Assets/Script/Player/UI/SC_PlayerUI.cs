@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class SC_PlayerUI : MonoBehaviour
 {
-    SC_WeaponUI weaponUI;
+    SC_WeaponUI _weaponUI;
+    public SC_WeaponUI weaponUI { get { return _weaponUI; } }
     [SerializeField] private Text killCount;
     [SerializeField] Text healthUI;
     SC_Inventory inventory;
@@ -18,15 +19,15 @@ public class SC_PlayerUI : MonoBehaviour
         TryGetComponent(out inventory);
         TryGetComponent(out health);
 
-        weaponUI = FindObjectOfType<SC_WeaponUI>();
+        _weaponUI = FindObjectOfType<SC_WeaponUI>();
         recordScore = FindObjectOfType<SC_RecordScore>();
     }
     void Update()
     {
        var  currentWeapon = inventory.weaponItemList[inventory.currentSlot];
 
-        weaponUI.SetInventoryUI(inventory);
-        weaponUI.SetWeaponUIText(currentWeapon);
+        _weaponUI.SetInventoryUI(inventory);
+        _weaponUI.SetWeaponUIText(currentWeapon);
 
         killCount.text = FindObjectOfType<SC_RecordScore>().killCount.ToString();
         SetHealthUI();
@@ -42,4 +43,6 @@ public class SC_PlayerUI : MonoBehaviour
         }
         healthUI.text = "HEALTH: " + healthbar;
     }
+
+
 }

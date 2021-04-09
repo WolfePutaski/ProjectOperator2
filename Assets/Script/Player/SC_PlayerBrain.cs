@@ -11,6 +11,7 @@ public class SC_PlayerBrain : MonoBehaviour
     SC_WeaponFunction _WeaponFunction;
     SC_WeaponPool _WeaponPool;
     Animator _animator;
+    SC_PlayerUI _PlayerUI;
     private SC_LookWithMouse _lookWithMouse;
     private SC_CameraFunctions _cameraFunctions;
     public SC_CameraFunctions cameraFunctions { get { return _cameraFunctions; } }
@@ -25,6 +26,7 @@ public class SC_PlayerBrain : MonoBehaviour
         TryGetComponent(out _WeaponFunction);
         TryGetComponent(out _animator);
         TryGetComponent(out _WeaponPool);
+        TryGetComponent(out _PlayerUI);
         _cameraFunctions = FindObjectOfType<SC_CameraFunctions>();
         ForceUnPause();
     }
@@ -73,9 +75,8 @@ public class SC_PlayerBrain : MonoBehaviour
             var newWeapon = _WeaponPool.generateWeapon();
             if (newWeapon != null)
             {
-                _Inventory.ReplaceWeapon(newWeapon);
+                _Inventory.AskToSpawnWeapon(newWeapon);
             }
-
         }
     }
 
@@ -127,4 +128,5 @@ public class SC_PlayerBrain : MonoBehaviour
     {
         NotRecieveInput = boolean;
     }
+
 }

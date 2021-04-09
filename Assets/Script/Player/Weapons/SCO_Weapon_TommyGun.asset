@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_MachineGun
+  m_Name: SCO_Weapon_TommyGun
   m_EditorClassIdentifier: 
-  weaponName: M249 SAW
-  weaponDesc: A military light machine gun. High capacity
-  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+  weaponName: Tommy Gun
+  weaponDesc: 
+  fireSound: {fileID: 8300000, guid: 23233609550158d40942de8ee71343de, type: 3}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
-  cycleTime: 0.07
-  reloadTime: 5
-  reloadPerfectStart: 0
-  reloadPerfectWindow: 0
+  cycleTime: 0.085
+  reloadTime: 3
+  reloadPerfectStart: 2.4
+  reloadPerfectWindow: 0.2
   damage: 20
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0
   velocity: 0
-  magCapacity: 100
+  magCapacity: 50
   isClosedBolt: 0
   TriggerDelay: 0
-  swayOffset: 1
-  recoilRecoverySpeed: 0.8
-  recoilKick: 0.3
-  recoilKickShake: 1
+  swayOffset: 2
+  recoilRecoverySpeed: 0.9
+  recoilKick: 0.2
+  recoilKickShake: 0
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0

@@ -12,7 +12,6 @@ public class SC_Health : MonoBehaviour/*, IKillable, IDamagable<float>*/
     {
         HealthCurrent = HealthStart;
     }
-
     public virtual void Kill()
     {
         Destroy(gameObject);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SCO_Weapon_M4A1
   m_EditorClassIdentifier: 
   weaponName: M4A1
-  weaponDesc: A standard military assault rifle.
+  weaponDesc: A military assault rifle. Accurate and reliable.
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
   secondFireMode: 0
@@ -30,7 +30,6 @@ MonoBehaviour:
   magCapacity: 30
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.2
   swayOffset: 1
   recoilRecoverySpeed: 1
   recoilKick: 0.35

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b3038f3340b4e746a1284e52bed644c, type: 3}
-  m_Name: SCO_WeaponMods_SmallMag
+  m_Name: SCO_WeaponMods_Compensator
   m_EditorClassIdentifier: 
-  modName: Small Mag
+  modName: 
   modType: 0
-  ModMag: -0.33
-  ModReloadTime: -0.25
+  ModMag: 0
+  ModReloadTime: 0
   ModForceOffPerfectLoad: 0
   ModFirerate: 0
   ModCritChance: 0

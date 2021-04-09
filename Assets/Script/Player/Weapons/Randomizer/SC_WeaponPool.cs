@@ -13,15 +13,15 @@ public class ItemScore<T>
 class RankClass
 {
     [SerializeField] private float _rankingScore;
-    [SerializeField] private float _awardedScore;
+    [SerializeField] private float _weaponScore;
     public float rankingScore => _rankingScore;
-    public float awardedScore => _awardedScore;
+    public float weaponScore => _weaponScore;
 
 }
 
 public class SC_WeaponPool : MonoBehaviour
 {
-    [SerializeField] private float currentScore;
+    [SerializeField] private float currentWeaponScore;
     [SerializeField] private float currentComboScore;
     [SerializeField] private int currentComboRank;
     [SerializeField] List<RankClass> rankingList;
@@ -51,14 +51,14 @@ public class SC_WeaponPool : MonoBehaviour
             {
                 var _newMod = _weaponModList[Random.Range(0, _weaponModList.Count)];
 
-                if (_newScore + _newMod.Score <= currentScore)
+                if (_newScore + _newMod.Score <= currentWeaponScore)
                 {
                     _newEquippedModList.Add(_newMod);
                     _newScore += _newMod.Score;
                 }
             }
 
-            bool passScore = _newScore <= currentScore;
+            bool passScore = _newScore <= currentWeaponScore;
             if (passScore)
             {
                 foreach (ItemScore<SCO_WeaponMods> _mod in _newEquippedModList)
@@ -89,7 +89,8 @@ public class SC_WeaponPool : MonoBehaviour
                 currentComboRank = i;
         }
 
-        //currentScore = 
+        currentComboScore = rankingList[currentComboRank].weaponScore;
+
     }
 
     public void AddComboScore(float addNum)

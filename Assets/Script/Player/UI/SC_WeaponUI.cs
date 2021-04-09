@@ -4,15 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
 public class SC_WeaponUI : MonoBehaviour
 {
+    [System.Serializable]
+    public class WeaponPromptText
+    {
+        public GameObject Prompt;
+        public TextMeshProUGUI TextName;
+        public TextMeshProUGUI TextDesc;
+        public GameObject TextKeyPrompt;
+        public Image timeBar;
+    }
+
     public TextMeshProUGUI TextName;
     public TextMeshProUGUI TextAmmo;
     public Image Heat;
     public Image Condition;
     public Text TextFiremode;
+    [SerializeField] public WeaponPromptText weaponPrompt;
 
     public List<Text> InvSlot;
+    [SerializeField] private List<TextMeshProUGUI> ModSlotText;
 
     public void SetWeaponUIText(string wpnName, int Ammo, int MaxAmmo )
     {
@@ -27,8 +41,6 @@ public class SC_WeaponUI : MonoBehaviour
 
         string ammoToShow = weaponItem.equippedWeaponProperties.isLoaded ? 
             (weaponItem.equippedWeaponProperties.ammoInMag + 1).ToString() : weaponItem.equippedWeaponProperties.ammoInMag.ToString();
-
-
 
         TextAmmo.text = ammoToShow + "/" + weaponItem.equippedWeaponStats.magCapacity.ToString();
 
@@ -51,6 +63,7 @@ public class SC_WeaponUI : MonoBehaviour
         
 
         TextFiremode.text = _textFiremode();
+        SetModListUI(weaponItem);
     }
 
     public void SetInventoryUI(SC_Inventory playerInventory)
@@ -62,6 +75,48 @@ public class SC_WeaponUI : MonoBehaviour
                 InvSlot[i].color = Color.white;
             else
                 InvSlot[i].color = Color.black;
+
+                InvSlot[i].gameObject.SetActive((playerInventory.weaponItemList[i].equippedWeaponStats != null));
         }
+    }
+
+    public void SetModListUI(WeaponItem weaponItem)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            var modSlot = ModSlotText[i];
+
+            var modCount = weaponItem.equippedMods.Count;
+
+            if (i >= modCount)
+                modSlot.gameObject.SetActive(false);
+            else
+            {
+                var wpnMod = weaponItem.equippedMods[i];
+
+                if (wpnMod != null)
+                {
+                    modSlot.gameObject.SetActive(true);
+                    modSlot.text = wpnMod.modName;
+                }
+                else
+                {
+                    modSlot.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    public void SetWeaponPromptText(WeaponItem weaponItem)
+    {
+        weaponPrompt.TextName.text = weaponItem.equippedWeaponStats.weaponName;
+        weaponPrompt.TextDesc.text = weaponItem.equippedWeaponStats.weaponDesc;
+    }
+
+    public void SetActiveWeaponPromptText(bool setActive,bool showKeyPrompt = false)
+    {
+        weaponPrompt.Prompt.SetActive(setActive);
+        weaponPrompt.TextKeyPrompt.SetActive(showKeyPrompt);
+        weaponPrompt.timeBar.gameObject.SetActive(showKeyPrompt);
     }
 }

@@ -30,7 +30,7 @@ MonoBehaviour:
   magCapacity: 12
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 1
+  swayPeriod: 0.2
   swayOffset: 8
   recoilRecoverySpeed: 1
   recoilKick: 0.7

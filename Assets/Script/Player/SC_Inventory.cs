@@ -86,7 +86,8 @@ public class SC_Inventory : MonoBehaviour
     public List<WeaponItem> weaponItemList;
     public int currentSlot = 0;
     public bool NotReceiveInput;
-
+    private IEnumerator _weaponPromptCoroutine;
+    [SerializeField] private float newWeaponPromptTimer = 5;
 
     [Header("===Debug===")]
     public List<WeaponNMod> startWeaponList;
@@ -103,10 +104,38 @@ public class SC_Inventory : MonoBehaviour
     {
         currentSlot = weaponItemList[i].equippedWeaponStats? i : currentSlot ;
     }
+
+    public void AskToSpawnWeapon(WeaponItem weaponToSpawn)
+    {
+        bool hasEmptySlot = false;
+        foreach (WeaponItem wpn in weaponItemList)
+        {
+            hasEmptySlot = wpn.equippedWeaponStats == null;
+        }
+
+        if (_weaponPromptCoroutine != null)
+            StopCoroutine(_weaponPromptCoroutine);
+
+        var camera = FindObjectOfType<SC_CameraShake>();
+        camera.ShakeCamera(RecoilKickShake.MEDIUM);
+
+        if (!hasEmptySlot)
+        {
+            _weaponPromptCoroutine = ShowWeaponSpawnText(weaponToSpawn,true);
+            StartCoroutine(_weaponPromptCoroutine);
+        }
+        else
+        {
+            ReplaceWeapon(weaponToSpawn);
+            _weaponPromptCoroutine = ShowWeaponSpawnText(weaponToSpawn);
+            StartCoroutine(_weaponPromptCoroutine);
+        }
+    }
+
     public void ReplaceWeapon(WeaponItem newWeapon)
     {
-        //Check Null
         int slotToReplace = currentSlot;
+
         for (int i = 0; i < 3; i++)
         {
             if (weaponItemList[i].equippedWeaponStats == null)
@@ -117,5 +146,57 @@ public class SC_Inventory : MonoBehaviour
         }
 
         weaponItemList[slotToReplace] = newWeapon;
+    }
+
+    IEnumerator ShowWeaponSpawnText(WeaponItem weaponToSpawn, bool askToSpawn = false)
+    {
+        var weaponUI = GetComponent<SC_PlayerUI>().weaponUI;
+
+        weaponUI.SetWeaponPromptText(weaponToSpawn);
+        weaponUI.SetActiveWeaponPromptText(true,askToSpawn);
+
+        if (askToSpawn)
+        {
+            bool hasConfirmedPrompt = false;
+            weaponUI.weaponPrompt.timeBar.fillAmount = 1;
+            float countDownTime = 0;
+
+            while (!hasConfirmedPrompt)
+            {
+                //CheckPressKey
+                if (Input.GetKeyDown(KeyCode.E)) //Accept
+                {
+                    ReplaceWeapon(weaponToSpawn);
+                    hasConfirmedPrompt = true;
+                }
+                else if (Input.GetKeyDown(KeyCode.Q)) //Decline
+                {
+                    hasConfirmedPrompt = true;
+                }
+
+                if (hasConfirmedPrompt)
+                    break;
+                
+                //Countdown
+                countDownTime += Time.deltaTime;
+                weaponUI.weaponPrompt.timeBar.fillAmount = (newWeaponPromptTimer - countDownTime) / newWeaponPromptTimer;
+                yield return new WaitForEndOfFrame();
+                if (countDownTime >= newWeaponPromptTimer)
+                    hasConfirmedPrompt = true;
+
+                yield return null;
+            }
+
+            yield return new WaitUntil(() => hasConfirmedPrompt == true);
+            var camera = FindObjectOfType<SC_CameraShake>();
+            camera.ShakeCamera(RecoilKickShake.MEDIUM);
+        }
+        else
+        {
+            yield return new WaitForSeconds(3f);
+        }
+        weaponUI.SetActiveWeaponPromptText(false);
+        yield break;
+
     }
 }
