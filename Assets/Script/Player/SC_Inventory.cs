@@ -89,6 +89,10 @@ public class SC_Inventory : MonoBehaviour
     private IEnumerator _weaponPromptCoroutine;
     [SerializeField] private float newWeaponPromptTimer = 5;
 
+    [Header("===Sound Effects===")]
+    [SerializeField] private AudioClip startPopUp;
+    [SerializeField] private AudioClip equipWeapon;
+
     [Header("===Debug===")]
     public List<WeaponNMod> startWeaponList;
 
@@ -151,6 +155,10 @@ public class SC_Inventory : MonoBehaviour
     IEnumerator ShowWeaponSpawnText(WeaponItem weaponToSpawn, bool askToSpawn = false)
     {
         var weaponUI = GetComponent<SC_PlayerUI>().weaponUI;
+        AudioSource audioSource;
+        TryGetComponent(out audioSource);
+
+        audioSource.PlayOneShot(startPopUp);
 
         weaponUI.SetWeaponPromptText(weaponToSpawn);
         weaponUI.SetActiveWeaponPromptText(true,askToSpawn);
@@ -167,6 +175,7 @@ public class SC_Inventory : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E)) //Accept
                 {
                     ReplaceWeapon(weaponToSpawn);
+                    audioSource.PlayOneShot(equipWeapon);
                     hasConfirmedPrompt = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.Q)) //Decline

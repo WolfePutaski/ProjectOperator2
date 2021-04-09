@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: SCO_Weapon_MachineGun
   m_EditorClassIdentifier: 
   weaponName: M249 SAW
-  weaponDesc: A military light machine gun. High capacity
+  weaponDesc: 'A military light machine gun.
+
+    High capacity'
   fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
   fireMode: 1
   secondFireMode: 0

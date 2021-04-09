@@ -1690,7 +1690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &457233608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7293,6 +7293,8 @@ MonoBehaviour:
   currentSlot: 0
   NotReceiveInput: 0
   newWeaponPromptTimer: 5
+  startPopUp: {fileID: 8300000, guid: d84176cbdfb2cdd4b83da145925023b7, type: 3}
+  equipWeapon: {fileID: 8300000, guid: 45c8f7adb09818345973288c1d66f2e0, type: 3}
   startWeaponList:
   - weaponClass: {fileID: 11400000, guid: 6fab8b116bec68341bcb5690558c2520, type: 2}
     equippedMods: []
