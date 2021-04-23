@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponList:
   - itemClass: {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
-    Score: 0
+    Score: 10
   - itemClass: {fileID: 11400000, guid: 7e1f5d9933fec8544a2a73e12db3c48e, type: 2}
-    Score: 0
+    Score: 12
   - itemClass: {fileID: 11400000, guid: 509e29d5e99ff8c4c966079b9dd40c19, type: 2}
-    Score: 0
+    Score: 22
   weaponModList:
   - itemClass: {fileID: 11400000, guid: c1e86b2c1eba7f14197955948507d126, type: 2}
-    Score: 0
+    Score: 5
   - itemClass: {fileID: 11400000, guid: 736ce0233a16ac847b95e8da63ff6d3e, type: 2}
-    Score: 0
+    Score: 5
   - itemClass: {fileID: 11400000, guid: 164299b7e6368a04fbe08675d68edbe6, type: 2}
-    Score: 0
+    Score: -2
   - itemClass: {fileID: 11400000, guid: f174d68e03456bc46904631d7bbabd8e, type: 2}
-    Score: 0
+    Score: -1

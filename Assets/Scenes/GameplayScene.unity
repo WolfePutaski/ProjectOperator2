@@ -3112,7 +3112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &836895805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7292,12 +7292,13 @@ MonoBehaviour:
     equippedMods: []
   currentSlot: 0
   NotReceiveInput: 0
-  newWeaponPromptTimer: 5
+  newWeaponPromptTimer: 10
   startPopUp: {fileID: 8300000, guid: d84176cbdfb2cdd4b83da145925023b7, type: 3}
   equipWeapon: {fileID: 8300000, guid: 45c8f7adb09818345973288c1d66f2e0, type: 3}
   startWeaponList:
-  - weaponClass: {fileID: 11400000, guid: 6fab8b116bec68341bcb5690558c2520, type: 2}
-    equippedMods: []
+  - weaponClass: {fileID: 11400000, guid: 6eeababce11c32e43baed437fcb24728, type: 2}
+    equippedMods:
+    - {fileID: 11400000, guid: 164299b7e6368a04fbe08675d68edbe6, type: 2}
 --- !u!114 &1978028610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7504,17 +7505,17 @@ MonoBehaviour:
   currentComboScore: 0
   currentComboRank: 0
   rankingList:
-  - _rankingScore: 13
-    _weaponScore: 0
-  - _rankingScore: 15
-    _weaponScore: 0
-  - _rankingScore: 21
-    _weaponScore: 0
-  - _rankingScore: 23
-    _weaponScore: 0
-  - _rankingScore: 28
-    _weaponScore: 0
-  degradeRate: 1
+  - _rankingScore: 2
+    _weaponScore: 10
+  - _rankingScore: 2
+    _weaponScore: 20
+  - _rankingScore: 2
+    _weaponScore: 25
+  - _rankingScore: 2
+    _weaponScore: 30
+  - _rankingScore: 4
+    _weaponScore: 50
+  degradeRate: 0
   _weaponPoolProfile: {fileID: 11400000, guid: e51950225fbd72647be27b7e55537478, type: 2}
 --- !u!1 &2010509219
 GameObject:

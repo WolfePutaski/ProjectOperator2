@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponDesc: 'A military light machine gun.
 
     High capacity'
-  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+  fireSound: {fileID: 8300000, guid: 083a4a3b817ad1648a397477ba29e841, type: 3}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1

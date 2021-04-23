@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modName: Small Mag
   modType: 0
-  ModMag: -0.33
+  ModMag: -0.34
   ModReloadTime: -0.25
   ModForceOffPerfectLoad: 0
   ModFirerate: 0

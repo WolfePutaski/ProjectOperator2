@@ -14,7 +14,7 @@ class RankClass
 {
     [SerializeField] private float _rankingScore;
     [SerializeField] private float _weaponScore;
-    public float rankingScore => _rankingScore;
+    public float rankingScoreToReach => _rankingScore;
     public float weaponScore => _weaponScore;
 
 }
@@ -78,24 +78,61 @@ public class SC_WeaponPool : MonoBehaviour
     {
         var updatedCurrentComboScore = currentComboScore - (degradeRate * Time.deltaTime);
         currentComboScore = Mathf.Max(0, updatedCurrentComboScore);
-
-        for (int i = 0; i< rankingList.Count;i++)
-        {
-            float scoreToCompare = 0;
-            for (int j = 0; j < i; j++)
-                scoreToCompare += rankingList[j].rankingScore;
-
-            if (currentComboScore > scoreToCompare)
-                currentComboRank = i;
-        }
-
-        currentComboScore = rankingList[currentComboRank].weaponScore;
+        currentWeaponScore = rankingList[currentComboRank].weaponScore;
 
     }
 
     public void AddComboScore(float addNum)
     {
         currentComboScore += addNum;
+        CheckAddNewWeapon();
     }
+
+    private void CheckAddNewWeapon()
+    {
+        int rankToCompare = 0;
+
+        for (int i = 0; i < rankingList.Count; i++)
+        {
+            float scoreToCompare = 0;
+
+            //Get Score To Compare
+            for (int j = 0; j < i; j++)
+            {
+                    scoreToCompare += rankingList[j].rankingScoreToReach;
+            }
+
+            if (currentComboScore >= scoreToCompare)
+            {
+                rankToCompare = i;
+            }
+        }
+
+
+        if (currentComboRank < rankToCompare)
+        {
+            gameObject.GetComponent<SC_Inventory>().AskToSpawnWeapon(generateWeapon());
+            currentComboRank = rankToCompare;
+            //Debug.Log(getTotalRankScore(rankToCompare));
+
+            //if (currentComboRank >= rankingList.Count)
+            //{
+            //    currentComboScore -= rankingList[currentComboRank].rankingScoreToReach;
+            //    currentComboRank--;
+            //}
+
+        }
+
+    }
+
+    private float getTotalRankScore(int rank)
+    {
+        float scoreToCompare = 0;
+        for (int j = 0; j < rank; j++)
+            scoreToCompare += rankingList[j].rankingScoreToReach;
+
+        return scoreToCompare;
+    }
+
 }
 
