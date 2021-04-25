@@ -64,6 +64,7 @@ public class SCO_Weapon_Master : ScriptableObject
     public float recoilRecoverySpeed; //How fast to recover from recoil
     public float recoilKick; //Amount of Kick
     public RecoilKickShake recoilKickShake;
+    public bool isOneHanded;
 
     [Header("=== Heat ===")]
     public float heatPerShot;

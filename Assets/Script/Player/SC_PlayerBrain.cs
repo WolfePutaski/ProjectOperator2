@@ -18,6 +18,10 @@ public class SC_PlayerBrain : MonoBehaviour
 
     private bool NotRecieveInput;
 
+    [Header("Animation")]
+    [SerializeField] RuntimeAnimatorController RifleAnim;
+    [SerializeField] RuntimeAnimatorController HandgunAnim;
+
     void Start()
     {
         TryGetComponent(out _Health);
@@ -59,6 +63,8 @@ public class SC_PlayerBrain : MonoBehaviour
             _lookWithMouse.enabled = false;
             _WeaponFunction.enabled = false;
         }
+
+        _animator.runtimeAnimatorController = _WeaponFunction.currentWeapon.equippedWeaponStats.isOneHanded ? HandgunAnim:RifleAnim ;
         
     }
 

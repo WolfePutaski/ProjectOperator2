@@ -2085,7 +2085,7 @@ RectTransform:
   - {fileID: 2010509220}
   - {fileID: 475442244}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2172,7 +2172,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -3144,10 +3144,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.18274099, y: 0.04060936, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1978028606}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &848775674
 GameObject:
@@ -3471,7 +3470,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1016459817
 MonoBehaviour:
@@ -3788,7 +3787,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1111179408
 GameObject:
@@ -7443,17 +7442,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978028606}
+  - component: {fileID: 1978028611}
+  - component: {fileID: 1978028616}
+  - component: {fileID: 1978028615}
   - component: {fileID: 1978028605}
   - component: {fileID: 1978028607}
   - component: {fileID: 1978028614}
   - component: {fileID: 1978028609}
   - component: {fileID: 1978028610}
   - component: {fileID: 1978028612}
-  - component: {fileID: 1978028611}
   - component: {fileID: 1978028608}
   - component: {fileID: 1978028613}
-  - component: {fileID: 1978028615}
-  - component: {fileID: 1978028616}
   - component: {fileID: 1978028617}
   m_Layer: 6
   m_Name: Player
@@ -7486,15 +7485,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978028604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18274099, y: -0.04060936, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1827288728}
   - {fileID: 219006267}
   - {fileID: 908185588}
   - {fileID: 1880354399}
-  m_Father: {fileID: 836895806}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1978028607
 MonoBehaviour:
@@ -7719,6 +7718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 2010509219}
   enableDebug: 1
+  RifleAnim: {fileID: 9100000, guid: 74983c13476a8a9439cd79aefabe87ff, type: 2}
+  HandgunAnim: {fileID: 22100000, guid: 061d97319d55bb94785473422ad1c16f, type: 2}
 --- !u!95 &1978028615
 Animator:
   serializedVersion: 3

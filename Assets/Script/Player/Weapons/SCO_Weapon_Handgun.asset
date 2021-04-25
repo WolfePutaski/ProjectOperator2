@@ -36,6 +36,7 @@ MonoBehaviour:
   recoilRecoverySpeed: 2
   recoilKick: 0.5
   recoilKickShake: 0
+  isOneHanded: 1
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0
