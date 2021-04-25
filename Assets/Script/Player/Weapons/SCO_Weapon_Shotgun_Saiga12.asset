@@ -18,7 +18,7 @@ MonoBehaviour:
   fireMode: 0
   secondFireMode: 1
   FiremodeToggle: 0
-  cycleTime: 0.1
+  cycleTimeRPM: 500
   reloadTime: 2.7
   reloadPerfectStart: 1.8
   reloadPerfectWindow: 0.3
@@ -30,7 +30,6 @@ MonoBehaviour:
   magCapacity: 12
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.2
   swayOffset: 8
   recoilRecoverySpeed: 1
   recoilKick: 0.7

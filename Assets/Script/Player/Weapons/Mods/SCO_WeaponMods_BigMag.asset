@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SCO_WeaponMods_BigMag
   m_EditorClassIdentifier: 
   modName: Large Mag
+  modType: 0
   ModMag: 0.5
   ModReloadTime: 0.25
   ModForceOffPerfectLoad: 0
   ModFirerate: 0
   ModCritChance: 0
-  ModKick: 0
-  ModSway: 0
-  ModDurability: 0
+  ModKick: -0.1
+  ModSway: 0.3
   ModDegradeRate: 0
   ModHeatRate: 0
   ModHeatCooldownRate: 0

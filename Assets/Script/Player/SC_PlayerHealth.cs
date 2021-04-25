@@ -35,10 +35,15 @@ public class SC_PlayerHealth : SC_Health
 
     public override void Damage(float damage)
     {
+        SC_WeaponPool weaponPool;
+        TryGetComponent(out weaponPool);
+
         base.Damage(damage);
         playerBrain.cameraFunctions.ShakeDamage();
 
         FindObjectOfType<SC_EnemySpawner>().forceSetRankForTime(0, 8);
+        weaponPool.DemoteRank();
+
     }
 
     public void disablePlayerInput()

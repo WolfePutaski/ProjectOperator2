@@ -20,11 +20,11 @@ MonoBehaviour:
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
-  cycleTime: 0.067
+  cycleTimeRPM: 900
   reloadTime: 2.4
   reloadPerfectStart: 1.5
   reloadPerfectWindow: 0.3
-  damage: 25
+  damage: 30
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0

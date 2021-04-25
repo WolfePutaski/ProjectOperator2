@@ -19,6 +19,10 @@ MonoBehaviour:
     Score: 12
   - itemClass: {fileID: 11400000, guid: 509e29d5e99ff8c4c966079b9dd40c19, type: 2}
     Score: 22
+  - itemClass: {fileID: 11400000, guid: 6fab8b116bec68341bcb5690558c2520, type: 2}
+    Score: 15
+  - itemClass: {fileID: 11400000, guid: c8948ac9fad23494f80a2172aaf69b9a, type: 2}
+    Score: 8
   weaponModList:
   - itemClass: {fileID: 11400000, guid: c1e86b2c1eba7f14197955948507d126, type: 2}
     Score: 5

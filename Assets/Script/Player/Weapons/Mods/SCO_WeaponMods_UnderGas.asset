@@ -17,11 +17,10 @@ MonoBehaviour:
   ModMag: 0
   ModReloadTime: 0
   ModForceOffPerfectLoad: 0
-  ModFirerate: -0.5
+  ModFirerate: -0.2
   ModCritChance: 0
-  ModKick: -0.5
+  ModKick: -0.3
   ModSway: 0
-  ModDurability: 0
   ModDegradeRate: 0
   ModHeatRate: 0
   ModHeatCooldownRate: 0

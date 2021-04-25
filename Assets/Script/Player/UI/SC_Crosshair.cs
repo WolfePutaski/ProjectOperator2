@@ -6,6 +6,9 @@ public class SC_Crosshair : MonoBehaviour
 {
     public GameObject crosshairSway;
     public GameObject crosshairAim;
+
+    //public Vector3 SwayOffset;
+    //public Vector3 RecoilOffset;
     [SerializeField] private Sprite crosshairDot; 
 
     void Awake()

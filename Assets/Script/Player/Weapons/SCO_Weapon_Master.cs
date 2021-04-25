@@ -37,7 +37,8 @@ public class SCO_Weapon_Master : ScriptableObject
     public FireMode fireMode;
     public FireMode secondFireMode;
     public bool FiremodeToggle;
-    public float cycleTime;
+    public float cycleTimeRPM;
+    public float cycleTime => 60/cycleTimeRPM;
     public float reloadTime;
     public float reloadPerfectStart;
     public float reloadPerfectWindow;

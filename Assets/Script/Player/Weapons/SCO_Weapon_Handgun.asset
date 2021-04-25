@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_Handgun
   m_EditorClassIdentifier: 
-  weaponName: Handgun
+  weaponName: Glock
+  weaponDesc: 'Standard 9mm handgun.
+
+    Cheap but reliable.'
   fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
   fireMode: 0
   secondFireMode: 0
   FiremodeToggle: 0
-  cycleTime: 0
+  cycleTimeRPM: 600
   reloadTime: 1.8
   reloadPerfectStart: 1.2
   reloadPerfectWindow: 0.3
@@ -29,7 +32,6 @@ MonoBehaviour:
   magCapacity: 15
   isClosedBolt: 1
   TriggerDelay: 0
-  swayPeriod: 0.2
   swayOffset: 2
   recoilRecoverySpeed: 2
   recoilKick: 0.5

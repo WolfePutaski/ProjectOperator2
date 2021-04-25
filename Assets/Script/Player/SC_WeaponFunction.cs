@@ -58,8 +58,6 @@ public class SC_WeaponFunction : MonoBehaviour
             else if (!_currentWeapon.equippedWeaponProperties.isLoaded)
                 CycleAmmo();
         }
-
-
     }
 
     void ReloadUIUpdate()
@@ -125,6 +123,9 @@ public class SC_WeaponFunction : MonoBehaviour
                         healthReciever.Damage(Damage);
                     
                     hitCount++;
+                    SC_WeaponPool weaponPool;
+                    TryGetComponent(out weaponPool);
+                    weaponPool.AddComboScore(weaponPool.hitScore, false);
                 }
 
                 //Debug.Log(hitObject);
@@ -151,15 +152,28 @@ public class SC_WeaponFunction : MonoBehaviour
     {
         crosshair.crosshairAim.transform.position += (SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z) * -_currentWeapon.equippedWeaponStats.recoilKick) 
             + Random.insideUnitSphere * _currentWeapon.equippedWeaponStats.recoilKick;
-        
+
+        //crosshair.RecoilOffset += (SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z) * -_currentWeapon.equippedWeaponStats.recoilKick)
+        //    + Random.insideUnitSphere * _currentWeapon.equippedWeaponStats.recoilKick;
+
         GetComponent<SC_CameraShake>().ShakeCamera(_currentWeapon.equippedWeaponStats.recoilKickShake);
     }
-    void CrosshairUpdate()
+    void CrosshairUpdate() //Will use Vector3 instead of transform
     {
         defaultAimPos = crosshair.transform.position;
 
         Transform AimPoint = crosshair.crosshairAim.transform;
         Transform SwayPoint = crosshair.crosshairSway.transform;
+
+        //Vector3 swayOffset = crosshair.SwayOffset;
+        //Vector3 recoilOffset = crosshair.RecoilOffset;
+
+        //if (recoilOffset != Vector3.zero)
+        //{
+        //    recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero,
+        //    Mathf.Pow(Time.deltaTime, .7f) * _currentWeapon.equippedWeaponStats.recoilRecoverySpeed);
+        //}
+
 
         if (AimPoint.position != defaultAimPos)
         {
@@ -170,6 +184,8 @@ public class SC_WeaponFunction : MonoBehaviour
         {
             AimPoint.position = Vector3.Lerp(AimPoint.position, defaultAimPos,
                 Mathf.Pow(Time.deltaTime,.7f)* _currentWeapon.equippedWeaponStats.recoilRecoverySpeed);
+
+
         }
 
         float swayRadius = Vector2.Distance(transform.position, crosshair.transform.position) * Mathf.Tan(Mathf.Deg2Rad* _currentWeapon.equippedWeaponStats.swayOffset / 2f);
@@ -193,11 +209,14 @@ public class SC_WeaponFunction : MonoBehaviour
         {
             lerpPeriodCount += Time.deltaTime;
             SwayPoint.localPosition = Vector2.Lerp(SwayPoint.localPosition, nextSwayPos , Time.deltaTime/_currentWeapon.equippedWeaponStats.swayPeriod);
+            //swayOffset = Vector2.Lerp(swayOffset, nextSwayPos, Time.deltaTime / _currentWeapon.equippedWeaponStats.swayPeriod);
         }
 
         Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z + _currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
         Debug.DrawRay(transform.position, SC_LookDir.GetVectorFromAngle(transform.eulerAngles.z -_currentWeapon.equippedWeaponStats.swayOffset/2f) * 1000f, Color.cyan);
-        
+
+
+        //crosshair.RecoilOffset = recoilOffset;
     }
 
 

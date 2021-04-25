@@ -10,7 +10,7 @@ public class ItemScore<T>
 }
 
 [System.Serializable]
-class RankClass
+public class RankClass
 {
     [SerializeField] private float _rankingScore;
     [SerializeField] private float _weaponScore;
@@ -21,19 +21,23 @@ class RankClass
 
 public class SC_WeaponPool : MonoBehaviour
 {
-    [SerializeField] private float currentWeaponScore;
-    [SerializeField] private float currentComboScore;
-    [SerializeField] private int currentComboRank;
-    [SerializeField] List<RankClass> rankingList;
+    private float _currentWeaponScore;
+    private float _currentComboScore;
+    private int _currentComboRank;
+    [SerializeField] public List<RankClass> RankingList;
     [SerializeField] float degradeRate = 1f;
 
     public SCO_WeaponPoolProfile _weaponPoolProfile;
     private List<ItemScore<SCO_Weapon_Master>> _weaponList => _weaponPoolProfile.weaponList;
     private List<ItemScore<SCO_WeaponMods>> _weaponModList => _weaponPoolProfile.weaponModList;
 
+    public float CurrentComboScore { get => _currentComboScore; }
+    public int CurrentComboRank { get => _currentComboRank; }
+    public float hitScore;
+
     public WeaponItem generateWeapon()
     {
-        if (_weaponList.Count <= 0)
+        if (_weaponList.Count <= 0 && _currentComboScore <= 0)
             return null;
 
         SCO_Weapon_Master newWeaponClass = null;
@@ -51,14 +55,14 @@ public class SC_WeaponPool : MonoBehaviour
             {
                 var _newMod = _weaponModList[Random.Range(0, _weaponModList.Count)];
 
-                if (_newScore + _newMod.Score <= currentWeaponScore)
+                if (_newScore + _newMod.Score <= _currentWeaponScore)
                 {
                     _newEquippedModList.Add(_newMod);
                     _newScore += _newMod.Score;
                 }
             }
 
-            bool passScore = _newScore <= currentWeaponScore;
+            bool passScore = _newScore <= _currentWeaponScore;
             if (passScore)
             {
                 foreach (ItemScore<SCO_WeaponMods> _mod in _newEquippedModList)
@@ -68,7 +72,6 @@ public class SC_WeaponPool : MonoBehaviour
 
                 newWeaponClass = _weaponScore.itemClass;
             }
-
         }
 
         return new WeaponItem(newWeaponClass,newEquippedModList);
@@ -76,60 +79,55 @@ public class SC_WeaponPool : MonoBehaviour
 
     void Update()
     {
-        var updatedCurrentComboScore = currentComboScore - (degradeRate * Time.deltaTime);
-        currentComboScore = Mathf.Max(0, updatedCurrentComboScore);
-        currentWeaponScore = rankingList[currentComboRank].weaponScore;
+        var updatedCurrentComboScore = _currentComboScore - (degradeRate * Time.deltaTime);
+        _currentComboScore = Mathf.Max(0, updatedCurrentComboScore);
 
-    }
-
-    public void AddComboScore(float addNum)
-    {
-        currentComboScore += addNum;
-        CheckAddNewWeapon();
-    }
-
-    private void CheckAddNewWeapon()
-    {
-        int rankToCompare = 0;
-
-        for (int i = 0; i < rankingList.Count; i++)
+        if (_currentComboRank >= 1 && (_currentComboScore < getTotalRankScore(_currentComboRank - 1)))
         {
-            float scoreToCompare = 0;
-
-            //Get Score To Compare
-            for (int j = 0; j < i; j++)
-            {
-                    scoreToCompare += rankingList[j].rankingScoreToReach;
-            }
-
-            if (currentComboScore >= scoreToCompare)
-            {
-                rankToCompare = i;
-            }
+            DemoteRank();
         }
 
+    }
 
-        if (currentComboRank < rankToCompare)
+    public void AddComboScore(float addNum, bool checkNewWeapon = true)
+    {
+        _currentComboScore += addNum;
+        if (checkNewWeapon)
+            CheckAddNewWeapon();
+    }
+
+    public void CheckAddNewWeapon()
+    {
+        if (_currentComboScore >= getTotalRankScore(_currentComboRank))
         {
+            if (_currentComboRank >= RankingList.Count - 1)
+            {
+                _currentComboRank = RankingList.Count - 1;
+                _currentComboScore -= RankingList[_currentComboRank].rankingScoreToReach;
+            }
+            else
+                _currentComboRank++;
+
+            _currentWeaponScore = RankingList[_currentComboRank].weaponScore;
+            _currentComboScore += degradeRate * 5f;
             gameObject.GetComponent<SC_Inventory>().AskToSpawnWeapon(generateWeapon());
-            currentComboRank = rankToCompare;
-            //Debug.Log(getTotalRankScore(rankToCompare));
-
-            //if (currentComboRank >= rankingList.Count)
-            //{
-            //    currentComboScore -= rankingList[currentComboRank].rankingScoreToReach;
-            //    currentComboRank--;
-            //}
-
         }
-
     }
 
-    private float getTotalRankScore(int rank)
+    public void DemoteRank()
+    {
+        if (_currentComboRank > 0)
+        {
+            _currentComboRank--;
+            _currentComboScore -= RankingList[_currentComboRank].rankingScoreToReach * 0.66f;
+        }
+    }
+
+    public float getTotalRankScore(int rank)
     {
         float scoreToCompare = 0;
-        for (int j = 0; j < rank; j++)
-            scoreToCompare += rankingList[j].rankingScoreToReach;
+        for (int j = 0; j <= rank; j++)
+            scoreToCompare += RankingList[j].rankingScoreToReach;
 
         return scoreToCompare;
     }

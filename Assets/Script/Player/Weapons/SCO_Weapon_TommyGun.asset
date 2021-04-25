@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: SCO_Weapon_TommyGun
   m_EditorClassIdentifier: 
   weaponName: Tommy Gun
-  weaponDesc: 
+  weaponDesc: 'A famous WWII submachine gun.
+
+'
   fireSound: {fileID: 8300000, guid: 23233609550158d40942de8ee71343de, type: 3}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
-  cycleTime: 0.085
+  cycleTimeRPM: 720
   reloadTime: 3
   reloadPerfectStart: 2.4
   reloadPerfectWindow: 0.2
-  damage: 20
+  damage: 25
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0
@@ -30,7 +32,7 @@ MonoBehaviour:
   magCapacity: 50
   isClosedBolt: 0
   TriggerDelay: 0
-  swayOffset: 2
+  swayOffset: 3
   recoilRecoverySpeed: 0.9
   recoilKick: 0.2
   recoilKickShake: 0

@@ -12,27 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_MP5
   m_EditorClassIdentifier: 
-  weaponName: 
-  weaponDesc: A popular sub machine gun. Accurate and low recoil.
+  weaponName: MP5
+  weaponDesc: 'A popular submachine gun.
+
+    Accurate and low recoil.'
   fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
-  fireMode: 0
-  secondFireMode: 1
+  fireMode: 1
+  secondFireMode: 0
   FiremodeToggle: 1
-  cycleTime: 0
-  reloadTime: 0
-  reloadPerfectStart: 0
-  reloadPerfectWindow: 0
-  damage: 0
+  cycleTimeRPM: 800
+  reloadTime: 2.4
+  reloadPerfectStart: 1.6
+  reloadPerfectWindow: 0.3
+  damage: 20
   headShotMultiplier: 0
   critChance: 0
   critMultiplier: 0
   velocity: 0
-  magCapacity: 0
-  isClosedBolt: 0
+  magCapacity: 30
+  isClosedBolt: 1
   TriggerDelay: 0
-  swayOffset: 0
-  recoilRecoverySpeed: 0
-  recoilKick: 0
+  swayOffset: 1
+  recoilRecoverySpeed: 1
+  recoilKick: 0.12
   recoilKickShake: 0
   heatPerShot: 0
   heatCoolRate: 0

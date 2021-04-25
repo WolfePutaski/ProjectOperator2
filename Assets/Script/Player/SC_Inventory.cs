@@ -54,7 +54,7 @@ public class WeaponItem
                     return 1 + a;
                 }
 
-                equippedWeaponStats.cycleTime /= (1 + _WeaponMods.ModFirerate);
+                equippedWeaponStats.cycleTimeRPM *= (1 + _WeaponMods.ModFirerate);
                 equippedWeaponStats.reloadTime *= (1 + _WeaponMods.ModReloadTime);
                 equippedWeaponStats.reloadPerfectStart *= (1 + _WeaponMods.ModReloadTime);
 
@@ -165,6 +165,7 @@ public class SC_Inventory : MonoBehaviour
 
         if (askToSpawn)
         {
+            Time.timeScale = .5f;
             bool hasConfirmedPrompt = false;
             weaponUI.weaponPrompt.timeBar.fillAmount = 1;
             float countDownTime = 0;
@@ -187,7 +188,7 @@ public class SC_Inventory : MonoBehaviour
                     break;
                 
                 //Countdown
-                countDownTime += Time.deltaTime;
+                countDownTime += Time.unscaledDeltaTime;
                 weaponUI.weaponPrompt.timeBar.fillAmount = (newWeaponPromptTimer - countDownTime) / newWeaponPromptTimer;
                 yield return new WaitForEndOfFrame();
                 if (countDownTime >= newWeaponPromptTimer)
@@ -199,6 +200,8 @@ public class SC_Inventory : MonoBehaviour
             yield return new WaitUntil(() => hasConfirmedPrompt == true);
             var camera = FindObjectOfType<SC_CameraShake>();
             camera.ShakeCamera(RecoilKickShake.MEDIUM);
+            Time.timeScale = 1f;
+
         }
         else
         {
