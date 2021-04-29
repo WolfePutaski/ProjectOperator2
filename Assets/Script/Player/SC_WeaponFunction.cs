@@ -107,6 +107,8 @@ public class SC_WeaponFunction : MonoBehaviour
             }
 
 
+
+
             void CheckHit(GameObject hitObject)
             {
                 bool isSelf()
@@ -120,9 +122,30 @@ public class SC_WeaponFunction : MonoBehaviour
                     SC_Health healthReciever;
                     hitObject.TryGetComponent(out healthReciever);
                     if (healthReciever != null)
+                    {
+                        //Check Headshot
+                        foreach (RaycastHit2D col in hit2D)
+                        {
+                            //Debug.Log(col.collider.name);
+                            if(col.collider.name == "Head" && col.collider.transform.IsChildOf(hitObject.transform))
+                            {
+                                var headCollider = col.collider;
+
+                                if (headCollider.OverlapPoint(crosshair.crosshairAim.transform.position))
+                                {
+                                    Damage += Damage * _currentWeapon.equippedWeaponStats.critMultiplier;
+                                }
+                                break;
+
+                            }
+
+                        }
                         healthReciever.Damage(Damage);
+
+                    }
                     
                     hitCount++;
+
                     SC_WeaponPool weaponPool;
                     TryGetComponent(out weaponPool);
                     weaponPool.AddComboScore(weaponPool.hitScore, false);

@@ -27,7 +27,7 @@ MonoBehaviour:
   damage: 20
   headShotMultiplier: 0
   critChance: 0
-  critMultiplier: 0
+  critMultiplier: 0.8
   velocity: 0
   magCapacity: 15
   isClosedBolt: 1

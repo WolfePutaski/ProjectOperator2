@@ -9,7 +9,8 @@ public class SC_Crosshair : MonoBehaviour
 
     //public Vector3 SwayOffset;
     //public Vector3 RecoilOffset;
-    [SerializeField] private Sprite crosshairDot; 
+    [SerializeField] private Sprite crosshairDot;
+    public Sprite CrosshairDot { get => crosshairDot; }
 
     void Awake()
     {

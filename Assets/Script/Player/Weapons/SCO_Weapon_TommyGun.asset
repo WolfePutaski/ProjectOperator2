@@ -27,7 +27,7 @@ MonoBehaviour:
   damage: 25
   headShotMultiplier: 0
   critChance: 0
-  critMultiplier: 0
+  critMultiplier: 0.8
   velocity: 0
   magCapacity: 50
   isClosedBolt: 0
@@ -36,6 +36,7 @@ MonoBehaviour:
   recoilRecoverySpeed: 0.9
   recoilKick: 0.2
   recoilKickShake: 0
+  isOneHanded: 0
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0

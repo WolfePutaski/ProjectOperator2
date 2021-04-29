@@ -31,7 +31,11 @@ public class SCO_Weapon_Master : ScriptableObject
     public string weaponName;
     [Multiline]
     public string weaponDesc;
+
+    [Header("=== SFX ===")]
     public AudioClip fireSound;
+    public AudioClip removeMagSound;
+    public AudioClip reloadedSound;
 
     [Header("=== Loading Mechanism ===")]
     public FireMode fireMode;
