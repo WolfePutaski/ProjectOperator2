@@ -12,12 +12,14 @@ public class WeaponFunctionProperties
     public int currentHeat;
     public bool isLoaded = true;
     public FireMode CurrentFiremode;
+    public float currentCondition;
 
     public WeaponFunctionProperties(SCO_Weapon_Master weaponClass)
     {
         ammoInMag = weaponClass.magCapacity;
         isLoaded = true;
         CurrentFiremode = weaponClass.fireMode;
+        currentCondition = weaponClass.maxCondition;
 
        if (!weaponClass.isClosedBolt)
             ammoInMag--;
@@ -77,6 +79,6 @@ public class SCO_Weapon_Master : ScriptableObject
     [Header("=== Jamming ===")]
     public float minJamChance;
     public float maxJamChance;
-    public float totalShots;
+    public float maxCondition;
 
 }

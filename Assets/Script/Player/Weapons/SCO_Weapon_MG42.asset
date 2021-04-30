@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_MachineGun
+  m_Name: SCO_Weapon_MG42
   m_EditorClassIdentifier: 
-  weaponName: M249 SAW
-  weaponDesc: 'A military light machine gun.
-
-    High capacity'
+  weaponName: MG42
+  weaponDesc: Highest fire rate and powerful
   fireSound: {fileID: 8300000, guid: 083a4a3b817ad1648a397477ba29e841, type: 3}
+  removeMagSound: {fileID: 0}
+  reloadedSound: {fileID: 0}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
-  cycleTimeRPM: 720
-  reloadTime: 5
+  cycleTimeRPM: 1200
+  reloadTime: 4
   reloadPerfectStart: 0
   reloadPerfectWindow: 0
-  damage: 30
-  headShotMultiplier: 0
+  damage: 45
+  headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0
-  magCapacity: 100
+  magCapacity: 50
   isClosedBolt: 0
   TriggerDelay: 0
-  swayOffset: 1
+  swayOffset: 2
   recoilRecoverySpeed: 0.8
   recoilKick: 0.3
   recoilKickShake: 1
@@ -41,4 +41,4 @@ MonoBehaviour:
   heatCoolRate: 0
   minJamChance: 0
   maxJamChance: 0
-  totalShots: 0
+  maxCondition: 0

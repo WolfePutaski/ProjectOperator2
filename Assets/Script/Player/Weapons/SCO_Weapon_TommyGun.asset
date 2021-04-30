@@ -15,8 +15,12 @@ MonoBehaviour:
   weaponName: Tommy Gun
   weaponDesc: 'A famous WWII submachine gun.
 
+    High mag capacity and pack a punch
+
 '
   fireSound: {fileID: 8300000, guid: 23233609550158d40942de8ee71343de, type: 3}
+  removeMagSound: {fileID: 0}
+  reloadedSound: {fileID: 0}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
@@ -25,7 +29,7 @@ MonoBehaviour:
   reloadPerfectStart: 2.4
   reloadPerfectWindow: 0.2
   damage: 25
-  headShotMultiplier: 0
+  headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0

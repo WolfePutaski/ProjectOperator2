@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: SCO_Weapon_Shotgun_Saiga12
   m_EditorClassIdentifier: 
   weaponName: Saiga-12
-  weaponDesc: A russian automatic shotgun.
+  weaponDesc: 'A tactical semi-automatic shotgun.
+
+    Fast firing and powerful.'
   fireSound: {fileID: 8300000, guid: 6c539999a9c296f4ba44b3e1047652df, type: 3}
+  removeMagSound: {fileID: 0}
+  reloadedSound: {fileID: 0}
   fireMode: 0
   secondFireMode: 1
   FiremodeToggle: 0
@@ -23,14 +27,14 @@ MonoBehaviour:
   reloadPerfectStart: 1.8
   reloadPerfectWindow: 0.3
   damage: 60
-  headShotMultiplier: 0
+  headShotMultiplier: 0.7
   critChance: 0
   critMultiplier: 0.7
   velocity: 0
   magCapacity: 12
   isClosedBolt: 1
   TriggerDelay: 0
-  swayOffset: 8
+  swayOffset: 3
   recoilRecoverySpeed: 1
   recoilKick: 0.7
   recoilKickShake: 1
@@ -39,6 +43,6 @@ MonoBehaviour:
   heatCoolRate: 0
   minJamChance: 0
   maxJamChance: 0
-  totalShots: 0
+  maxCondition: 0
   PelletCount: 8
   Spread: 0.05

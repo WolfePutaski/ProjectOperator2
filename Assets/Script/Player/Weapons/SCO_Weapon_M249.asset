@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_M4A1
+  m_Name: SCO_Weapon_M249
   m_EditorClassIdentifier: 
-  weaponName: M4A1
-  weaponDesc: 'A military assault rifle.
+  weaponName: M249 SAW
+  weaponDesc: 'A military light machine gun.
 
-    Accurate and reliable.'
-  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+    High capacity'
+  fireSound: {fileID: 8300000, guid: 083a4a3b817ad1648a397477ba29e841, type: 3}
   removeMagSound: {fileID: 0}
   reloadedSound: {fileID: 0}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
-  cycleTimeRPM: 900
-  reloadTime: 2.4
-  reloadPerfectStart: 1.5
-  reloadPerfectWindow: 0.3
+  cycleTimeRPM: 720
+  reloadTime: 5
+  reloadPerfectStart: 0
+  reloadPerfectWindow: 0
   damage: 30
   headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0
-  magCapacity: 30
-  isClosedBolt: 1
+  magCapacity: 100
+  isClosedBolt: 0
   TriggerDelay: 0
   swayOffset: 1
-  recoilRecoverySpeed: 1
-  recoilKick: 0.35
-  recoilKickShake: 0
+  recoilRecoverySpeed: 0.8
+  recoilKick: 0.3
+  recoilKickShake: 1
   isOneHanded: 0
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0
   maxJamChance: 0
-  totalShots: 0
+  maxCondition: 0

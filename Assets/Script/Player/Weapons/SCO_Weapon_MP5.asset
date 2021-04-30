@@ -17,6 +17,8 @@ MonoBehaviour:
 
     Accurate and low recoil.'
   fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
+  removeMagSound: {fileID: 0}
+  reloadedSound: {fileID: 0}
   fireMode: 1
   secondFireMode: 0
   FiremodeToggle: 1
@@ -25,7 +27,7 @@ MonoBehaviour:
   reloadPerfectStart: 1.6
   reloadPerfectWindow: 0.3
   damage: 20
-  headShotMultiplier: 0
+  headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0

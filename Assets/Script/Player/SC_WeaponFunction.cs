@@ -82,11 +82,32 @@ public class SC_WeaponFunction : MonoBehaviour
         }
         else
             ShootRay(_currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position);
-
-        _currentWeapon.equippedWeaponProperties.isLoaded = false;
+        
         aimKick();
-        //Invoke("CycleAmmo", _currentWeapon.equippedWeaponStats.cycleTime);
-        cycleDelay = _currentWeapon.equippedWeaponStats.cycleTime;
+        DecreaseCondition();
+
+        void DecreaseCondition()
+        {
+            _currentWeapon.equippedWeaponProperties.currentCondition--;
+            //Check Jam
+            float conditionPercent = Mathf.Clamp01(_currentWeapon.equippedWeaponProperties.currentCondition / _currentWeapon.equippedWeaponStats.maxCondition);
+            float conditionPercentDegraded = Mathf.Clamp01(1f - conditionPercent);
+
+            float conditionFactor = Mathf.Max(0,(Mathf.Max(conditionPercentDegraded, 0f) - 1f)/0.8f + 1f);
+            float jamChance = _currentWeapon.equippedWeaponStats.minJamChance + (Mathf.Pow(conditionFactor,2f)*(_currentWeapon.equippedWeaponStats.maxJamChance - _currentWeapon.equippedWeaponStats.minJamChance));
+            float jamCheckNum = Random.Range(0f, 1f);
+            Debug.Log("JamChance: " + jamChance + " JamCheck: " + jamCheckNum);
+
+
+            if (jamCheckNum < jamChance)
+                Debug.Log("JAMMED!");
+            else
+            {
+                _currentWeapon.equippedWeaponProperties.isLoaded = false;
+                cycleDelay = _currentWeapon.equippedWeaponStats.cycleTime;
+            }
+
+        }
 
         void ShootRay(float Damage, Vector3 AimPoint, float spread = 0)
         {
@@ -133,7 +154,7 @@ public class SC_WeaponFunction : MonoBehaviour
 
                                 if (headCollider.OverlapPoint(crosshair.crosshairAim.transform.position))
                                 {
-                                    Damage += Damage * _currentWeapon.equippedWeaponStats.critMultiplier;
+                                    Damage += Damage * _currentWeapon.equippedWeaponStats.headShotMultiplier;
                                 }
                                 break;
 
@@ -162,6 +183,12 @@ public class SC_WeaponFunction : MonoBehaviour
                 objectPooler.DeactivePooledObject(bulletTracer, 0.04f);
             }
         }
+        
+    }
+
+    void JamWeapon()
+    {
+
     }
     void CycleAmmo()
     {
@@ -270,6 +297,8 @@ public class SC_WeaponFunction : MonoBehaviour
             ReloadTimeCount = _currentWeapon.equippedWeaponStats.reloadTime;
             if (!weaponToReload.equippedWeaponStats.isClosedBolt)
                 _currentWeapon.equippedWeaponProperties.isLoaded = false;
+
+            
         }
 
         if (weaponToReload == _currentWeapon)

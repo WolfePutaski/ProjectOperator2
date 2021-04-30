@@ -21,7 +21,7 @@ public class SC_WeaponUI : MonoBehaviour
     public TextMeshProUGUI TextName;
     public TextMeshProUGUI TextAmmo;
     public Image Heat;
-    public Image Condition;
+    public Image ConditionUI;
     public Text TextFiremode;
     [SerializeField] public WeaponPromptText weaponPrompt;
 
@@ -64,6 +64,11 @@ public class SC_WeaponUI : MonoBehaviour
 
         TextFiremode.text = _textFiremode();
         SetModListUI(weaponItem);
+
+        var conditionPercent = weaponItem.equippedWeaponProperties.currentCondition / weaponItem.equippedWeaponStats.maxCondition;
+        ConditionUI.fillAmount = conditionPercent;
+        ConditionUI.color = conditionPercent <= .3f ? Color.red : Color.white;
+
     }
 
     public void SetInventoryUI(SC_Inventory playerInventory)

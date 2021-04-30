@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_M4A1
+  m_Name: SCO_Weapon_Glock
   m_EditorClassIdentifier: 
-  weaponName: M4A1
-  weaponDesc: 'A military assault rifle.
+  weaponName: Glock
+  weaponDesc: 'Standard 9mm handgun.
 
-    Accurate and reliable.'
-  fireSound: {fileID: 8300000, guid: 71588921b1bee274eb0753aa9b029eb5, type: 3}
+    Cheap but reliable.'
+  fireSound: {fileID: 8300000, guid: 673f1f166682cc547899c77fb74cadc3, type: 3}
   removeMagSound: {fileID: 0}
   reloadedSound: {fileID: 0}
-  fireMode: 1
+  fireMode: 0
   secondFireMode: 0
-  FiremodeToggle: 1
-  cycleTimeRPM: 900
-  reloadTime: 2.4
-  reloadPerfectStart: 1.5
+  FiremodeToggle: 0
+  cycleTimeRPM: 600
+  reloadTime: 1.8
+  reloadPerfectStart: 1.2
   reloadPerfectWindow: 0.3
-  damage: 30
+  damage: 20
   headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0
-  magCapacity: 30
+  magCapacity: 17
   isClosedBolt: 1
   TriggerDelay: 0
-  swayOffset: 1
-  recoilRecoverySpeed: 1
-  recoilKick: 0.35
+  swayOffset: 3
+  recoilRecoverySpeed: 2
+  recoilKick: 0.5
   recoilKickShake: 0
-  isOneHanded: 0
+  isOneHanded: 1
   heatPerShot: 0
   heatCoolRate: 0
-  minJamChance: 0
-  maxJamChance: 0
-  totalShots: 0
+  minJamChance: 0.01
+  maxJamChance: 0.2
+  maxCondition: 30
