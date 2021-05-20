@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849a61b73fbc92d48a4aaeb5d50bc98e, type: 3}
+  m_Name: SCO_Weapon_Shotgun_HuntingShotgun
+  m_EditorClassIdentifier: 
+  weaponName: Hunting Shotgun
+  weaponDesc: 'A Break-Action Shotgun.
+
+    Simple but powerful'
+  fireSound: {fileID: 8300000, guid: 6c539999a9c296f4ba44b3e1047652df, type: 3}
+  removeMagSound: {fileID: 0}
+  reloadedSound: {fileID: 0}
+  fireMode: 0
+  secondFireMode: 0
+  FiremodeToggle: 0
+  cycleTimeRPM: 1000
+  reloadTime: 1.5
+  reloadPerfectStart: 0.8
+  reloadPerfectWindow: 0.2
+  damage: 60
+  headShotMultiplier: 0.7
+  critChance: 0
+  critMultiplier: 0.7
+  velocity: 0
+  magCapacity: 2
+  isClosedBolt: 0
+  TriggerDelay: 0
+  swayOffset: 4
+  recoilRecoverySpeed: 1
+  recoilKick: 0.7
+  recoilKickShake: 1
+  isOneHanded: 0
+  heatPerShot: 0
+  heatCoolRate: 0
+  minJamChance: 0
+  maxJamChance: 0
+  maxCondition: 0
+  PelletCount: 8
+  Spread: 0.03

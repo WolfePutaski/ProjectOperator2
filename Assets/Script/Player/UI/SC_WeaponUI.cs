@@ -39,7 +39,7 @@ public class SC_WeaponUI : MonoBehaviour
     {
         TextName.text = weaponItem.equippedWeaponStats.weaponName;
 
-        string ammoToShow = weaponItem.equippedWeaponProperties.isLoaded ? 
+        string ammoToShow = weaponItem.equippedWeaponProperties.chamberCondition == ChamberCondition.LOADED ? 
             (weaponItem.equippedWeaponProperties.ammoInMag + 1).ToString() : weaponItem.equippedWeaponProperties.ammoInMag.ToString();
 
         TextAmmo.text = ammoToShow + "/" + weaponItem.equippedWeaponStats.magCapacity.ToString();

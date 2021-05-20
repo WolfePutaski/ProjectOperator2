@@ -7,10 +7,8 @@ public class SC_WeaponFunction : MonoBehaviour
 {
     AudioSource audioSource;
     SC_Inventory inventory;
-
-    GameObject cameraHolder;
-    GameObject cameraHolder2;
     SC_Crosshair crosshair;
+    SC_CameraShake cameraShake;
 
     SC_ReloadCircle reloadCircle;
     float ReloadTimeCount;
@@ -29,6 +27,11 @@ public class SC_WeaponFunction : MonoBehaviour
 
     SC_ObjectPooler objectPooler;
 
+    [Header("===Audio===")]
+    [SerializeField] AudioClip boltLockSound;
+    [SerializeField] AudioClip UnjamSound;
+
+
 
     void Awake()
     {
@@ -37,6 +40,7 @@ public class SC_WeaponFunction : MonoBehaviour
         crosshair = FindObjectOfType<SC_Crosshair>();
         reloadCircle = FindObjectOfType<SC_ReloadCircle>();
         objectPooler = FindObjectOfType<SC_ObjectPooler>();
+        cameraShake = FindObjectOfType<SC_CameraShake>();
 
     }
     void Update()
@@ -53,20 +57,51 @@ public class SC_WeaponFunction : MonoBehaviour
     {
         if (_currentWeapon != null)
         {
-            if (cycleDelay >= 0 && !_currentWeapon.equippedWeaponProperties.isLoaded)
-                cycleDelay -= Time.fixedDeltaTime;
-            else if (!_currentWeapon.equippedWeaponProperties.isLoaded)
-                CycleAmmo();
+            if (_currentWeapon.equippedWeaponProperties.chamberCondition == ChamberCondition.EMPTY)
+            {
+                if (cycleDelay >= 0)
+                    cycleDelay -= Time.fixedDeltaTime;
+                else
+                    CycleAmmo();
+            }
+
         }
     }
 
     void ReloadUIUpdate()
     {
-        reloadCircle.gameObject.SetActive(weaponToReload != null);
+        switch (currentWeapon.equippedWeaponProperties.chamberCondition)
+        {
+            case ChamberCondition.JAMMED:
+                UnjammingUI();
+                break;
+            default:
+                ReloadingUI();
+                break;
+        }
 
-        reloadCircle.ReloadBar.fillAmount = 1- (ReloadTimeCount / _currentWeapon.equippedWeaponStats.reloadTime);
-        reloadCircle.PerfectReloadBar.fillAmount = _currentWeapon.equippedWeaponStats.reloadPerfectWindow / _currentWeapon.equippedWeaponStats.reloadTime;
-        reloadCircle.PerfectReloadBar.rectTransform.eulerAngles = new Vector3(0,0,360 - ( 360f* _currentWeapon.equippedWeaponStats.reloadPerfectStart / _currentWeapon.equippedWeaponStats.reloadTime));
+        void UnjammingUI()
+        {
+            reloadCircle.gameObject.SetActive(true);
+
+            reloadCircle.ReloadBar.color = reloadCircle.JamColor;
+            reloadCircle.ReloadBar.fillAmount = (float)_currentWeapon.equippedWeaponProperties.UnJamAmount/ (float)_currentWeapon.equippedWeaponProperties.MaxUnJamAmount; //unjam amount
+
+
+
+        }
+
+        void ReloadingUI()
+        {
+            reloadCircle.gameObject.SetActive(weaponToReload != null);
+
+            reloadCircle.ReloadBar.color = reloadCircle.ReloadColor;
+            reloadCircle.ReloadBar.fillAmount = 1 - (ReloadTimeCount / _currentWeapon.equippedWeaponStats.reloadTime);
+
+            reloadCircle.PerfectReloadBar.fillAmount = PerfectReloadCanTry? _currentWeapon.equippedWeaponStats.reloadPerfectWindow / _currentWeapon.equippedWeaponStats.reloadTime : 0f;
+            reloadCircle.PerfectReloadBar.rectTransform.eulerAngles = new Vector3(0,0,360 - ( 360f* _currentWeapon.equippedWeaponStats.reloadPerfectStart / _currentWeapon.equippedWeaponStats.reloadTime));
+        }
+        
     }
     void Shoot()
     {
@@ -84,12 +119,12 @@ public class SC_WeaponFunction : MonoBehaviour
             ShootRay(_currentWeapon.equippedWeaponStats.damage, crosshair.crosshairAim.transform.position);
         
         aimKick();
+
         DecreaseCondition();
 
         void DecreaseCondition()
         {
-            _currentWeapon.equippedWeaponProperties.currentCondition--;
-            //Check Jam
+            _currentWeapon.equippedWeaponProperties.currentCondition = Mathf.Max(0, _currentWeapon.equippedWeaponProperties.currentCondition - 1);
             float conditionPercent = Mathf.Clamp01(_currentWeapon.equippedWeaponProperties.currentCondition / _currentWeapon.equippedWeaponStats.maxCondition);
             float conditionPercentDegraded = Mathf.Clamp01(1f - conditionPercent);
 
@@ -100,11 +135,14 @@ public class SC_WeaponFunction : MonoBehaviour
 
 
             if (jamCheckNum < jamChance)
-                Debug.Log("JAMMED!");
+                JamWeapon();
             else
             {
-                _currentWeapon.equippedWeaponProperties.isLoaded = false;
-                cycleDelay = _currentWeapon.equippedWeaponStats.cycleTime;
+                _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.EMPTY;
+                if (_currentWeapon.equippedWeaponProperties.ammoInMag > 0)
+                    cycleDelay = _currentWeapon.equippedWeaponStats.cycleTime;
+                else
+                    audioSource.PlayOneShot(boltLockSound);
             }
 
         }
@@ -126,9 +164,6 @@ public class SC_WeaponFunction : MonoBehaviour
                 if (hitCount == 1) //PENETRATION
                     break;
             }
-
-
-
 
             void CheckHit(GameObject hitObject)
             {
@@ -188,14 +223,28 @@ public class SC_WeaponFunction : MonoBehaviour
 
     void JamWeapon()
     {
+        _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.JAMMED;
 
+        int UnjamAmountSet = Mathf.Max(1, (int)
+            (Random.Range(0, 5) * (0.8f - (_currentWeapon.equippedWeaponProperties.currentCondition / _currentWeapon.equippedWeaponStats.maxCondition)) + 1));
+
+        _currentWeapon.equippedWeaponProperties.UnJamAmount = UnjamAmountSet;
+        _currentWeapon.equippedWeaponProperties.MaxUnJamAmount = UnjamAmountSet;
+
+        cameraShake.ShakeCamera(RecoilKickShake.MEDIUM);
+        audioSource.PlayOneShot(boltLockSound);
+        
     }
     void CycleAmmo()
     {
         if (_currentWeapon.equippedWeaponProperties.ammoInMag > 0)
         {
             _currentWeapon.equippedWeaponProperties.ammoInMag--;
-            _currentWeapon.equippedWeaponProperties.isLoaded = true;
+            _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.LOADED;
+        }
+        else
+        {
+            _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.EMPTY;
         }
     }
     void aimKick()
@@ -288,53 +337,64 @@ public class SC_WeaponFunction : MonoBehaviour
     bool PerfectReloadCanTry;
     public void Input_Reload()
     {
-        if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null)
+        switch(_currentWeapon.equippedWeaponProperties.chamberCondition)
         {
-            weaponToReload = _currentWeapon;
-            PerfectReloadCanTry = true;
-
-            _currentWeapon.equippedWeaponProperties.ammoInMag = 0;
-            ReloadTimeCount = _currentWeapon.equippedWeaponStats.reloadTime;
-            if (!weaponToReload.equippedWeaponStats.isClosedBolt)
-                _currentWeapon.equippedWeaponProperties.isLoaded = false;
-
-            
+            case ChamberCondition.JAMMED:
+                UnJam();
+                break;
+            default:
+                Reload();
+                break;
         }
 
-        if (weaponToReload == _currentWeapon)
+        void Reload()
         {
-            if (ReloadTimeCount > 0)
+            if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null)
             {
-                float deltaTime = weaponToReload.equippedWeaponStats.reloadTime - ReloadTimeCount;
-                ReloadTimeCount -= Time.deltaTime;
+                weaponToReload = _currentWeapon;
+                PerfectReloadCanTry = true;
 
-                if (Input.GetKeyDown(KeyCode.R) && deltaTime > .5f && PerfectReloadCanTry)
+                _currentWeapon.equippedWeaponProperties.ammoInMag = 0;
+                ReloadTimeCount = _currentWeapon.equippedWeaponStats.reloadTime;
+                if (!weaponToReload.equippedWeaponStats.isClosedBolt)
+                    _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.EMPTY;
+            }
+
+            if (weaponToReload == _currentWeapon)
+            {
+                if (ReloadTimeCount > 0)
                 {
-                    if (deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart >= 0 &&
-                        deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart <= _currentWeapon.equippedWeaponStats.reloadPerfectWindow)
+                    float deltaTime = weaponToReload.equippedWeaponStats.reloadTime - ReloadTimeCount;
+                    ReloadTimeCount -= Time.deltaTime;
+
+                    if (Input.GetKeyDown(KeyCode.R) && deltaTime > .5f && PerfectReloadCanTry)
                     {
-                        ReloadTimeCount = 0;
+                        if (deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart >= 0 &&
+                            deltaTime - _currentWeapon.equippedWeaponStats.reloadPerfectStart <= _currentWeapon.equippedWeaponStats.reloadPerfectWindow)
+                        {
+                            ReloadTimeCount = 0;
+                        }
+                        PerfectReloadCanTry = false;
                     }
-                    PerfectReloadCanTry = false;
+                }
+                else
+                {
+                    StopReload();
+                    _currentWeapon.equippedWeaponProperties.ammoInMag = _currentWeapon.equippedWeaponStats.magCapacity;
+                    if (_currentWeapon.equippedWeaponProperties.chamberCondition == ChamberCondition.EMPTY)
+                    {
+                        _currentWeapon.equippedWeaponProperties.ammoInMag--;
+                        _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.LOADED;
+                    }
+
+
                 }
             }
             else
             {
-                StopReload();
-                _currentWeapon.equippedWeaponProperties.ammoInMag = _currentWeapon.equippedWeaponStats.magCapacity;
-                if (!_currentWeapon.equippedWeaponProperties.isLoaded)
-                {
-                    _currentWeapon.equippedWeaponProperties.ammoInMag--;
-                    _currentWeapon.equippedWeaponProperties.isLoaded = true;
+                ReloadTimeCount = 0;
+                weaponToReload = null;
                 }
-
-
-            }
-        }
-        else
-        {
-            ReloadTimeCount = 0;
-            weaponToReload = null;
         }
 
         void StopReload()
@@ -343,12 +403,28 @@ public class SC_WeaponFunction : MonoBehaviour
             weaponToReload = null;
         }
 
+        void UnJam()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _currentWeapon.equippedWeaponProperties.UnJamAmount--;
+                audioSource.PlayOneShot(UnjamSound);
+                cameraShake.ShakeCamera(RecoilKickShake.LIGHT);
+                if (_currentWeapon.equippedWeaponProperties.UnJamAmount <= 0)
+                {
+                    audioSource.PlayOneShot(boltLockSound);
+                    CycleAmmo();
+                    Debug.Log("Unjammed!");
+                }
+            }
+        }
+
         ReloadUIUpdate();
     }
     public void Input_Fire()
     {
 
-        if (_currentWeapon.equippedWeaponProperties.isLoaded)
+        if (_currentWeapon.equippedWeaponProperties.chamberCondition == ChamberCondition.LOADED)
         {
             if (_currentWeapon.equippedWeaponProperties.CurrentFiremode == FireMode.AUTO)
             {

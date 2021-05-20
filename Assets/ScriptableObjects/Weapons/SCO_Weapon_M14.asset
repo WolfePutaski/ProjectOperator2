@@ -10,39 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_TommyGun
+  m_Name: SCO_Weapon_M14
   m_EditorClassIdentifier: 
-  weaponName: Tommy Gun
-  weaponDesc: 'A famous WWII submachine gun.
+  weaponName: M14
+  weaponDesc: 'A military battle rifle.
 
-    High mag capacity and pack a punch
-
-'
-  fireSound: {fileID: 8300000, guid: 23233609550158d40942de8ee71343de, type: 3}
+    Heavy but powerful.'
+  fireSound: {fileID: 0}
   removeMagSound: {fileID: 0}
   reloadedSound: {fileID: 0}
-  fireMode: 1
+  fireMode: 0
   secondFireMode: 0
-  FiremodeToggle: 1
-  cycleTimeRPM: 720
-  reloadTime: 3
-  reloadPerfectStart: 2.4
-  reloadPerfectWindow: 0.2
-  damage: 25
-  headShotMultiplier: 0.8
+  FiremodeToggle: 0
+  cycleTimeRPM: 0
+  reloadTime: 0
+  reloadPerfectStart: 0
+  reloadPerfectWindow: 0
+  damage: 0
+  headShotMultiplier: 0
   critChance: 0
-  critMultiplier: 0.8
+  critMultiplier: 0
   velocity: 0
-  magCapacity: 50
+  magCapacity: 0
   isClosedBolt: 0
   TriggerDelay: 0
-  swayOffset: 3
-  recoilRecoverySpeed: 0.9
-  recoilKick: 0.2
+  swayOffset: 0
+  recoilRecoverySpeed: 0
+  recoilKick: 0
   recoilKickShake: 0
   isOneHanded: 0
   heatPerShot: 0
   heatCoolRate: 0
   minJamChance: 0
   maxJamChance: 0
-  totalShots: 0
+  maxCondition: 0

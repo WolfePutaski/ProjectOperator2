@@ -19,5 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c189e11ac892864ea78444ae6447c6d, type: 2}
   - {fileID: 11400000, guid: b9056db77a8b22c4e874bc883701bf82, type: 2}
   - {fileID: 11400000, guid: 6dd2da63f7183dd469286f21f4f8d0dc, type: 2}
-  _spawnCooldown: 1
-  _maxEnemyCount: 15
+  _spawnCooldown: 0.8
+  _maxEnemyCount: 25

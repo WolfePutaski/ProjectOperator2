@@ -1836,7 +1836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &457233608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4809,7 +4809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4848,6 +4848,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReloadBar: {fileID: 403716877}
   PerfectReloadBar: {fileID: 1372373602}
+  ReloadColor: {r: 1, g: 1, b: 1, a: 1}
+  JamColor: {r: 0.85, g: 0, b: 0, a: 1}
 --- !u!1 &1281308202
 GameObject:
   m_ObjectHideFlags: 0
@@ -7871,7 +7873,9 @@ MonoBehaviour:
     equippedWeaponProperties:
       ammoInMag: 0
       currentHeat: 0
-      isLoaded: 0
+      UnJamAmount: 0
+      MaxUnJamAmount: 0
+      chamberCondition: 0
       CurrentFiremode: 0
       currentCondition: 0
     equippedMods: []
@@ -7879,7 +7883,9 @@ MonoBehaviour:
     equippedWeaponProperties:
       ammoInMag: 0
       currentHeat: 0
-      isLoaded: 0
+      UnJamAmount: 0
+      MaxUnJamAmount: 0
+      chamberCondition: 0
       CurrentFiremode: 0
       currentCondition: 0
     equippedMods: []
@@ -7887,7 +7893,9 @@ MonoBehaviour:
     equippedWeaponProperties:
       ammoInMag: 0
       currentHeat: 0
-      isLoaded: 0
+      UnJamAmount: 0
+      MaxUnJamAmount: 0
+      chamberCondition: 0
       CurrentFiremode: 0
       currentCondition: 0
     equippedMods: []
@@ -7912,6 +7920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _muzzle: {fileID: 1880354399}
+  boltLockSound: {fileID: 8300000, guid: ca2fe623fbc69384699be9d862c4623d, type: 3}
+  UnjamSound: {fileID: 8300000, guid: 571c344f25ef73a4c803fb488b1e6966, type: 3}
 --- !u!82 &1978028611
 AudioSource:
   m_ObjectHideFlags: 0

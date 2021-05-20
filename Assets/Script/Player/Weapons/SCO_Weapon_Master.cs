@@ -5,19 +5,23 @@ using UnityEngine;
 public enum FireMode { SEMI, AUTO, BURST, MANUAL }
 public enum RecoilKickShake { LIGHT, MEDIUM, HEAVY }
 
+public enum ChamberCondition { EMPTY, JAMMED, LOADED}
+
 [System.Serializable]
 public class WeaponFunctionProperties
 {
     public int ammoInMag;
     public int currentHeat;
-    public bool isLoaded = true;
+    public int UnJamAmount;
+    public int MaxUnJamAmount;
+    public ChamberCondition chamberCondition = ChamberCondition.LOADED;
     public FireMode CurrentFiremode;
     public float currentCondition;
 
     public WeaponFunctionProperties(SCO_Weapon_Master weaponClass)
     {
         ammoInMag = weaponClass.magCapacity;
-        isLoaded = true;
+        chamberCondition = ChamberCondition.LOADED;
         CurrentFiremode = weaponClass.fireMode;
         currentCondition = weaponClass.maxCondition;
 
