@@ -3371,7 +3371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &836895805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4181,9 +4181,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1826116206906610579, guid: 90240e35934f1cf4095ebc778945e586, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 39b1ced7e7689a64c970544491f240a5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f65fca840f1893d48b2a63427a32a727, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6050,10 +6050,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1488842011}
   m_HandleRect: {fileID: 820776558}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6071,7 +6071,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _volumeParameter: SFX
   audioMixer: {fileID: 24100000, guid: 90240e35934f1cf4095ebc778945e586, type: 2}
-  _multiplier: 0
 --- !u!1 &1418667048
 GameObject:
   m_ObjectHideFlags: 0
@@ -7082,10 +7081,10 @@ MonoBehaviour:
 
     L.Mouse - Fire
 
-    R - Reload, Unjam
+    1,2,3 - Switch Weapon
 
-    1,2,3
-    - Switch Weapon
+    R
+    - Reload, Unjam
 
     X - Switch Fire mode (If avaliable)
 
@@ -7095,15 +7094,16 @@ MonoBehaviour:
     =
     TIPS =
 
-    - Press Reload at right timing to <color=yellow>Reload FASTER</color>!
+    - Press Reload at THE right timing to <color=yellow>Reload FASTER</color>!
 
     -
     Aim at the head to do <color=yellow>more damage</color>!
 
-    - OLD GUNS <color=red>JAM
-    MORE OFTEN</color>!
+    - LOW CONDITION
+    GUNS <color=red>JAM MORE OFTEN</color>!
 
-    - KEEP KILLING TO EARN <color=yellow>NEW GUNS</color>!'
+    - KEEP KILLING TO EARN <color=yellow>NEW
+    GUNS</color>!'
 --- !u!222 &1580118601
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8516,6 +8516,23 @@ MonoBehaviour:
   SelectFireSound: {fileID: 8300000, guid: cc0322b4191d3594fabb751c5ff6228f, type: 3}
   boltLockSound: {fileID: 8300000, guid: ca2fe623fbc69384699be9d862c4623d, type: 3}
   UnjamSound: {fileID: 8300000, guid: 571c344f25ef73a4c803fb488b1e6966, type: 3}
+  ImpactSound:
+  - {fileID: 8300000, guid: ef0c92b406298494eb10a83d6a91f1c2, type: 3}
+  - {fileID: 8300000, guid: a9958843f0b0f6d42b1948b0d141a72a, type: 3}
+  - {fileID: 8300000, guid: 924fec86d66b9d045a1d02da6e17d333, type: 3}
+  - {fileID: 8300000, guid: 4e181b1b186460f4b86fda53c0a8fcc6, type: 3}
+  - {fileID: 8300000, guid: 037072dbf1153d3419bd497e9e949ec2, type: 3}
+  - {fileID: 8300000, guid: 908cc10865b465740b0e82c98be6e740, type: 3}
+  - {fileID: 8300000, guid: 799b0c92740b57e4face6a31f17080a6, type: 3}
+  - {fileID: 8300000, guid: f1b2cf2be1ced1f41955d74b81536fde, type: 3}
+  - {fileID: 8300000, guid: d705f143bfbe769488df8aaaa2b403fb, type: 3}
+  - {fileID: 8300000, guid: cd4b7066ab609ce498d0d9b4af34e435, type: 3}
+  HeadImpactSound:
+  - {fileID: 8300000, guid: 4b1567be6a0a6f04991d1e69435a8a0f, type: 3}
+  - {fileID: 8300000, guid: 5153b69bd86093843803c6537c31d6c8, type: 3}
+  - {fileID: 8300000, guid: d57bed179eef76845806d22676455037, type: 3}
+  - {fileID: 8300000, guid: fea5950703aea5c4db7a1987687709cd, type: 3}
+  - {fileID: 8300000, guid: 89a791aa632b58e42ad76b74268dff93, type: 3}
 --- !u!82 &1978028611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8847,10 +8864,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2041180104}
   m_HandleRect: {fileID: 1418667049}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8868,7 +8885,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _volumeParameter: BGM
   audioMixer: {fileID: 24100000, guid: 90240e35934f1cf4095ebc778945e586, type: 2}
-  _multiplier: 0
 --- !u!1 &2035615287
 GameObject:
   m_ObjectHideFlags: 0

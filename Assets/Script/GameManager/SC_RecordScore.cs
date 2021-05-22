@@ -6,14 +6,6 @@ public class SC_RecordScore : MonoBehaviour
 {
     public int killCount;
 
-    public void Start()
-    {
-    }
-    void Update()
-    {
-        
-    }
-
     public void addKillCount()
     {
         killCount++;

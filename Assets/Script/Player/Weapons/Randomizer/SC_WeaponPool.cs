@@ -119,7 +119,8 @@ public class SC_WeaponPool : MonoBehaviour
         if (_currentComboRank > 0)
         {
             _currentComboRank--;
-            _currentComboScore -= RankingList[_currentComboRank].rankingScoreToReach * 0.66f;
+            _currentComboScore = getTotalRankScore(_currentComboRank) - RankingList[_currentComboRank].rankingScoreToReach * .66f;
+
         }
     }
 

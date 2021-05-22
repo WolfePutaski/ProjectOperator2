@@ -24,12 +24,12 @@ MonoBehaviour:
   reloadTime: 4
   reloadPerfectStart: 0
   reloadPerfectWindow: 0
-  damage: 45
+  damage: 55
   headShotMultiplier: 0.8
   critChance: 0
   critMultiplier: 0.8
   velocity: 0
-  magCapacity: 50
+  magCapacity: 75
   isClosedBolt: 0
   TriggerDelay: 0
   swayOffset: 2
@@ -39,4 +39,4 @@ MonoBehaviour:
   isOneHanded: 0
   minJamChance: 0.01
   maxJamChance: 0.3
-  maxCondition: 200
+  maxCondition: 300

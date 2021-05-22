@@ -23,7 +23,7 @@ MonoBehaviour:
   secondFireMode: 0
   FiremodeToggle: 1
   cycleTimeRPM: 720
-  reloadTime: 5
+  reloadTime: 4
   reloadPerfectStart: 0
   reloadPerfectWindow: 0
   damage: 30
@@ -41,4 +41,4 @@ MonoBehaviour:
   isOneHanded: 0
   minJamChance: 0.01
   maxJamChance: 0.2
-  maxCondition: 200
+  maxCondition: 300

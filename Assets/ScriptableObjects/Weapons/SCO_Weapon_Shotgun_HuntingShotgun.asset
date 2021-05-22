@@ -23,10 +23,10 @@ MonoBehaviour:
   secondFireMode: 0
   FiremodeToggle: 0
   cycleTimeRPM: 1000
-  reloadTime: 1.5
-  reloadPerfectStart: 0.8
-  reloadPerfectWindow: 0.2
-  damage: 60
+  reloadTime: 1.2
+  reloadPerfectStart: 0.7
+  reloadPerfectWindow: 0.15
+  damage: 70
   headShotMultiplier: 0.7
   critChance: 0
   critMultiplier: 0.7

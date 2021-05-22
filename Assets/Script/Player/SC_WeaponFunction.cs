@@ -40,6 +40,8 @@ public class SC_WeaponFunction : MonoBehaviour
     [SerializeField] AudioClip boltLockSound;
     [SerializeField] AudioClip UnjamSound;
 
+    [SerializeField] List<AudioClip> ImpactSound;
+    [SerializeField] List<AudioClip> HeadImpactSound;
 
 
     void Awake()
@@ -207,12 +209,16 @@ public class SC_WeaponFunction : MonoBehaviour
                                 if (headCollider.OverlapPoint(crosshair.crosshairAim.transform.position))
                                 {
                                     Damage += Damage * _currentWeapon.equippedWeaponStats.headShotMultiplier;
+                                    audioSource.PlayOneShot(HeadImpactSound[Random.Range(0, HeadImpactSound.Count)]);
+
                                 }
                                 break;
 
                             }
 
                         }
+
+                        audioSource.PlayOneShot(ImpactSound[Random.Range(0, ImpactSound.Count)]);
                         healthReciever.Damage(Damage);
 
                     }
