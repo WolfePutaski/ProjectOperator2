@@ -39,7 +39,7 @@ public class VolumeSliderSet : MonoBehaviour
 
     void Start()
     {
-        _slider.value = PlayerPrefs.GetFloat(_volumeParameter,1);
+        _slider.value = PlayerPrefs.GetFloat(_volumeParameter,_slider.value);
 
     }
 }

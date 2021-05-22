@@ -15,6 +15,15 @@ public class MainMenu : MonoBehaviour
     List<MainMenuScreenType> menuList;
     [SerializeField] List<GameObject> menuObjectsList;
 
+    void OnDisable()
+    {
+        Cursor.visible = false;
+    }
+
+    void OnEnable()
+    {
+        Cursor.visible = true;
+    }
 
     public void GoToScreen(MainMenuScreenType menuToGo)
     {
