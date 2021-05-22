@@ -9,16 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b3038f3340b4e746a1284e52bed644c, type: 3}
-  m_Name: SCO_WeaponMods_UnderGas
+  m_Script: {fileID: 11500000, guid: c916f95d46e2e4a479de4f947fd18e2b, type: 3}
+  m_Name: SCO_Squad_h1
   m_EditorClassIdentifier: 
-  modName: Under-Gas
-  modType: 1
-  ModMag: 0
-  ModReloadTime: 0
-  ModForceOffPerfectLoad: 0
-  ModFirerate: -0.2
-  ModCritChance: 0
-  ModKick: -0.3
-  ModSway: 0
-  ModMaxCondition: 0.2
+  squadSpread: 0
+  enemyTypes:
+  - enemy: {fileID: 4772161852552073335, guid: 2000484c81c6c674c8374fd51d969fbc, type: 3}
+    count: 1

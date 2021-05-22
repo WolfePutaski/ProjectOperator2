@@ -23,6 +23,7 @@ public class SC_WeaponUI : MonoBehaviour
     public Image Heat;
     public Image ConditionUI;
     public Text TextFiremode;
+    public GameObject SelectorIndicator;
     [SerializeField] public WeaponPromptText weaponPrompt;
 
     public List<Text> InvSlot;
@@ -60,6 +61,8 @@ public class SC_WeaponUI : MonoBehaviour
                     return "???";
             }
         }
+
+        SelectorIndicator.SetActive(weaponItem.equippedWeaponStats.FiremodeToggle);
         
 
         TextFiremode.text = _textFiremode();

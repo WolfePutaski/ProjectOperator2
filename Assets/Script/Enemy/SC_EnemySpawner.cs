@@ -15,7 +15,12 @@ public class SC_EnemySpawner : MonoBehaviour
     public float maxScoreRank;
 
     bool CoolDownFinished => _spawnCooldownCount <= 0;
-    bool EnemyCountIsMax => GameObject.FindGameObjectsWithTag("Enemy").Length >= squadRank[_currentRank].maxEnemyCount;
+    bool EnemyCountIsMax => GameObject.FindObjectsOfType<SCO_Enemy>().Length >= squadRank[_currentRank].maxEnemyCount;
+
+    void Start()
+    {
+        forceSetRankForTime(0, 15f);
+    }
 
     // Update is called once per frame
     void Update()
@@ -59,7 +64,7 @@ public class SC_EnemySpawner : MonoBehaviour
         {
             _scoreRank = Mathf.Max(0, _scoreRank - Time.deltaTime * scoreRankDegRate);
 
-            if(_scoreRank >= maxScoreRank)
+            if(_scoreRank >= maxScoreRank && CheckPlayerInventory())
             {
                 StartCoroutine(_forceSetRankForTime(2, 20));
             }
@@ -93,5 +98,12 @@ public class SC_EnemySpawner : MonoBehaviour
     public void AddRankScore(float modRankScore)
     {
         _scoreRank += modRankScore;
+    }
+
+    public bool CheckPlayerInventory()
+    {
+        SC_Inventory playerInventory;
+        playerInventory = FindObjectOfType<SC_Inventory>();
+        return playerInventory.weaponItemList.Count >= 3 ? true : false;
     }
 }

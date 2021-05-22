@@ -39,8 +39,6 @@ MonoBehaviour:
   recoilKick: 0.12
   recoilKickShake: 0
   isOneHanded: 0
-  heatPerShot: 0
-  heatCoolRate: 0
-  minJamChance: 0
-  maxJamChance: 0
-  totalShots: 0
+  minJamChance: 0.01
+  maxJamChance: 0.2
+  maxCondition: 200

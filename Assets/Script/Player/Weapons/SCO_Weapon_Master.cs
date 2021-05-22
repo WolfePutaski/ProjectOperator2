@@ -76,13 +76,16 @@ public class SCO_Weapon_Master : ScriptableObject
     public RecoilKickShake recoilKickShake;
     public bool isOneHanded;
 
-    [Header("=== Heat ===")]
-    public float heatPerShot;
-    public float heatCoolRate;
 
     [Header("=== Jamming ===")]
     public float minJamChance;
     public float maxJamChance;
     public float maxCondition;
+
+    //Unused features
+
+    //[Header("=== Heat ===")]
+    //public float heatPerShot;
+    //public float heatCoolRate;
 
 }

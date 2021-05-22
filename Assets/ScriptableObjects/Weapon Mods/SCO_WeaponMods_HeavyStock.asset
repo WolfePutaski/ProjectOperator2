@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b3038f3340b4e746a1284e52bed644c, type: 3}
-  m_Name: SCO_WeaponMods_SmallMag
+  m_Name: SCO_WeaponMods_HeavyStock
   m_EditorClassIdentifier: 
-  modName: Small Mag
-  modType: 0
-  ModMag: -0.34
-  ModReloadTime: -0.25
+  modName: Heavy Stock
+  modType: 3
+  ModMag: 0
+  ModReloadTime: 0
   ModForceOffPerfectLoad: 0
   ModFirerate: 0
   ModCritChance: 0
-  ModKick: 0
-  ModSway: -0.1
+  ModKick: 0.2
+  ModSway: 0.2
   ModMaxCondition: 0

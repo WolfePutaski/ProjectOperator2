@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32edc37c9a39bf6419562f51b9eabf2f, type: 3}
-  m_Name: SCO_SquadRank_2
+  m_Name: SCO_SquadRank_1
   m_EditorClassIdentifier: 
   _squadList:
-  - {fileID: 11400000, guid: 8fc3c60a87c8fe246a74fcc277b4b7a6, type: 2}
+  - {fileID: 11400000, guid: 092631a2f8e2006439be21a23fb310ee, type: 2}
   - {fileID: 11400000, guid: a468658975956dc4f9d1258ab99fe6ef, type: 2}
   - {fileID: 11400000, guid: 66512df8c068ec743ac376a61dae29af, type: 2}
-  - {fileID: 11400000, guid: 3c189e11ac892864ea78444ae6447c6d, type: 2}
-  - {fileID: 11400000, guid: b9056db77a8b22c4e874bc883701bf82, type: 2}
-  - {fileID: 11400000, guid: 6dd2da63f7183dd469286f21f4f8d0dc, type: 2}
-  _spawnCooldown: 0.8
-  _maxEnemyCount: 25
+  - {fileID: 11400000, guid: 9c52e8614c496c44b8242bf23d9a1bd0, type: 2}
+  _spawnCooldown: 1.2
+  _maxEnemyCount: 10

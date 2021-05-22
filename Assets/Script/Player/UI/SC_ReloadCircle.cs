@@ -9,5 +9,6 @@ public class SC_ReloadCircle : MonoBehaviour
     public Image PerfectReloadBar;
 
     public Color ReloadColor;
+    public Color ReloadFailColor;
     public Color JamColor;
 }

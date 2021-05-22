@@ -20,7 +20,8 @@ public class SCO_WeaponMods : ScriptableObject
     [SerializeField] public float ModKick;
     [SerializeField] public float ModSway;
 
-    [SerializeField] public float ModDegradeRate;
-    [SerializeField] public float ModHeatRate;
-    [SerializeField] public float ModHeatCooldownRate;
+    [SerializeField] public float ModMaxCondition;
+
+    //[SerializeField] public float ModHeatRate;
+    //[SerializeField] public float ModHeatCooldownRate;
 }

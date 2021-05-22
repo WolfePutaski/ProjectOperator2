@@ -21,6 +21,4 @@ MonoBehaviour:
   ModCritChance: 0
   ModKick: -0.1
   ModSway: 0.3
-  ModDegradeRate: 0
-  ModHeatRate: 0
-  ModHeatCooldownRate: 0
+  ModMaxCondition: -0.05

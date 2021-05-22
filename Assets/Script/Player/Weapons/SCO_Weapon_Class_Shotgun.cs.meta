@@ -5,7 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - fireSound: {instanceID: 0}
-  - squad: {fileID: 11400000, guid: 1977d08aa69dcaf42ae8b107802443c5, type: 2}
+  - removeMagSound: {fileID: 8300000, guid: ca411142bc274674eb4d382a7569839d, type: 3}
+  - reloadedSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

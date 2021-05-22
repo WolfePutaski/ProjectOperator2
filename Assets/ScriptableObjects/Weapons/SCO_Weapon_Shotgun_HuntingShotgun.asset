@@ -39,10 +39,8 @@ MonoBehaviour:
   recoilKick: 0.7
   recoilKickShake: 1
   isOneHanded: 0
-  heatPerShot: 0
-  heatCoolRate: 0
-  minJamChance: 0
-  maxJamChance: 0
-  maxCondition: 0
+  minJamChance: 0.01
+  maxJamChance: 0.1
+  maxCondition: 80
   PelletCount: 8
   Spread: 0.03

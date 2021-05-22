@@ -18,6 +18,7 @@ public class SC_EnemySystem : MonoBehaviour
 
     [Header("===Attack===")]
     public float timeToAttack;
+    public Collider2D attackCollider;
 
     //[SerializeField] SCO_Enemy enemyProfile;
 
@@ -46,7 +47,9 @@ public class SC_EnemySystem : MonoBehaviour
         void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
         void AAt(IState to, Func<bool> condition) => _stateMachine.AddAnyTransition(to, condition);
 
-        Func<bool> closeToTarget() => () => Vector2.Distance(_PlayerTarget.transform.position, gameObject.transform.position) <= 1f;
+        attackCollider.OverlapPoint(_PlayerTarget.transform.position);
+
+        Func<bool> closeToTarget() => () => attackCollider.OverlapPoint(_PlayerTarget.transform.position); /*Vector2.Distance(_PlayerTarget.transform.position, gameObject.transform.position) <= 1f;*/
         Func<bool> noHP() => () => _healthSystem.HealthCurrent <= 0f;
     }
 

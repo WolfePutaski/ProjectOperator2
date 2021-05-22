@@ -65,6 +65,7 @@ public class WeaponItem
 
                 equippedWeaponStats.recoilKick *= modByPercent(_WeaponMods.ModKick);
                 equippedWeaponStats.swayOffset *= modByPercent(_WeaponMods.ModSway);
+                equippedWeaponStats.maxCondition *= modByPercent(_WeaponMods.ModMaxCondition);
             }
 
             equippedWeaponStats.weaponName += "+";

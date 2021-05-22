@@ -20,14 +20,23 @@ public class SC_WeaponFunction : MonoBehaviour
 
     Vector3 defaultAimPos;
 
+    bool isUnJamDelaying;
+
     string FireKey => "Fire1";
     WeaponItem _currentWeapon;
     public WeaponItem currentWeapon => _currentWeapon;
     [SerializeField] Transform _muzzle;
 
+    public LayerMask hitLayer;
+
     SC_ObjectPooler objectPooler;
 
     [Header("===Audio===")]
+    [SerializeField] AudioClip ReloadSuccess;
+    [SerializeField] AudioClip PerfReloadFail;
+    [SerializeField] AudioClip ReloadStartSound;
+    [SerializeField] AudioClip SelectFireSound;
+
     [SerializeField] AudioClip boltLockSound;
     [SerializeField] AudioClip UnjamSound;
 
@@ -95,7 +104,7 @@ public class SC_WeaponFunction : MonoBehaviour
         {
             reloadCircle.gameObject.SetActive(weaponToReload != null);
 
-            reloadCircle.ReloadBar.color = reloadCircle.ReloadColor;
+            reloadCircle.ReloadBar.color = PerfectReloadCanTry? reloadCircle.ReloadColor : reloadCircle.ReloadFailColor;
             reloadCircle.ReloadBar.fillAmount = 1 - (ReloadTimeCount / _currentWeapon.equippedWeaponStats.reloadTime);
 
             reloadCircle.PerfectReloadBar.fillAmount = PerfectReloadCanTry? _currentWeapon.equippedWeaponStats.reloadPerfectWindow / _currentWeapon.equippedWeaponStats.reloadTime : 0f;
@@ -131,7 +140,7 @@ public class SC_WeaponFunction : MonoBehaviour
             float conditionFactor = Mathf.Max(0,(Mathf.Max(conditionPercentDegraded, 0f) - 1f)/0.8f + 1f);
             float jamChance = _currentWeapon.equippedWeaponStats.minJamChance + (Mathf.Pow(conditionFactor,2f)*(_currentWeapon.equippedWeaponStats.maxJamChance - _currentWeapon.equippedWeaponStats.minJamChance));
             float jamCheckNum = Random.Range(0f, 1f);
-            Debug.Log("JamChance: " + jamChance + " JamCheck: " + jamCheckNum);
+            //Debug.Log("JamChance: " + jamChance + " JamCheck: " + jamCheckNum);
 
 
             if (jamCheckNum < jamChance)
@@ -153,7 +162,7 @@ public class SC_WeaponFunction : MonoBehaviour
             var _spread = (Random.Range(-spread, spread) * new Vector3(Mathf.Sin(spread), Mathf.Cos(spread), 0));
 
             hit2D = Physics2D.RaycastAll(transform.position, 
-                (AimPoint - transform.position).normalized + _spread, 1000f);
+                (AimPoint - transform.position).normalized + _spread, 1000f, hitLayer);
             Debug.DrawRay(transform.position, ((crosshair.crosshairAim.transform.position - transform.position).normalized + _spread) * 1000f, Color.red,1f);
 
             int hitCount = 0;
@@ -349,7 +358,7 @@ public class SC_WeaponFunction : MonoBehaviour
 
         void Reload()
         {
-            if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null)
+            if (Input.GetKeyDown(KeyCode.R) && weaponToReload == null && !isUnJamDelaying)
             {
                 weaponToReload = _currentWeapon;
                 PerfectReloadCanTry = true;
@@ -358,6 +367,8 @@ public class SC_WeaponFunction : MonoBehaviour
                 ReloadTimeCount = _currentWeapon.equippedWeaponStats.reloadTime;
                 if (!weaponToReload.equippedWeaponStats.isClosedBolt)
                     _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.EMPTY;
+
+                audioSource.PlayOneShot(ReloadStartSound);
             }
 
             if (weaponToReload == _currentWeapon)
@@ -374,6 +385,11 @@ public class SC_WeaponFunction : MonoBehaviour
                         {
                             ReloadTimeCount = 0;
                         }
+                        else
+                        {
+                            audioSource.PlayOneShot(PerfReloadFail);
+                            cameraShake.ShakeCamera(RecoilKickShake.LIGHT);
+                        }
                         PerfectReloadCanTry = false;
                     }
                 }
@@ -386,6 +402,8 @@ public class SC_WeaponFunction : MonoBehaviour
                         _currentWeapon.equippedWeaponProperties.ammoInMag--;
                         _currentWeapon.equippedWeaponProperties.chamberCondition = ChamberCondition.LOADED;
                     }
+                    audioSource.PlayOneShot(ReloadSuccess);
+                    cameraShake.ShakeCamera(RecoilKickShake.MEDIUM);
 
 
                 }
@@ -405,16 +423,28 @@ public class SC_WeaponFunction : MonoBehaviour
 
         void UnJam()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && _currentWeapon.equippedWeaponProperties.UnJamAmount > 0)
             {
+
                 _currentWeapon.equippedWeaponProperties.UnJamAmount--;
                 audioSource.PlayOneShot(UnjamSound);
                 cameraShake.ShakeCamera(RecoilKickShake.LIGHT);
                 if (_currentWeapon.equippedWeaponProperties.UnJamAmount <= 0)
                 {
-                    audioSource.PlayOneShot(boltLockSound);
+                    audioSource.PlayOneShot(ReloadSuccess);
                     CycleAmmo();
-                    Debug.Log("Unjammed!");
+
+                    if (currentWeapon.equippedWeaponProperties.chamberCondition == ChamberCondition.LOADED)
+                        StartCoroutine(DelayReload());
+
+                    IEnumerator DelayReload()
+                    {
+                        isUnJamDelaying = true;
+                        yield return new WaitForSeconds(.5f);
+                        isUnJamDelaying = false;
+
+                    }
+                    //Debug.Log("Unjammed!");
                 }
             }
         }
@@ -449,16 +479,16 @@ public class SC_WeaponFunction : MonoBehaviour
         if (Input.GetButtonDown("ChangeFireMode"))
         {
             if (_currentWeapon.equippedWeaponStats.FiremodeToggle)
-
             {
                 var _currentFireMode = _currentWeapon.equippedWeaponProperties.CurrentFiremode;
 
-            if (_currentFireMode == _currentWeapon.equippedWeaponStats.fireMode)
-                _currentFireMode = _currentWeapon.equippedWeaponStats.secondFireMode;
-            else
-                _currentFireMode = _currentWeapon.equippedWeaponStats.fireMode;
+                if (_currentFireMode == _currentWeapon.equippedWeaponStats.fireMode)
+                    _currentFireMode = _currentWeapon.equippedWeaponStats.secondFireMode;
+                else
+                    _currentFireMode = _currentWeapon.equippedWeaponStats.fireMode;
 
-            _currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
+                _currentWeapon.equippedWeaponProperties.CurrentFiremode = _currentFireMode;
+                audioSource.PlayOneShot(SelectFireSound);
             }
         }
     }

@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
-  m_Name: SCO_Weapon_M14
+  m_Name: SCO_Weapon_Uzi
   m_EditorClassIdentifier: 
-  weaponName: M14
-  weaponDesc: 'A military battle rifle.
+  weaponName: Micro Uzi
+  weaponDesc: 'Compact Sub Machine Gun.
 
-    Heavy but powerful.'
-  fireSound: {fileID: 8300000, guid: 08ae89e83a52a80458ef37dcb66ba826, type: 3}
+    Light and fast firing.'
+  fireSound: {fileID: 8300000, guid: b3dd4fbeac8f29040a5a906ec757a3b0, type: 3}
   removeMagSound: {fileID: 0}
   reloadedSound: {fileID: 0}
-  fireMode: 0
+  fireMode: 1
   secondFireMode: 0
-  FiremodeToggle: 0
-  cycleTimeRPM: 500
-  reloadTime: 2.4
-  reloadPerfectStart: 1.6
+  FiremodeToggle: 1
+  cycleTimeRPM: 1200
+  reloadTime: 2
+  reloadPerfectStart: 1.2
   reloadPerfectWindow: 0.2
-  damage: 55
-  headShotMultiplier: 1
+  damage: 20
+  headShotMultiplier: 0.8
   critChance: 0
-  critMultiplier: 0.8
+  critMultiplier: 0
   velocity: 0
-  magCapacity: 20
-  isClosedBolt: 1
+  magCapacity: 25
+  isClosedBolt: 0
   TriggerDelay: 0
-  swayOffset: 2
+  swayOffset: 1
   recoilRecoverySpeed: 1
-  recoilKick: 0.5
-  recoilKickShake: 1
+  recoilKick: 0.18
+  recoilKickShake: 0
   isOneHanded: 0
-  minJamChance: 0.01
+  minJamChance: 0.015
   maxJamChance: 0.2
-  maxCondition: 150
+  maxCondition: 160
