@@ -41,7 +41,7 @@ public class SC_PlayerHealth : SC_Health
         base.Damage(damage);
         playerBrain.cameraFunctions.ShakeDamage();
 
-        FindObjectOfType<SC_EnemySpawner>().forceSetRankForTime(0, 8);
+        FindObjectOfType<SC_EnemySpawner>().forceSetRankForTime(0, 8f);
         weaponPool.DemoteRank();
 
     }

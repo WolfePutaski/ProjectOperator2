@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: SCO_Squad_n2h1
   m_EditorClassIdentifier: 
   squadSpread: 0
-  enemyTypes: []
+  enemyTypes:
+  - enemy: {fileID: 7263960127824650610, guid: 46aeacffbd1e43c46bee9cc83d014259, type: 3}
+    count: 2
+  - enemy: {fileID: 4772161852552073335, guid: 2000484c81c6c674c8374fd51d969fbc, type: 3}
+    count: 1

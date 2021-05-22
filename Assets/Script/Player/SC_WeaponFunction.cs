@@ -91,6 +91,9 @@ public class SC_WeaponFunction : MonoBehaviour
 
         void UnjammingUI()
         {
+            reloadCircle.KeyText.gameObject.SetActive(true);
+            reloadCircle.KeyText.text = reloadCircle.unJamText;
+
             reloadCircle.gameObject.SetActive(true);
 
             reloadCircle.ReloadBar.color = reloadCircle.JamColor;
@@ -102,6 +105,11 @@ public class SC_WeaponFunction : MonoBehaviour
 
         void ReloadingUI()
         {
+            bool ActiveText = _currentWeapon.equippedWeaponProperties.chamberCondition.Equals(ChamberCondition.EMPTY) && _currentWeapon.equippedWeaponProperties.ammoInMag.Equals(0);
+
+            reloadCircle.KeyText.gameObject.SetActive(ActiveText);
+            reloadCircle.KeyText.text = reloadCircle.reloadText;
+
             reloadCircle.gameObject.SetActive(weaponToReload != null);
 
             reloadCircle.ReloadBar.color = PerfectReloadCanTry? reloadCircle.ReloadColor : reloadCircle.ReloadFailColor;
@@ -442,7 +450,6 @@ public class SC_WeaponFunction : MonoBehaviour
                         isUnJamDelaying = true;
                         yield return new WaitForSeconds(.5f);
                         isUnJamDelaying = false;
-
                     }
                     //Debug.Log("Unjammed!");
                 }
