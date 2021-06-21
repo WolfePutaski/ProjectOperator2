@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849a61b73fbc92d48a4aaeb5d50bc98e, type: 3}
   m_Name: SCO_Weapon_Shotgun_Saiga12
   m_EditorClassIdentifier: 
-  weaponName: Saiga-12
+  weaponName: Tactical Shotgun
   weaponDesc: 'A tactical semi-automatic shotgun.
 
     Fast firing and powerful.'

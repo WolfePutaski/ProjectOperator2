@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionCheck : ScriptableObject
+[SerializeField]
+public class ConditionCheck
 {
-    bool ReturnCondition()
+    public bool ReturnCondition()
     {
         return true;
     }

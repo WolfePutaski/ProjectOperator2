@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_MP5
   m_EditorClassIdentifier: 
-  weaponName: MP5
+  weaponName: Police SMG
   weaponDesc: 'A popular submachine gun.
 
     Accurate and low recoil.'

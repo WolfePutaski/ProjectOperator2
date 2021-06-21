@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_M14
   m_EditorClassIdentifier: 
-  weaponName: M14
-  weaponDesc: 'A military battle rifle.
+  weaponName: Marksman Rifle
+  weaponDesc: 'A military Marksman rifle.
 
     Heavy but powerful.'
   fireSound: {fileID: 8300000, guid: 08ae89e83a52a80458ef37dcb66ba826, type: 3}

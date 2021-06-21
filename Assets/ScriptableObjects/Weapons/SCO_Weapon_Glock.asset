@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_Glock
   m_EditorClassIdentifier: 
-  weaponName: Glock
+  weaponName: 9mm Handgun
   weaponDesc: 'Standard 9mm handgun.
 
     Cheap but reliable.'

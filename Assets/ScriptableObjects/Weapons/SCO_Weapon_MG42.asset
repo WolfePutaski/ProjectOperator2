@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_MG42
   m_EditorClassIdentifier: 
-  weaponName: MG42
-  weaponDesc: Highest fire rate and powerful
+  weaponName: Buzzsaw 42
+  weaponDesc: Extreme rate of fire and powerful
   fireSound: {fileID: 8300000, guid: 083a4a3b817ad1648a397477ba29e841, type: 3}
   removeMagSound: {fileID: 0}
   reloadedSound: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087be3dfadd31342b658b2a69d3a3eb, type: 3}
   m_Name: SCO_Weapon_M249
   m_EditorClassIdentifier: 
-  weaponName: M249 SAW
+  weaponName: Light Machine Gun
   weaponDesc: 'A military light machine gun.
 
     High capacity'

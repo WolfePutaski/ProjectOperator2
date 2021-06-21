@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class EnemyLimit
+{
+    public GameObject enemyToLimit;
+    public int limitCount;
+    public float overLimitSpawnChance;
+}
+
 public class SC_EnemySpawner : MonoBehaviour
 {
     public float spawnRadius;
     public List<SCO_SquadRank> squadRank;
+
+    public List<EnemyLimit> enemyLimitList;
 
     [SerializeField] private int _currentRank = 1;
     private float _spawnCooldownCount;
@@ -55,9 +65,38 @@ public class SC_EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < nme.count; i++)
             {
-                GameObject newNme = Instantiate(nme.enemy);
-                newNme.transform.position = SquadSpawnLocation + Random.insideUnitCircle.normalized * squadToSpawn.squadSpread;
+                if (CheckSpawn())
+                    spawnEnemy(nme.enemy);
             }
+
+            bool CheckSpawn()
+            {
+                foreach (EnemyLimit nmeLimit in enemyLimitList)
+                {
+                    if (nme.enemy == nmeLimit.enemyToLimit)
+                    {
+                        if (!CheckEnemyTypeCount(nme.enemy, nmeLimit.limitCount))
+                        {
+                            float randomNum = Random.Range(0f, 1f);
+                            if (randomNum > nmeLimit.overLimitSpawnChance)
+                            {
+                                return false;
+                            }
+                        }
+
+                    }
+
+                }
+                return true;
+            }
+        }
+
+
+
+        void spawnEnemy(GameObject nmeToSpawn)
+        {
+            GameObject newNme = Instantiate(nmeToSpawn);
+            newNme.transform.position = SquadSpawnLocation + Random.insideUnitCircle.normalized * squadToSpawn.squadSpread;
         }
 
     }
@@ -111,5 +150,24 @@ public class SC_EnemySpawner : MonoBehaviour
         SC_Inventory playerInventory;
         playerInventory = FindObjectOfType<SC_Inventory>();
         return playerInventory.weaponItemList.Count >= 3 ? true : false;
+    }
+
+    public bool CheckEnemyTypeCount(GameObject nmeToCheck, int maxCount)
+    {
+        GameObject[] FindGameObjectsWithSameName(string name)
+        {
+            GameObject[] allObjs = Object.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+            List<GameObject> likeNames = new List<GameObject>();
+            foreach (GameObject obj in allObjs)
+            {
+                if (obj.name == name)
+                {
+                    likeNames.Add(obj);
+                }
+            }
+            return likeNames.ToArray();
+        }
+
+        return FindGameObjectsWithSameName(nmeToCheck.name + "(Clone)").Length < maxCount;
     }
 }
